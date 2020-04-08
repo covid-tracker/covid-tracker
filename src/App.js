@@ -5,6 +5,7 @@ class App extends Component {
   state = {
     canadianSummary: [],
     allProvincesData: [],
+    caseNumber: '',
   };
 
     componentDidMount() {
@@ -19,25 +20,30 @@ class App extends Component {
       });
   }
 
-  // componentDidMount() {
-  //   axios
-  //     .get("https://api.covid19api.com/country/canada/status/confirmed/live")
-  //     .then((response) => {
-  //       const canadianSummary = response;
-  //       this.setState({
-  //         canadianSummary: canadianSummary,
-  //       });
-  //     });
-  // }
-
   // Function for pulling Canadian Province array from Summary Array
   getCanadianProvinces = () => {
     // Using reverse() to rearrange latest data on top
     const allProvincesData = this.state.canadianSummary.data.reverse();
     this.setState({ allProvincesData });
-    const newArray = this.state.allProvincesData.map(e => {
-      console.log(e);
+    let cases;
+    let newArray = this.state.allProvincesData.filter(e => {
+        // console.log(e.Cases);
+
+        if (e.Province == "Grand Princess") {
+          cases = e.Cases;
+        } else {
+          cases = 'Nothing found';
+        }
+        console.log(cases);
     })
+
+    this.setState({
+      caseNumber: newArray,
+    });
+
+    //  this.setState({
+    //   //  caseNumber: cases,
+    //  });
 
     // Spread operator to pull provinces out of the summary array and store in a new variable
 
@@ -54,7 +60,15 @@ class App extends Component {
           <p className="subtitle">
             My first website with <strong>Bulma</strong>!
           </p>
-          <button className="button" onClick={this.getCanadianProvinces}>Button</button>
+          <button className="button" onClick={this.getCanadianProvinces}>All Provinces Data</button>
+          <button className="button" style={{'margin-left':20}}>Grand Princess Data</button>
+
+          <ul>
+            {this.state.caseNumber.map ( e => {
+              <li>{e}</li>
+            })}
+          </ul>
+
         </div>
       </section>
     );
