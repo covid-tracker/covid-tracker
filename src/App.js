@@ -19,9 +19,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <h1>Something</h1>
-      </div>
+      <section className="section">
+        <div className="container">
+          <h1 className="title">Hello World</h1>
+          <p className="subtitle">
+            My first website with <strong>Bulma</strong>!
+          </p>
+        </div>
+      </section>
     );
   }
 }
