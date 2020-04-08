@@ -2,22 +2,25 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class App extends Component {
-  state = {
-    canadianSummary: [],
-    allProvincesData: [],
-    caseNumber: [],
-  };
+  constructor () {
+    super();
+    this.state = {
+      canadianSummary: [],
+      allProvincesData: [],
+      caseNumber: [],
+    };
+  }
 
-    componentDidMount() {
+  componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
     })
-        .then((response) => {
-        this.setState({
-          canadianSummary: response,
-        });
+    .then((response) => {
+      this.setState({
+        canadianSummary: response,
       });
+    });
   }
 
   // 1. Spread operator to pull provinces out of the summary array and store in a new variable (Using Map function instead)
@@ -30,16 +33,16 @@ class App extends Component {
   //2. Filter through to get individual provinces
   getCaseNumber = () => {
     let cases = this.state.allProvincesData.filter(e => {
-        if (e.Province === "Grand Princess") {
-          return e.Cases;
-        } else {
-          return 'Nothing found';
-        }
+        // 1.
+        console.log(e.Province);
+        return e.Province === 'New Brunswick' ? e.Cases : 'Nothing Found';
     })
+
+    // 2.
+    console.log(cases);
     this.setState({
       caseNumber: cases,
     });
-    console.log(this.state.caseNumber);
   }
 
   render() {
