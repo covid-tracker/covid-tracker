@@ -5,7 +5,7 @@ class App extends Component {
   state = {
     canadianSummary: [],
     allProvincesData: [],
-    caseNumber: '',
+    caseNumber: [],
   };
 
     componentDidMount() {
@@ -20,39 +20,29 @@ class App extends Component {
       });
   }
 
-  // Function for pulling Canadian Province array from Summary Array
+  // 1. Spread operator to pull provinces out of the summary array and store in a new variable (Using Map function instead)
   getCanadianProvinces = () => {
     // Using reverse() to rearrange latest data on top
     const allProvincesData = this.state.canadianSummary.data.reverse();
     this.setState({ allProvincesData });
-    let cases;
-    let newArray = this.state.allProvincesData.filter(e => {
-        // console.log(e.Cases);
+  }
 
-        if (e.Province == "Grand Princess") {
-          cases = e.Cases;
+  //2. Filter through to get individual provinces
+  getCaseNumber = () => {
+    let cases = this.state.allProvincesData.filter(e => {
+        if (e.Province === "Grand Princess") {
+          return e.Cases;
         } else {
-          cases = 'Nothing found';
+          return 'Nothing found';
         }
-        console.log(cases);
     })
-
     this.setState({
-      caseNumber: newArray,
+      caseNumber: cases,
     });
-
-    //  this.setState({
-    //   //  caseNumber: cases,
-    //  });
-
-    // Spread operator to pull provinces out of the summary array and store in a new variable
-
-
-    // Filter through to get individual provinces
+    console.log(this.state.caseNumber);
   }
 
   render() {
-    // {console.log(this.state.canadianSummary)}
     return (
       <section className="section">
         <div className="container">
@@ -61,12 +51,12 @@ class App extends Component {
             My first website with <strong>Bulma</strong>!
           </p>
           <button className="button" onClick={this.getCanadianProvinces}>All Provinces Data</button>
-          <button className="button" style={{'margin-left':20}}>Grand Princess Data</button>
+          <button className="button" style={{'marginLeft':20}} onClick={this.getCaseNumber}>Grand Princess Data</button>
 
           <ul>
-            {this.state.caseNumber.map ( e => {
-              <li>{e}</li>
-            })}
+            {/* {this.state.caseNumber.map ( cases => (
+              <li>{cases}</li>
+            ))} */}
           </ul>
 
         </div>
