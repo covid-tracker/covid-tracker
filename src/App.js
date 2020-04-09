@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class App extends Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {
       canadianSummary: [],
       allProvincesData: [],
-      caseNumber: [],
+      caseNumber: "",
     };
   }
 
@@ -15,35 +15,40 @@ class App extends Component {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
-    })
-    .then((response) => {
+    }).then((response) => {
       this.setState({
         canadianSummary: response,
       });
     });
   }
 
-  // 1. Spread operator to pull provinces out of the summary array and store in a new variable (Using Map function instead)
+  // 1. Pull provinces out of the canadianSummary array and store in a new state
   getCanadianProvinces = () => {
     // Using reverse() to rearrange latest data on top
     const allProvincesData = this.state.canadianSummary.data.reverse();
     this.setState({ allProvincesData });
-  }
+  };
 
   //2. Filter through to get individual provinces
   getCaseNumber = () => {
-    let cases = this.state.allProvincesData.filter(e => {
-        // 1.
-        console.log(e.Province);
-        return e.Province === 'New Brunswick' ? e.Cases : 'Nothing Found';
-    })
+    // console.log(this.state);
 
-    // 2.
-    console.log(cases);
-    this.setState({
-      caseNumber: cases,
-    });
-  }
+    for (let i = 0; i < 100; i++) {
+      let provinceNames = {};
+      (provinceNames = this.state.allProvincesData[i].Province), this.state;
+
+      console.log(provinceNames);
+      console.log(this.state.allProvincesData[i]);
+    }
+
+    // let cases = this.state.allProvincesData.filter((e) => {
+    //   return e.Province === "New Brunswick" ? e.Cases : "Nothing Found";
+    // });
+
+    // this.setState({
+    //   caseNumber: cases,
+    // });
+  };
 
   render() {
     return (
@@ -53,15 +58,16 @@ class App extends Component {
           <p className="subtitle">
             My first website with <strong>Bulma</strong>!
           </p>
-          <button className="button" onClick={this.getCanadianProvinces}>All Provinces Data</button>
-          <button className="button" style={{'marginLeft':20}} onClick={this.getCaseNumber}>Grand Princess Data</button>
-
-          <ul>
-            {/* {this.state.caseNumber.map ( cases => (
-              <li>{cases}</li>
-            ))} */}
-          </ul>
-
+          <button className="button" onClick={this.getCanadianProvinces}>
+            All Provinces Data
+          </button>
+          <button
+            className="button"
+            style={{ margin: 20 }}
+            onClick={this.getCaseNumber}
+          >
+            Grand Princess Data
+          </button>
         </div>
       </section>
     );
