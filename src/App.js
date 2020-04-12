@@ -8,6 +8,7 @@ class App extends Component {
       canadianSummary: [],
       allProvincesData: [],
       caseNumber: "",
+      individualProvince: [],
     };
   }
 
@@ -17,7 +18,7 @@ class App extends Component {
       method: `GET`,
     }).then((response) => {
       this.setState({
-        canadianSummary: response,
+        canadianSummary: response.data.reverse(),
       });
     });
   }
@@ -25,20 +26,22 @@ class App extends Component {
   // 1. Pull provinces out of the canadianSummary array and store in a new state
   getCanadianProvinces = () => {
     // Using reverse() to rearrange latest data on top
-    const allProvincesData = this.state.canadianSummary.data.reverse();
+    const allProvincesData = this.state.canadianSummary;
     this.setState({ allProvincesData });
   };
 
   //2. Filter through to get individual provinces
   getCaseNumber = () => {
-    // console.log(this.state);
-
     for (let i = 0; i < 100; i++) {
       let provinceNames = {};
-      (provinceNames = this.state.allProvincesData[i].Province), this.state;
+      provinceNames.ProvinceName = this.state.allProvincesData[i].Province;
+      provinceNames.ConfirmedCases = this.state.allProvincesData[i].Cases;
+      provinceNames.Date = this.state.allProvincesData[i].Date;
 
-      console.log(provinceNames);
-      console.log(this.state.allProvincesData[i]);
+      this.setState({
+        individualProvince: provinceNames,
+      });
+      // console.log(provinceNames);
     }
 
     // let cases = this.state.allProvincesData.filter((e) => {
@@ -51,6 +54,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.canadianSummary);
     return (
       <section className="section">
         <div className="container">
@@ -68,6 +72,16 @@ class App extends Component {
           >
             Grand Princess Data
           </button>
+          <ul>
+            {this.state.canadianSummary.map((singleProvince, index) => {
+              return (
+                <li key={index}>
+                  {singleProvince.Province} - Number of cases
+                  {singleProvince.Cases}
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
     );
