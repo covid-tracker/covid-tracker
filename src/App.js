@@ -7,7 +7,7 @@ class App extends Component {
     this.state = {
       canadianSummary: [],
       allProvincesData: [],
-      caseNumber: "",
+      filteredProvincesData: [],
     };
   }
 
@@ -31,42 +31,37 @@ class App extends Component {
 
   //2. Filter through to get individual provinces
   getCaseNumber = () => {
-    // console.log(this.state);
-
+    let provinceObject = {};
+    let provinceArray = [];
     for (let i = 0; i < 100; i++) {
-      let provinceNames = {};
-      (provinceNames = this.state.allProvincesData[i].Province), this.state;
-
-      console.log(provinceNames);
-      console.log(this.state.allProvincesData[i]);
+      provinceObject.ProvinceName = this.state.allProvincesData[i].Province;
+      provinceObject.ConfirmedCases = this.state.allProvincesData[i].Cases;
+      provinceObject.Date = this.state.allProvincesData[i].Date;
+      provinceArray.push(provinceObject);
+      this.setState({
+        filteredProvincesData: provinceArray,
+      });
     }
-
-    // let cases = this.state.allProvincesData.filter((e) => {
-    //   return e.Province === "New Brunswick" ? e.Cases : "Nothing Found";
-    // });
-
-    // this.setState({
-    //   caseNumber: cases,
-    // });
+    // Maybe try spreading and pushing the items in the array??
+    // console.log(provinceArray);
+    console.log(this.state.filteredProvincesData);
   };
 
   render() {
     return (
       <section className="section">
         <div className="container">
-          <h1 className="title">Hello World</h1>
+          <h1 className="title">Covid-19 Tracker</h1>
           <p className="subtitle">
-            My first website with <strong>Bulma</strong>!
+            AKA <strong>Apocalypse Clock!</strong>
           </p>
+
           <button className="button" onClick={this.getCanadianProvinces}>
-            All Provinces Data
+            1. API Call
           </button>
-          <button
-            className="button"
-            style={{ margin: 20 }}
-            onClick={this.getCaseNumber}
-          >
-            Grand Princess Data
+
+          <button className="button" onClick={this.getCaseNumber}>
+            2. Provinces Data
           </button>
         </div>
       </section>
