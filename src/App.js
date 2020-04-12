@@ -7,7 +7,6 @@ class App extends Component {
     this.state = {
       canadianSummary: [],
       allProvincesData: [],
-      caseNumber: "",
       individualProvince: [],
     };
   }
@@ -76,7 +75,7 @@ class App extends Component {
             {this.state.canadianSummary.map((singleProvince, index) => {
               return (
                 <li key={index}>
-                  {singleProvince.Province} - Number of cases
+                  {singleProvince.Province} - Number of cases -
                   {singleProvince.Cases}
                 </li>
               );
