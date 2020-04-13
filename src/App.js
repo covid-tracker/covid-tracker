@@ -1,72 +1,69 @@
 import React, { Component } from "react";
 import axios from "axios";
-
 class App extends Component {
   constructor() {
     super();
     this.state = {
       canadianSummary: [],
       allProvincesData: [],
-      filteredProvincesData: [],
+      individualProvince: [],
     };
   }
-
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
     }).then((response) => {
       this.setState({
-        canadianSummary: response,
+        canadianSummary: response.data.reverse(),
       });
     });
   }
 
-  // 1. Pull provinces out of the canadianSummary array and store in a new state
-  getCanadianProvinces = () => {
-    // Using reverse() to rearrange latest data on top
-    const allProvincesData = this.state.canadianSummary.data.reverse();
-    this.setState({ allProvincesData });
-  };
-
   //2. Filter through to get individual provinces
   getCaseNumber = () => {
-    let provinceObject = {};
-    let provinceArray = [];
     for (let i = 0; i < 100; i++) {
-      provinceObject.ProvinceName = this.state.allProvincesData[i].Province;
-      provinceObject.ConfirmedCases = this.state.allProvincesData[i].Cases;
-      provinceObject.Date = this.state.allProvincesData[i].Date;
-      provinceArray.push(provinceObject);
+      let provinceNames = {};
+      provinceNames.ProvinceName = this.state.allProvincesData[i].Province;
+      provinceNames.ConfirmedCases = this.state.allProvincesData[i].Cases;
+      provinceNames.Date = this.state.allProvincesData[i].Date;
       this.setState({
-        filteredProvincesData: provinceArray,
+        individualProvince: provinceNames,
       });
+      // console.log(provinceNames);
     }
-    // Maybe try spreading and pushing the items in the array??
-    // console.log(provinceArray);
-    console.log(this.state.filteredProvincesData);
+    // let cases = this.state.allProvincesData.filter((e) => {
+    //   return e.Province === "New Brunswick" ? e.Cases : "Nothing Found";
+    // });
+    // this.setState({
+    //   caseNumber: cases,
+    // });
   };
-
   render() {
+    console.log(this.state.canadianSummary);
     return (
       <section className="section">
         <div className="container">
-          <h1 className="title">Covid-19 Tracker</h1>
+          <h1 className="title">Hello World</h1>
           <p className="subtitle">
-            AKA <strong>Apocalypse Clock!</strong>
+            My first website with <strong>Bulma</strong>!
           </p>
-
-          <button className="button" onClick={this.getCanadianProvinces}>
-            1. API Call
-          </button>
-
           <button className="button" onClick={this.getCaseNumber}>
-            2. Provinces Data
+            Grand Princess Data
           </button>
+          <ul>
+            {this.state.canadianSummary.map((singleProvince, index) => {
+              return (
+                <li key={index}>
+                  {singleProvince.Province} - Number of cases -
+                  {singleProvince.Cases}
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
     );
   }
 }
-
 export default App;
