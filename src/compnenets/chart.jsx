@@ -32,7 +32,7 @@ class Chart extends Component {
         <VictoryChart
           height={300}
           width={300}
-          domainPadding={{ x: 5, y: [0, 10] }}
+          domainPadding={{ x: 10, y: [0, 10] }}
           scale={{ x: "Name" }}
         >
           <VictoryBar
