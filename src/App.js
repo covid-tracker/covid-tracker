@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
-
 class App extends Component {
   constructor() {
     super();
@@ -36,11 +35,11 @@ class App extends Component {
     this.setState({
       provinceData: provinceInfo,
     });
-
-    console.log(this.state.provinceData);
   };
 
+  //2. Filter through to get individual provinces
   render() {
+    // console.log(this.state.canadianSummary);
     // const latestDate = this.state.canadianSummary.filter(() => {
     //   const today = new Date();
     //   let todayDate =
@@ -51,6 +50,7 @@ class App extends Component {
     //     (today.getDate() - 1);
     //   return todayDate;
     // });
+    // console.log(latestDate);
 
     return (
       <section className="section">
@@ -59,23 +59,22 @@ class App extends Component {
           <p className="subtitle">
             My first website with <strong>Bulma</strong>!
           </p>
-
           <button onClick={() => this.provinceData()}>Click me</button>
-
           <ul>
             {this.state.canadianSummary
               .splice(1, 14)
-              .map((provinceName, index) => {
+              .map((singleProvince, index) => {
                 return (
                   <li key={index}>
-                    PROVINCE: {provinceName.Province} ..... CASES:{" "}
-                    {provinceName.Cases} ..... DATE: {provinceName.Date}
+                    {singleProvince.Province} - Number of cases -
+                    {singleProvince.Cases} - Date -{singleProvince.Date}
                   </li>
                 );
               })}
           </ul>
         </div>
-        <Chart />
+        <Chart provinceNames={this.state.provinceData} />
+        {console.log(this.state.provinceData.province)}
       </section>
     );
   }

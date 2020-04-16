@@ -36,14 +36,14 @@ class Chart extends Component {
           height={400}
           width={400}
           domainPadding={{ x: 10, y: [0, 10] }}
-          scale={{ x: "Name" }}
+          // scale={{ x: "Name" }}
         >
           <VictoryBar
             dataComponent={<Bar events={{ onMouseOver: handleMouseOver }} />}
             style={this.state.style}
-            data={data}
-            x="Name"
-            y="Cases"
+            data={this.props.provinceNames}
+            x="province"
+            y="cases"
           />
         </VictoryChart>
       </div>
