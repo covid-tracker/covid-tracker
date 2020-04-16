@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Chart from "./compnenets/chart";
+import Chart from "./components/Chart";
 class App extends Component {
   constructor() {
     super();
     this.state = {
       canadianSummary: [],
+      provinceData: [],
     };
   }
 
@@ -38,18 +39,19 @@ class App extends Component {
 
   //2. Filter through to get individual provinces
   render() {
-    console.log(this.state.canadianSummary);
-    const latestDate = this.state.canadianSummary.filter(() => {
-      const today = new Date();
-      let todayDate =
-        today.getFullYear() +
-        "-" +
-        (today.getMonth() + 1) +
-        "-" +
-        (today.getDate() - 1);
-      return todayDate;
-    });
-    console.log(latestDate);
+    // console.log(this.state.canadianSummary);
+    // const latestDate = this.state.canadianSummary.filter(() => {
+    //   const today = new Date();
+    //   let todayDate =
+    //     today.getFullYear() +
+    //     "-" +
+    //     (today.getMonth() + 1) +
+    //     "-" +
+    //     (today.getDate() - 1);
+    //   return todayDate;
+    // });
+    // console.log(latestDate);
+
     return (
       <section className="section">
         <div className="container">
@@ -71,9 +73,11 @@ class App extends Component {
               })}
           </ul>
         </div>
-        <Chart />
+        <Chart provinceNames={this.state.provinceData} />
+        {console.log(this.state.provinceData.province)}
       </section>
     );
   }
 }
+
 export default App;

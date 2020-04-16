@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { VictoryBar, VictoryChart, Bar } from "victory";
+
 const data = [
   { Name: "Ontario", Cases: 2000 },
   { Name: "Grand Princess", Cases: 500 },
   { Name: "Yukon", Cases: 550 },
   { Name: "BC", Cases: 800 },
 ];
+
 class Chart extends Component {
   constructor() {
     super();
@@ -16,6 +18,7 @@ class Chart extends Component {
       },
     };
   }
+
   render() {
     const handleMouseOver = () => {
       const fillColor = this.state.clicked ? "blue" : "tomato";
@@ -30,21 +33,22 @@ class Chart extends Component {
     return (
       <div>
         <VictoryChart
-          height={300}
-          width={300}
+          height={400}
+          width={400}
           domainPadding={{ x: 10, y: [0, 10] }}
-          scale={{ x: "Name" }}
+          // scale={{ x: "Name" }}
         >
           <VictoryBar
             dataComponent={<Bar events={{ onMouseOver: handleMouseOver }} />}
             style={this.state.style}
-            data={data}
-            x="Name"
-            y="Cases"
+            data={this.props.provinceNames}
+            x="province"
+            y="cases"
           />
         </VictoryChart>
       </div>
     );
   }
 }
+
 export default Chart;
