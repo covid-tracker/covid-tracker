@@ -5,6 +5,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      fromDate: "2020-04-15T00:00:00Z",
+      toDate: "2020-04-16T00:00:00Z",
       canadianSummary: [],
       provinceData: [],
     };
@@ -14,10 +16,15 @@ class App extends Component {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
+      params: {
+        from: this.state.fromDate,
+        to: this.state.toDate,
+      },
     }).then((response) => {
       this.setState({
         canadianSummary: response.data.reverse(),
       });
+      console.log(this.state.canadianSummary);
     });
   }
 
@@ -37,9 +44,7 @@ class App extends Component {
     });
   };
 
-  //2. Filter through to get individual provinces
   render() {
-    // console.log(this.state.canadianSummary);
     // const latestDate = this.state.canadianSummary.filter(() => {
     //   const today = new Date();
     //   let todayDate =
@@ -74,7 +79,6 @@ class App extends Component {
           </ul>
         </div>
         <Chart provinceNames={this.state.provinceData} />
-        {console.log(this.state.provinceData.province)}
       </section>
     );
   }
