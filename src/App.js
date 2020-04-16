@@ -51,7 +51,6 @@ class App extends Component {
     //     (today.getDate() - 1);
     //   return todayDate;
     // });
-    // console.log(latestDate);
 
     return (
       <section className="section">
