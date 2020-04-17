@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { VictoryBar, VictoryChart, Bar } from "victory";
+import {
+  VictoryBar,
+  VictoryChart,
+  Bar,
+  VictoryTheme,
+  VictoryLabel,
+} from "victory";
 
 class Chart extends Component {
   constructor() {
@@ -30,13 +36,26 @@ class Chart extends Component {
           width={400}
           domainPadding={{ x: 10, y: [0, 10] }}
           // scale={{ x: "province" }}
+          style={{ parent: { maxWidth: "60%" } }}
+          theme={VictoryTheme.material}
+          height={300}
+          width={600}
+          padding={{ left: 180, right: 0, bottom: 40, top: 30 }}
         >
           <VictoryBar
             dataComponent={<Bar events={{ onMouseOver: handleMouseOver }} />}
-            style={this.state.style}
+            style={
+              (this.state.style,
+              {
+                labels: {
+                  fontSize: 200,
+                },
+              })
+            }
             data={this.props.provinceNames}
             x="province"
             y="cases"
+            horizontal={true}
             animate={{
               duration: 300,
               onLoad: { duration: 100 },

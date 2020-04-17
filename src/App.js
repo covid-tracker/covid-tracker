@@ -6,7 +6,7 @@ class App extends Component {
     super();
     this.state = {
       fromDate: "2020-04-15T00:00:00Z",
-      toDate: "2020-04-16T00:00:00Z",
+      toDate: "2020-04-15T01:00:00Z",
       canadianSummary: [],
       provinceData: [],
     };
@@ -22,22 +22,20 @@ class App extends Component {
       },
     }).then((response) => {
       this.setState({
-        canadianSummary: response.data.reverse(),
+        canadianSummary: response.data,
       });
       console.log(this.state.canadianSummary);
     });
   }
 
   provinceData = () => {
-    let provinceInfo = this.state.canadianSummary
-      .splice(1, 14)
-      .map((provinceName) => {
-        return {
-          province: provinceName.Province,
-          cases: provinceName.Cases,
-          date: provinceName.Date,
-        };
-      });
+    let provinceInfo = this.state.canadianSummary.map((provinceName) => {
+      return {
+        province: provinceName.Province,
+        cases: provinceName.Cases,
+        date: provinceName.Date,
+      };
+    });
 
     this.setState({
       provinceData: provinceInfo,
@@ -45,18 +43,6 @@ class App extends Component {
   };
 
   render() {
-    // const latestDate = this.state.canadianSummary.filter(() => {
-    //   const today = new Date();
-    //   let todayDate =
-    //     today.getFullYear() +
-    //     "-" +
-    //     (today.getMonth() + 1) +
-    //     "-" +
-    //     (today.getDate() - 1);
-    //   return todayDate;
-    // });
-    // console.log(latestDate);
-
     return (
       <section className="section">
         <div className="container">
@@ -66,16 +52,26 @@ class App extends Component {
           </p>
           <button onClick={() => this.provinceData()}>Click me</button>
           <ul>
-            {this.state.canadianSummary
-              .splice(1, 14)
-              .map((singleProvince, index) => {
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Province Name</th>
+                  <th>Case Numbers</th>
+                </tr>
+              </thead>
+              {this.state.canadianSummary.map((singleProvince, index) => {
                 return (
-                  <li key={index}>
-                    {singleProvince.Province} - Number of cases -
-                    {singleProvince.Cases} - Date -{singleProvince.Date}
-                  </li>
+                  <tbody>
+                    <tr key={index}>
+                      <td key={singleProvince.Lon}>
+                        {singleProvince.Province}
+                      </td>
+                      <td key={singleProvince.Lat}>{singleProvince.Cases}</td>
+                    </tr>
+                  </tbody>
                 );
               })}
+            </table>
           </ul>
         </div>
         <Chart provinceNames={this.state.provinceData} />
