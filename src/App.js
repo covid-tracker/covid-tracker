@@ -49,21 +49,24 @@ class App extends Component {
     return (
       <section className="section">
         <div className="container" style={{ textAlign: "center" }}>
-          <h1 className="title" style={{ textAlign: "center" }}>
-            COVID Tracker
-          </h1>
-          <p className="subtitle">
-            AKA<strong> Apocalypse Clock</strong>!
-          </p>
-          <button
-            class="button is-danger is-rounded"
-            onClick={() => this.provinceData()}
-          >
-            Click Me
-          </button>
-          <ul>
-            <table class="table">
-              <thead>
+          <header>
+            <h1 className="title" style={{ textAlign: "center" }}>
+              COVID Tracker
+            </h1>
+            <p className="subtitle">
+              AKA<strong> Apocalypse Clock</strong>!
+            </p>
+            <button
+              class="button is-danger is-rounded"
+              onClick={() => this.provinceData()}
+            >
+              Click Me
+            </button>
+          </header>
+
+          <main className="columns">
+            <table className="table column">
+              <thead className="">
                 <tr>
                   <th>Province Name</th>
                   <th>Case Numbers</th>
@@ -82,10 +85,10 @@ class App extends Component {
                 );
               })}
             </table>
-          </ul>
+            <Chart className="column" provinceNames={this.state.provinceData} />
+          </main>
+          <MetroSpinner size={70} color="#686769" loading={loading} />
         </div>
-        <MetroSpinner size={70} color="#686769" loading={loading} />
-        <Chart provinceNames={this.state.provinceData} />
       </section>
     );
   }
