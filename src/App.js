@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
+import { MetroSpinner } from "react-spinners-kit";
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       fromDate: "2020-04-15T00:00:00Z",
       toDate: "2020-04-15T01:00:00Z",
+      loading: false,
       canadianSummary: [],
       provinceData: [],
     };
@@ -24,7 +27,6 @@ class App extends Component {
       this.setState({
         canadianSummary: response.data,
       });
-      console.log(this.state.canadianSummary);
     });
   }
 
@@ -43,14 +45,22 @@ class App extends Component {
   };
 
   render() {
+    const { loading } = this.state;
     return (
       <section className="section">
-        <div className="container">
-          <h1 className="title">Hello World</h1>
+        <div className="container" style={{ textAlign: "center" }}>
+          <h1 className="title" style={{ textAlign: "center" }}>
+            COVID Tracker
+          </h1>
           <p className="subtitle">
-            My first website with <strong>Bulma</strong>!
+            AKA<strong> Apocalypse Clock</strong>!
           </p>
-          <button onClick={() => this.provinceData()}>Click me</button>
+          <button
+            class="button is-danger is-rounded"
+            onClick={() => this.provinceData()}
+          >
+            Click Me
+          </button>
           <ul>
             <table class="table">
               <thead>
@@ -74,6 +84,7 @@ class App extends Component {
             </table>
           </ul>
         </div>
+        <MetroSpinner size={70} color="#686769" loading={loading} />
         <Chart provinceNames={this.state.provinceData} />
       </section>
     );

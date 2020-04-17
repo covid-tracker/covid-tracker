@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  VictoryBar,
-  VictoryChart,
-  Bar,
-  VictoryTheme,
-  VictoryLabel,
-} from "victory";
+import { VictoryBar, VictoryChart, Bar, VictoryTheme } from "victory";
 
 class Chart extends Component {
   constructor() {
