@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { VictoryBar, VictoryChart, Bar } from "victory";
+import { VictoryBar, VictoryChart, Bar, VictoryTheme } from "victory";
 class Chart extends Component {
   constructor() {
     super();
@@ -27,15 +27,18 @@ class Chart extends Component {
           height={200}
           width={400}
           domainPadding={{ x: 10, y: [0, 10] }}
-          scale={{ x: "province" }}
-          style={{ parent: { maxWidth: "60%" } }}
+          // scale={{ x: "province" }}
+          theme={VictoryTheme.material}
+          height={500}
+          width={900}
+          padding={{ left: 180, top: 30 }}
         >
           <VictoryBar
             dataComponent={<Bar events={{ onMouseOver: handleMouseOver }} />}
-            style={this.state.style}
             data={this.props.provinceNames}
             x="province"
             y="cases"
+            horizontal={true}
             animate={{
               duration: 300,
               onLoad: { duration: 100 },

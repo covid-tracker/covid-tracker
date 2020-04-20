@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
+import { MetroSpinner } from "react-spinners-kit";
 class App extends Component {
   constructor() {
     super();
     this.state = {
       fromDate: "2020-04-15T00:00:00Z",
       toDate: "2020-04-15T01:00:00Z",
+      loading: false,
       canadianSummary: [],
       provinceData: [],
     };
@@ -23,7 +25,6 @@ class App extends Component {
       this.setState({
         canadianSummary: response.data,
       });
-      console.log(this.state.canadianSummary);
     });
   }
   provinceData = () => {
@@ -39,26 +40,49 @@ class App extends Component {
     });
   };
   render() {
+    const { loading } = this.state;
     return (
       <section className="section">
-        <div className="container">
-          <h1 className="title">Hello World</h1>
-          <p className="subtitle">
-            My first website with <strong>Bulma</strong>!
-          </p>
-          <button onClick={() => this.provinceData()}>Click me</button>
-          <ul>
-            {this.state.canadianSummary.map((singleProvince, index) => {
-              return (
-                <li key={index}>
-                  {singleProvince.Province} - Number of cases -
-                  {singleProvince.Cases} - Date -{singleProvince.Date}
-                </li>
-              );
-            })}
-          </ul>
+        <div className="container" style={{ textAlign: "center" }}>
+          <header>
+            <h1 className="title" style={{ textAlign: "center" }}>
+              COVID Tracker
+            </h1>
+            <p className="subtitle">
+              AKA<strong> Apocalypse Clock</strong>!
+            </p>
+            <button
+              class="button is-danger is-rounded"
+              onClick={() => this.provinceData()}
+            >
+              Click Me
+            </button>
+          </header>
+          <main className="columns">
+            <table className="table column">
+              <thead className="">
+                <tr>
+                  <th>Province Name</th>
+                  <th>Case Numbers</th>
+                </tr>
+              </thead>
+              {this.state.canadianSummary.map((singleProvince, index) => {
+                return (
+                  <tbody>
+                    <tr key={index}>
+                      <td key={singleProvince.Lon}>
+                        {singleProvince.Province}
+                      </td>
+                      <td key={singleProvince.Lat}>{singleProvince.Cases}</td>
+                    </tr>
+                  </tbody>
+                );
+              })}
+            </table>
+            <Chart className="column" provinceNames={this.state.provinceData} />
+          </main>
+          <MetroSpinner size={70} color="#686769" loading={loading} />
         </div>
-        <Chart provinceNames={this.state.provinceData} />
       </section>
     );
   }
