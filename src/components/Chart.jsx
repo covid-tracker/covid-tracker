@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { VictoryBar, VictoryChart, Bar, VictoryTheme } from "victory";
+
 class Chart extends Component {
   constructor() {
     super();
@@ -10,6 +11,7 @@ class Chart extends Component {
       },
     };
   }
+
   render() {
     const handleMouseOver = () => {
       const fillColor = this.state.clicked ? "blue" : "lightred";
@@ -21,6 +23,7 @@ class Chart extends Component {
         },
       });
     };
+
     return (
       <div>
         <VictoryChart

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
 import { MetroSpinner } from "react-spinners-kit";
+
 class App extends Component {
   constructor() {
     super();
@@ -13,6 +14,7 @@ class App extends Component {
       provinceData: [],
     };
   }
+
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
@@ -27,6 +29,7 @@ class App extends Component {
       });
     });
   }
+
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
@@ -35,10 +38,12 @@ class App extends Component {
         date: provinceName.Date,
       };
     });
+
     this.setState({
       provinceData: provinceInfo,
     });
   };
+
   render() {
     const { loading } = this.state;
     return (
