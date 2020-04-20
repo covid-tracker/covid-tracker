@@ -63,6 +63,10 @@ class App extends Component {
               Click Me
             </button>
           </header>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4ed72758b3f34a49f6937eab32fccb5bb0da69f8
           <main className="columns">
             <table className="table column">
               <thead className="">
