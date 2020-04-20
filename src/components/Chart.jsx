@@ -23,6 +23,7 @@ class Chart extends Component {
         },
       });
     };
+
     return (
       <div>
         <VictoryChart
@@ -51,5 +52,4 @@ class Chart extends Component {
     );
   }
 }
-
 export default Chart;
