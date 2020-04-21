@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
+import Map from "./components/Map";
 import { MetroSpinner } from "react-spinners-kit";
 
 class App extends Component {
@@ -87,6 +88,9 @@ class App extends Component {
             </table>
             <Chart className="column" provinceNames={this.state.provinceData} />
           </main>
+
+          <Map markerData={this.state.canadianSummary} />
+
           <MetroSpinner size={70} color="#686769" loading={loading} />
         </div>
       </section>
