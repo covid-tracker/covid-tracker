@@ -7,8 +7,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-04-20T00:00:00Z",
-      toDate: "2020-04-20T01:00:00Z",
+      fromDate: "2020-04-15T00:00:00Z",
+      toDate: "2020-04-15T01:00:00Z",
       loading: false,
       canadianSummary: [],
       provinceData: [],
