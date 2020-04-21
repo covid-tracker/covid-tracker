@@ -27,8 +27,6 @@ class Chart extends Component {
     return (
       <div>
         <VictoryChart
-          height={200}
-          width={400}
           domainPadding={{ x: 10, y: [0, 10] }}
           // scale={{ x: "province" }}
           theme={VictoryTheme.material}
