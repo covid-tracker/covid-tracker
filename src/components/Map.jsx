@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 // import { PureComponent } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
-
 class Map extends Component {
   state = {
     viewport: {
@@ -12,7 +11,6 @@ class Map extends Component {
       zoom: 2.8,
     },
   };
-
   render() {
     return (
       <ReactMapGL
@@ -23,15 +21,14 @@ class Map extends Component {
         onViewportChange={(viewport) => this.setState({ viewport })}
       >
         {this.props.markerData.map((province) => {
-          console.log(province);
           return (
             <Marker
-              latitude={37}
-              longitude={-122}
+              latitude={parseInt(province.Lat)}
+              longitude={parseInt(province.Lon)}
               offsetLeft={-20}
               offsetTop={-10}
             >
-              <div>{province.Province}</div>
+              <div>{province.Cases}</div>
             </Marker>
           );
         })}
@@ -39,5 +36,4 @@ class Map extends Component {
     );
   }
 }
-
 export default Map;
