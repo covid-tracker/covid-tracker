@@ -16,6 +16,7 @@ class App extends Component {
       canadianSummary: [],
       canadianSummaryAll: [],
       provinceData: [],
+      provinceDataAll: [],
     };
   }
 
@@ -69,27 +70,23 @@ class App extends Component {
   };
 
   provinceGraph = (singleProvince) => {
-    console.log(this.state.fromDateAll);
-  };
-
-  provinceData = () => {
-    let provinceInfo = this.state.canadianSummary.map((provinceName) => {
+    let provinceInfo = this.state.canadianSummaryAll.map((provinceName) => {
       return {
-        province: provinceName.Province,
+        // province: provinceName.Province,
         cases: provinceName.Cases,
         date: provinceName.Date,
       };
     });
 
     this.setState({
-      provinceData: provinceInfo,
+      provinceDataAll: provinceInfo,
     });
   };
 
-  provinceDataAll = () => {
-    let provinceInfo = this.state.canadianSummaryAll.map((provinceName) => {
+  provinceData = () => {
+    let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
-        // province: provinceName.Province,
+        province: provinceName.Province,
         cases: provinceName.Cases,
         date: provinceName.Date,
       };
@@ -165,7 +162,10 @@ class App extends Component {
                 );
               })}
             </table>
-            <Chart className="column" provinceNames={this.provinceDataAll} />
+            <Chart
+              className="column"
+              provinceNames={this.state.provinceDataAll}
+            />
           </main>
 
           <Map markerData={this.state.canadianSummary} />

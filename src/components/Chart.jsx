@@ -98,6 +98,7 @@ class Chart extends Component {
     //     </VictoryChart>
     //   </div>
     // );
+    console.log(this.props.provinceNames.map((e) => e.cases));
     return (
       <div>
         {/* <InterpolationSelect
@@ -125,11 +126,11 @@ class Chart extends Component {
         <VictoryChart height={390}>
           <VictoryLine
             interpolation={this.state.interpolation}
-            data={this.props.provinceDataAll}
+            data={this.props.provinceNames.date}
             style={{ data: { stroke: "#c43a31" } }}
           />
           <VictoryScatter
-            data={this.state.provinceDataAll}
+            data={this.props.provinceNames.cases}
             size={5}
             style={{ data: { fill: "#c43a31" } }}
           />
