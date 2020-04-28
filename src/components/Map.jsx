@@ -29,8 +29,8 @@ class Map extends Component {
         {this.props.markerData.map((province) => {
           return (
             <Marker
-              latitude={parseInt(province.Lat)}
-              longitude={parseInt(province.Lon)}
+              latitude={parseFloat(province.Lat)}
+              longitude={parseFloat(province.Lon)}
             >
               <div style={style}>
                 {province.Province} - {province.Cases}
