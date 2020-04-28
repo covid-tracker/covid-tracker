@@ -8,10 +8,13 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-04-15T00:00:00Z",
-      toDate: "2020-04-15T01:00:00Z",
+      fromDate: "2020-04-26T00:00:00Z",
+      toDate: "2020-04-26T00:01:00Z",
+      fromDateAll: "",
+      toDateAll: "",
       loading: false,
       canadianSummary: [],
+      canadianSummaryAll: [],
       provinceData: [],
     };
   }
@@ -29,12 +32,64 @@ class App extends Component {
         canadianSummary: response.data,
       });
     });
+
+    axios({
+      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
+      method: `GET`,
+      params: {
+        from: this.state.fromDateAll,
+        to: this.state.toDateAll,
+      },
+    }).then((response) => {
+      this.setState({
+        canadianSummaryAll: response.data,
+      });
+    });
   }
+
+  dateFunction = () => {
+    let date = new Date();
+    // To print yesterday's date
+    date.setDate(date.getDate() - 1);
+    let yesterdayString = date.toISOString();
+    // Changing time to prevent looping on same date
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    // date.setMilliseconds(0);
+    let yesterdayStringTime = date.toISOString();
+
+    // this.setState({
+    //   fromDate: yesterdayString,
+    //   toDate: yesterdayStringTime,
+    // });
+
+    // console.log(this.state.fromDate);
+    // console.log(this.state.toDate);
+  };
+
+  provinceGraph = (singleProvince) => {
+    console.log(this.state.fromDateAll);
+  };
 
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
         province: provinceName.Province,
+        cases: provinceName.Cases,
+        date: provinceName.Date,
+      };
+    });
+
+    this.setState({
+      provinceData: provinceInfo,
+    });
+  };
+
+  provinceDataAll = () => {
+    let provinceInfo = this.state.canadianSummaryAll.map((provinceName) => {
+      return {
+        // province: provinceName.Province,
         cases: provinceName.Cases,
         date: provinceName.Date,
       };
@@ -58,7 +113,7 @@ class App extends Component {
               AKA<strong> Apocalypse Clock</strong>!
             </p>
             <button
-              class="button is-danger is-rounded"
+              className="button is-danger is-rounded"
               onClick={() => this.provinceData()}
             >
               Click Me
@@ -66,27 +121,51 @@ class App extends Component {
           </header>
 
           <main className="columns">
-            <table className="table column">
-              <thead className="">
+            <table className="table is-bordered is-hoverable is-striped column">
+              <thead>
                 <tr>
-                  <th>Province Name</th>
-                  <th>Case Numbers</th>
+                  <th
+                    style={{
+                      backgroundColor: "Black",
+                      color: "white",
+                      textAlign: "center",
+                    }}
+                  >
+                    PROVINCE NAME
+                  </th>
+                  <th
+                    style={{
+                      backgroundColor: "Black",
+                      color: "white",
+                      textAlign: "center",
+                    }}
+                  >
+                    TOTAL CASES
+                  </th>
                 </tr>
               </thead>
               {this.state.canadianSummary.map((singleProvince, index) => {
                 return (
                   <tbody>
                     <tr key={index}>
-                      <td key={singleProvince.Lon}>
+                      <td
+                        onClick={() => this.provinceGraph(singleProvince)}
+                        key={singleProvince.Lon}
+                      >
                         {singleProvince.Province}
                       </td>
-                      <td key={singleProvince.Lat}>{singleProvince.Cases}</td>
+                      <td
+                        onClick={() => this.provinceGraph(singleProvince)}
+                        key={singleProvince.Lat}
+                      >
+                        {singleProvince.Cases}
+                      </td>
                     </tr>
                   </tbody>
                 );
               })}
             </table>
-            <Chart className="column" provinceNames={this.state.provinceData} />
+            <Chart className="column" provinceNames={this.provinceDataAll} />
           </main>
 
           <Map markerData={this.state.canadianSummary} />
