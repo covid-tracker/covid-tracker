@@ -16,7 +16,11 @@ class App extends Component {
       canadianSummary: [],
       canadianSummaryAll: [],
       provinceData: [],
-      provinceDataAll: [],
+      historicalProvinceDataForGraph: [],
+      graphComponentData: {
+        interpolation: "natural",
+        polar: false,
+      },
     };
   }
 
@@ -70,17 +74,21 @@ class App extends Component {
   };
 
   provinceGraph = (singleProvince) => {
-    let provinceInfo = this.state.canadianSummaryAll.map((provinceName) => {
-      return {
-        // province: provinceName.Province,
-        cases: provinceName.Cases,
-        date: provinceName.Date,
-      };
-    });
+    let provinceHistoricalData = this.state.canadianSummaryAll.filter(
+      (provinceName) => {
+        if (provinceName.Province === singleProvince.Province) {
+          return {
+            finalizedCases: provinceName,
+          };
+        }
+      }
+    );
 
     this.setState({
-      provinceDataAll: provinceInfo,
+      historicalProvinceDataForGraph: provinceHistoricalData,
     });
+
+    console.log(this.state.historicalProvinceDataForGraph);
   };
 
   provinceData = () => {
@@ -164,7 +172,8 @@ class App extends Component {
             </table>
             <Chart
               className="column"
-              provinceNames={this.state.provinceDataAll}
+              graphStyle={this.state.graphComponentData}
+              provinceNames={this.state.historicalProvinceDataForGraph}
             />
           </main>
 

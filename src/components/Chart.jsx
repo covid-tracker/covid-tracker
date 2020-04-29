@@ -3,19 +3,10 @@ import {
   // VictoryBar,
   VictoryChart,
   // Bar,
-  VictoryTheme,
+  // VictoryTheme,
   VictoryLine,
   VictoryScatter,
 } from "victory";
-
-const data = [
-  { x: 0, y: 0 },
-  { x: 1, y: 2 },
-  { x: 2, y: 1 },
-  { x: 3, y: 4 },
-  { x: 4, y: 3 },
-  { x: 5, y: 5 },
-];
 
 const cartesianInterpolations = [
   "basis",
@@ -57,12 +48,26 @@ class Chart extends Component {
   constructor() {
     super();
     this.state = {
-      interpolation: "natural",
-      polar: false,
+      xValue: {},
+      yValue: {},
     };
   }
 
+  coordinateValues = () => {
+    const data = [
+      {
+        x: this.props.provinceNames.map((e) => e.Cases),
+        y: this.props.provinceNames.map((e) => e.Date),
+      },
+    ];
+    this.setState({
+      xValue: data.x,
+      yValue: data.y,
+    });
+  };
+
   render() {
+    // console.log(data);
     // const handleMouseOver = () => {
     //   const fillColor = this.state.clicked ? "blue" : "lightred";
     //   const clicked = !this.state.clicked;
@@ -98,7 +103,7 @@ class Chart extends Component {
     //     </VictoryChart>
     //   </div>
     // );
-    console.log(this.props.provinceNames.map((e) => e.cases));
+
     return (
       <div>
         {/* <InterpolationSelect
@@ -123,17 +128,22 @@ class Chart extends Component {
           style={{ marginLeft: 25, marginRight: 5 }}
         />
         <label htmlFor="polar">polar</label> */}
-        <VictoryChart height={390}>
+        <VictoryChart
+          height={600}
+          width={600}
+          onClick={this.coordinateValues()}
+        >
+          {/* <ul>
+            {data.y.map((e) => {
+              return <li>{e}</li>;
+            })}
+          </ul> */}
+
           <VictoryLine
-            interpolation={this.state.interpolation}
-            data={this.props.provinceNames.date}
+            interpolation={this.props.graphStyle.interpolation}
             style={{ data: { stroke: "#c43a31" } }}
           />
-          <VictoryScatter
-            data={this.props.provinceNames.cases}
-            size={5}
-            style={{ data: { fill: "#c43a31" } }}
-          />
+          <VictoryScatter size={4} style={{ data: { fill: "#c43a31" } }} />
         </VictoryChart>
       </div>
     );
