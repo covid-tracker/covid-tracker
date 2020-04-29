@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
 import Map from "./components/Map";
+import Table from "./components/Table";
 import { MetroSpinner } from "react-spinners-kit";
+
 class App extends Component {
   constructor() {
     super();
@@ -15,9 +17,14 @@ class App extends Component {
       canadianSummary: [],
       canadianSummaryAll: [],
       provinceData: [],
-      provinceDataAll: [],
+      historicalProvinceDataForGraph: [],
+      graphComponentData: {
+        interpolation: "natural",
+        polar: false,
+      },
     };
   }
+
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
@@ -31,6 +38,7 @@ class App extends Component {
         canadianSummary: response.data,
       });
     });
+
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
@@ -44,6 +52,7 @@ class App extends Component {
       });
     });
   }
+
   dateFunction = () => {
     let date = new Date();
     // To print yesterday's date
@@ -62,18 +71,23 @@ class App extends Component {
     // console.log(this.state.fromDate);
     // console.log(this.state.toDate);
   };
+
   provinceGraph = (singleProvince) => {
-    let provinceInfo = this.state.canadianSummaryAll.map((provinceName) => {
-      return {
-        // province: provinceName.Province,
-        cases: provinceName.Cases,
-        date: provinceName.Date,
-      };
-    });
+    let provinceHistoricalData = this.state.canadianSummaryAll.filter(
+      (provinceName) => {
+        if (provinceName.Province === singleProvince.Province) {
+          return {
+            finalizedCases: provinceName,
+          };
+        }
+      }
+    );
     this.setState({
-      provinceDataAll: provinceInfo,
+      historicalProvinceDataForGraph: provinceHistoricalData,
     });
+    console.log(this.state.historicalProvinceDataForGraph);
   };
+
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
@@ -86,6 +100,7 @@ class App extends Component {
       provinceData: provinceInfo,
     });
   };
+
   render() {
     const { loading } = this.state;
     return (
@@ -106,53 +121,15 @@ class App extends Component {
             </button>
           </header>
           <main className="columns">
-            <table className="table is-bordered is-hoverable is-striped column">
-              <thead>
-                <tr>
-                  <th
-                    style={{
-                      backgroundColor: "Black",
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                  >
-                    PROVINCE NAME
-                  </th>
-                  <th
-                    style={{
-                      backgroundColor: "Black",
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                  >
-                    TOTAL CASES
-                  </th>
-                </tr>
-              </thead>
-              {this.state.canadianSummary.map((singleProvince, index) => {
-                return (
-                  <tbody>
-                    <tr key={index}>
-                      <td
-                        onClick={() => this.provinceGraph(singleProvince)}
-                        key={singleProvince.Lon}
-                      >
-                        {singleProvince.Province}
-                      </td>
-                      <td
-                        onClick={() => this.provinceGraph(singleProvince)}
-                        key={singleProvince.Lat}
-                      >
-                        {singleProvince.Cases}
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              })}
-            </table>
+            <Table
+              className="column"
+              tableInfo={this.state.canadianSummary}
+              provinceNames={this.state.historicalProvinceDataForGraph}
+            />
             <Chart
               className="column"
-              provinceNames={this.state.provinceDataAll}
+              graphStyle={this.state.graphComponentData}
+              provinceNames={this.state.historicalProvinceDataForGraph}
             />
           </main>
           <Map markerData={this.state.canadianSummary} />
@@ -162,4 +139,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;
