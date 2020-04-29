@@ -3,19 +3,17 @@ import axios from "axios";
 import Chart from "./components/Chart";
 import Map from "./components/Map";
 import { MetroSpinner } from "react-spinners-kit";
-
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-04-15T00:00:00Z",
-      toDate: "2020-04-15T01:00:00Z",
+      fromDate: "2020-04-20T00:00:00Z",
+      toDate: "2020-04-20T01:00:00Z",
       loading: false,
       canadianSummary: [],
       provinceData: [],
     };
   }
-
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
@@ -30,7 +28,6 @@ class App extends Component {
       });
     });
   }
-
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
@@ -39,12 +36,10 @@ class App extends Component {
         date: provinceName.Date,
       };
     });
-
     this.setState({
       provinceData: provinceInfo,
     });
   };
-
   render() {
     const { loading } = this.state;
     return (
@@ -64,16 +59,28 @@ class App extends Component {
               Click Me
             </button>
           </header>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4ed72758b3f34a49f6937eab32fccb5bb0da69f8
           <main className="columns">
-            <table className="table column">
-              <thead className="">
+            <table className="table is-bordered is-hoverable is-striped column">
+              <thead>
                 <tr>
-                  <th>Province Name</th>
-                  <th>Case Numbers</th>
+                  <th
+                    style={{
+                      backgroundColor: "Black",
+                      color: "white",
+                      textAlign: "center",
+                    }}
+                  >
+                    PROVINCE NAME
+                  </th>
+                  <th
+                    style={{
+                      backgroundColor: "Black",
+                      color: "white",
+                      textAlign: "center",
+                    }}
+                  >
+                    TOTAL CASES
+                  </th>
                 </tr>
               </thead>
               {this.state.canadianSummary.map((singleProvince, index) => {
@@ -91,9 +98,7 @@ class App extends Component {
             </table>
             <Chart className="column" provinceNames={this.state.provinceData} />
           </main>
-
           <Map markerData={this.state.canadianSummary} />
-
           <MetroSpinner size={70} color="#686769" loading={loading} />
         </div>
       </section>

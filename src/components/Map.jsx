@@ -1,6 +1,12 @@
 import React, { Component } from "react";
-// import { PureComponent } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
+const style = {
+  padding: "3px 10px",
+  color: "#fff",
+  cursor: "pointer",
+  background: "#111",
+  borderRadius: "50px",
+};
 class Map extends Component {
   state = {
     viewport: {
@@ -8,7 +14,7 @@ class Map extends Component {
       height: 500,
       latitude: 53.76,
       longitude: -98.81,
-      zoom: 2.8,
+      zoom: 2.6,
     },
   };
   render() {
@@ -25,10 +31,10 @@ class Map extends Component {
             <Marker
               latitude={parseInt(province.Lat)}
               longitude={parseInt(province.Lon)}
-              offsetLeft={-20}
-              offsetTop={-10}
             >
-              <div>{province.Cases}</div>
+              <div style={style}>
+                {province.Province} - {province.Cases}
+              </div>
             </Marker>
           );
         })}
