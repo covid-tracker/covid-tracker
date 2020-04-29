@@ -38,13 +38,17 @@ class Table extends Component {
                     <tbody>
                       <tr key={index}>
                         <td
-                          onClick={() => this.provinceGraph(singleProvince)}
+                          onClick={() =>
+                            this.props.clickEventForGraph(singleProvince)
+                          }
                           key={singleProvince.Lon}
                         >
                           {singleProvince.Province}
                         </td>
                         <td
-                          onClick={() => this.provinceGraph(singleProvince)}
+                          onClick={() =>
+                            this.props.clickEventForGraph(singleProvince)
+                          }
                           key={singleProvince.Lat}
                         >
                           {singleProvince.Cases}

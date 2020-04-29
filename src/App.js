@@ -125,6 +125,7 @@ class App extends Component {
               className="column"
               tableInfo={this.state.canadianSummary}
               provinceNames={this.state.historicalProvinceDataForGraph}
+              clickEventForGraph={this.provinceGraph}
             />
             <Chart
               className="column"
