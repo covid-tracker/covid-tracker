@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
 import Map from "./components/Map";
+import Table from "./components/Table";
 import { MetroSpinner } from "react-spinners-kit";
 
 class App extends Component {
@@ -23,7 +24,6 @@ class App extends Component {
       },
     };
   }
-
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
@@ -97,7 +97,6 @@ class App extends Component {
         date: provinceName.Date,
       };
     });
-
     this.setState({
       provinceData: provinceInfo,
     });
@@ -122,66 +121,23 @@ class App extends Component {
               Click Me
             </button>
           </header>
-
           <main className="columns">
-            <table className="table is-bordered is-hoverable is-striped column">
-              <thead>
-                <tr>
-                  <th
-                    style={{
-                      backgroundColor: "Black",
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                  >
-                    PROVINCE NAME
-                  </th>
-                  <th
-                    style={{
-                      backgroundColor: "Black",
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                  >
-                    TOTAL CASES
-                  </th>
-                </tr>
-              </thead>
-              {this.state.canadianSummary.map((singleProvince, index) => {
-                return (
-                  <tbody>
-                    <tr key={index}>
-                      <td
-                        onClick={() => this.provinceGraph(singleProvince)}
-                        key={singleProvince.Lon}
-                      >
-                        {singleProvince.Province}
-                      </td>
-                      <td
-                        onClick={() => this.provinceGraph(singleProvince)}
-                        key={singleProvince.Lat}
-                      >
-                        {singleProvince.Cases}
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              })}
-            </table>
+            <Table
+              className="column"
+              tableInfo={this.state.canadianSummary}
+              provinceNames={this.state.historicalProvinceDataForGraph}
+            />
             <Chart
               className="column"
               graphStyle={this.state.graphComponentData}
               provinceNames={this.state.historicalProvinceDataForGraph}
             />
           </main>
-
           <Map markerData={this.state.canadianSummary} />
-
           <MetroSpinner size={70} color="#686769" loading={loading} />
         </div>
       </section>
     );
   }
 }
-
 export default App;
