@@ -9,8 +9,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-04-26T00:00:00Z",
-      toDate: "2020-04-26T00:01:00Z",
+      fromDate: "2020-04-27T00:00:00Z",
+      toDate: "2020-04-27ST00:01:00Z",
       fromDateAll: "",
       toDateAll: "",
       loading: false,
