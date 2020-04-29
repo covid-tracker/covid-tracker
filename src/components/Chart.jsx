@@ -60,10 +60,13 @@ class Chart extends Component {
         y: this.props.provinceNames.map((e) => e.Date),
       },
     ];
+    console.log(data);
     this.setState({
       xValue: data.x,
       yValue: data.y,
     });
+
+    // console.log(this.state.xValue);
   };
 
   render() {
@@ -128,11 +131,10 @@ class Chart extends Component {
           style={{ marginLeft: 25, marginRight: 5 }}
         />
         <label htmlFor="polar">polar</label> */}
-        <VictoryChart
-          height={600}
-          width={600}
-          onClick={this.coordinateValues()}
-        >
+        <button className="button" onClick={() => this.coordinateValues()}>
+          Click Me
+        </button>
+        <VictoryChart height={600} width={600}>
           {/* <ul>
             {data.y.map((e) => {
               return <li>{e}</li>;

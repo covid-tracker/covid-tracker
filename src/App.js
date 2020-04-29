@@ -87,8 +87,6 @@ class App extends Component {
     this.setState({
       historicalProvinceDataForGraph: provinceHistoricalData,
     });
-
-    console.log(this.state.historicalProvinceDataForGraph);
   };
 
   provinceData = () => {
