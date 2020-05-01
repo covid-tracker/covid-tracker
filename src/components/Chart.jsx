@@ -23,6 +23,7 @@ const cartesianInterpolations = [
 ];
 
 const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
+
 // const InterpolationSelect = ({ currentValue, values, onChange }) => (
 //   <select onChange={onChange} value={currentValue} style={{ width: 75 }}>
 //     {values.map((value) => (
@@ -32,6 +33,7 @@ const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
 //     ))}
 //   </select>
 // );
+
 class Chart extends Component {
   // constructor() {
   //   super();
@@ -42,44 +44,27 @@ class Chart extends Component {
   //     },
   //   };
   // }
+
+  constructor() {
+    super();
+    this.state = {
+      xAndYValue: [],
+    };
+  }
+
+  coordinateValues = () => {
+    let newArray = this.props.provinceNames.map((e) => {
+      let data = { x: e.Date, y: e.Cases };
+      return data;
+    });
+    this.setState({
+      xAndYValue: newArray,
+    });
+  };
+
   render() {
-    const data = [
-      { x: this.props.provinceNames.Date, y: this.props.provinceNames.Cases },
-    ];
-    // const handleMouseOver = () => {
-    //   const fillColor = this.state.clicked ? "blue" : "lightred";
-    //   const clicked = !this.state.clicked;
-    //   this.setState({
-    //     clicked,
-    //     style: {
-    //       data: { fill: fillColor },
-    //     },
-    //   });
-    // };
-    // return (
-    //   <div>
-    //     <VictoryChart
-    //       domainPadding={{ x: 10, y: [0, 10] }}
-    //       // scale={{ x: "province" }}
-    //       theme={VictoryTheme.material}
-    //       height={500}
-    //       width={900}
-    //       padding={{ left: 180, top: 30 }}
-    //     >
-    //       <VictoryBar
-    //         dataComponent={<Bar events={{ onMouseOver: handleMouseOver }} />}
-    //         data={this.props.provinceNames}
-    //         x="province"
-    //         y="cases"
-    //         horizontal={true}
-    //         animate={{
-    //           duration: 300,
-    //           onLoad: { duration: 100 },
-    //         }}
-    //       />
-    //     </VictoryChart>
-    //   </div>
-    // );
+    console.log(this.state.xAndYValue);
+
     return (
       <div>
         {/* <InterpolationSelect
@@ -104,14 +89,17 @@ class Chart extends Component {
           style={{ marginLeft: 25, marginRight: 5 }}
         />
         <label htmlFor="polar">polar</label> */}
+        <button className="button" onClick={() => this.coordinateValues()}>
+          Click Me
+        </button>
         <VictoryChart height={600} width={600}>
           <VictoryLine
             interpolation={this.props.graphStyle.interpolation}
-            data={data}
+            data={this.state.xAndYValue}
             style={{ data: { stroke: "#c43a31" } }}
           />
           <VictoryScatter
-            data={data}
+            data={this.state.xAndYValue}
             size={4}
             style={{ data: { fill: "#c43a31" } }}
           />

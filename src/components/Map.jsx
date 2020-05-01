@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
+
 const style = {
   padding: "3px 10px",
   color: "#fff",
@@ -14,9 +15,10 @@ class Map extends Component {
       height: 500,
       latitude: 53.76,
       longitude: -98.81,
-      zoom: 2.8,
+      zoom: 2.6,
     },
   };
+
   render() {
     return (
       <ReactMapGL
