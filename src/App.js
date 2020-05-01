@@ -2,18 +2,29 @@ import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
 import Map from "./components/Map";
+import Table from "./components/Table";
 import { MetroSpinner } from "react-spinners-kit";
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-04-20T00:00:00Z",
-      toDate: "2020-04-20T01:00:00Z",
+      fromDate: "",
+      toDate: "",
+      fromDateAll: "",
+      toDateAll: "",
       loading: false,
       canadianSummary: [],
+      canadianSummaryAll: [],
       provinceData: [],
+      historicalProvinceDataForGraph: [],
+      graphComponentData: {
+        interpolation: "natural",
+        polar: false,
+      },
     };
   }
+
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
@@ -27,7 +38,52 @@ class App extends Component {
         canadianSummary: response.data,
       });
     });
+
+    axios({
+      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
+      method: `GET`,
+      params: {
+        from: this.state.fromDateAll,
+        to: this.state.toDateAll,
+      },
+    }).then((response) => {
+      this.setState({
+        canadianSummaryAll: response.data,
+      });
+    });
   }
+
+  dateFunction = () => {
+    let date = new Date();
+    date.setDate(date.getDate() - 1);
+    date.setHours(-4);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    let yesterdayString = date.toISOString().split(".")[0] + "Z";
+    date.setHours(0);
+    let yesterdayStringTime = date.toISOString().split(".")[0] + "Z";
+    this.setState({
+      fromDate: yesterdayString,
+      toDate: yesterdayStringTime,
+    });
+  };
+
+  provinceGraph = (singleProvince) => {
+    let provinceHistoricalData = this.state.canadianSummaryAll.filter(
+      (provinceName) => {
+        if (provinceName.Province === singleProvince.Province) {
+          return {
+            finalizedCases: provinceName,
+          };
+        }
+      }
+    );
+
+    this.setState({
+      historicalProvinceDataForGraph: provinceHistoricalData,
+    });
+  };
+
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
@@ -40,6 +96,7 @@ class App extends Component {
       provinceData: provinceInfo,
     });
   };
+
   render() {
     const { loading } = this.state;
     return (
@@ -53,50 +110,25 @@ class App extends Component {
               AKA<strong> Apocalypse Clock</strong>!
             </p>
             <button
-              class="button is-danger is-rounded"
-              onClick={() => this.provinceData()}
+              className="button is-danger is-rounded"
+              onClick={() => this.dateFunction()}
             >
               Click Me
             </button>
           </header>
           <main className="columns">
-            <table className="table is-bordered is-hoverable is-striped column">
-              <thead>
-                <tr>
-                  <th
-                    style={{
-                      backgroundColor: "Black",
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                  >
-                    PROVINCE NAME
-                  </th>
-                  <th
-                    style={{
-                      backgroundColor: "Black",
-                      color: "white",
-                      textAlign: "center",
-                    }}
-                  >
-                    TOTAL CASES
-                  </th>
-                </tr>
-              </thead>
-              {this.state.canadianSummary.map((singleProvince, index) => {
-                return (
-                  <tbody>
-                    <tr key={index}>
-                      <td key={singleProvince.Lon}>
-                        {singleProvince.Province}
-                      </td>
-                      <td key={singleProvince.Lat}>{singleProvince.Cases}</td>
-                    </tr>
-                  </tbody>
-                );
-              })}
-            </table>
-            <Chart className="column" provinceNames={this.state.provinceData} />
+            <Table
+              className="column"
+              dateEven={this.dateFunction()}
+              tableInfo={this.state.canadianSummary}
+              provinceNames={this.state.historicalProvinceDataForGraph}
+              clickEventForGraph={this.provinceGraph}
+            />
+            <Chart
+              className="column"
+              graphStyle={this.state.graphComponentData}
+              provinceNames={this.state.historicalProvinceDataForGraph}
+            />
           </main>
           <Map markerData={this.state.canadianSummary} />
           <MetroSpinner size={70} color="#686769" loading={loading} />
