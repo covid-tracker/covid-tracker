@@ -48,7 +48,7 @@ class Chart extends Component {
   constructor() {
     super();
     this.state = {
-      xAndYValue: {},
+      xAndYValue: [],
     };
   }
 
@@ -95,12 +95,18 @@ class Chart extends Component {
         <VictoryChart height={600} width={600}>
           <VictoryLine
             interpolation={this.props.graphStyle.interpolation}
+            data={this.state.xAndYValue}
             style={{ data: { stroke: "#c43a31" } }}
           />
-          <VictoryScatter size={4} style={{ data: { fill: "#c43a31" } }} />
+          <VictoryScatter
+            data={this.state.xAndYValue}
+            size={4}
+            style={{ data: { fill: "#c43a31" } }}
+          />
         </VictoryChart>
       </div>
     );
   }
 }
+
 export default Chart;

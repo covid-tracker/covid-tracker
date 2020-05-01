@@ -9,10 +9,12 @@
     "axios": "^0.19.2",
     "bulma": "^0.8.2",
     "bulmaswatch": "^0.8.0",
+    "mapbox-gl": "^1.9.1",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-map-gl": "^5.2.5",
+    "react-mapbox-gl": "^4.8.3",
     "react-scripts": "3.4.1",
     "react-spinners-kit": "^1.9.1",
     "victory": "^34.1.3"

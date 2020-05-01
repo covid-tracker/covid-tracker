@@ -9,8 +9,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "",
-      toDate: "",
+      fromDate: "2020-04-29T00:00:00Z",
+      toDate: "2020-04-29T00:00:01Z",
       fromDateAll: "",
       toDateAll: "",
       loading: false,
@@ -119,7 +119,7 @@ class App extends Component {
           <main className="columns">
             <Table
               className="column"
-              dateEven={this.dateFunction()}
+              // dateEven={this.dateFunction()}
               tableInfo={this.state.canadianSummary}
               provinceNames={this.state.historicalProvinceDataForGraph}
               clickEventForGraph={this.provinceGraph}
@@ -137,4 +137,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;
