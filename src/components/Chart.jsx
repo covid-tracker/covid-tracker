@@ -48,64 +48,22 @@ class Chart extends Component {
   constructor() {
     super();
     this.state = {
-      xValue: {},
-      yValue: {},
+      xAndYValue: {},
     };
   }
 
   coordinateValues = () => {
-    const data = [
-      {
-        x: this.props.provinceNames.map((e) => e.Cases),
-        y: this.props.provinceNames.map((e) => e.Date),
-      },
-    ];
-    console.log(data);
-    this.setState({
-      xValue: data.x,
-      yValue: data.y,
+    let newArray = this.props.provinceNames.map((e) => {
+      let data = { x: e.Date, y: e.Cases };
+      return data;
     });
-
-    // console.log(this.state.xValue);
+    this.setState({
+      xAndYValue: newArray,
+    });
   };
 
   render() {
-    // console.log(data);
-    // const handleMouseOver = () => {
-    //   const fillColor = this.state.clicked ? "blue" : "lightred";
-    //   const clicked = !this.state.clicked;
-    //   this.setState({
-    //     clicked,
-    //     style: {
-    //       data: { fill: fillColor },
-    //     },
-    //   });
-    // };
-
-    // return (
-    //   <div>
-    //     <VictoryChart
-    //       domainPadding={{ x: 10, y: [0, 10] }}
-    //       // scale={{ x: "province" }}
-    //       theme={VictoryTheme.material}
-    //       height={500}
-    //       width={900}
-    //       padding={{ left: 180, top: 30 }}
-    //     >
-    //       <VictoryBar
-    //         dataComponent={<Bar events={{ onMouseOver: handleMouseOver }} />}
-    //         data={this.props.provinceNames}
-    //         x="province"
-    //         y="cases"
-    //         horizontal={true}
-    //         animate={{
-    //           duration: 300,
-    //           onLoad: { duration: 100 },
-    //         }}
-    //       />
-    //     </VictoryChart>
-    //   </div>
-    // );
+    console.log(this.state.xAndYValue);
 
     return (
       <div>
@@ -135,12 +93,6 @@ class Chart extends Component {
           Click Me
         </button>
         <VictoryChart height={600} width={600}>
-          {/* <ul>
-            {data.y.map((e) => {
-              return <li>{e}</li>;
-            })}
-          </ul> */}
-
           <VictoryLine
             interpolation={this.props.graphStyle.interpolation}
             style={{ data: { stroke: "#c43a31" } }}

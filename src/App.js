@@ -9,8 +9,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-04-26T00:00:00Z",
-      toDate: "2020-04-26T00:01:00Z",
+      fromDate: "",
+      toDate: "",
       fromDateAll: "",
       toDateAll: "",
       loading: false,
@@ -24,6 +24,7 @@ class App extends Component {
       },
     };
   }
+
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
@@ -54,23 +55,17 @@ class App extends Component {
 
   dateFunction = () => {
     let date = new Date();
-    // To print yesterday's date
     date.setDate(date.getDate() - 1);
-    let yesterdayString = date.toISOString();
-    // Changing time to prevent looping on same date
-    date.setHours(0);
+    date.setHours(-4);
     date.setMinutes(0);
     date.setSeconds(0);
-    // date.setMilliseconds(0);
-    let yesterdayStringTime = date.toISOString();
-
-    // this.setState({
-    //   fromDate: yesterdayString,
-    //   toDate: yesterdayStringTime,
-    // });
-
-    // console.log(this.state.fromDate);
-    // console.log(this.state.toDate);
+    let yesterdayString = date.toISOString().split(".")[0] + "Z";
+    date.setHours(0);
+    let yesterdayStringTime = date.toISOString().split(".")[0] + "Z";
+    this.setState({
+      fromDate: yesterdayString,
+      toDate: yesterdayStringTime,
+    });
   };
 
   provinceGraph = (singleProvince) => {
@@ -87,7 +82,6 @@ class App extends Component {
     this.setState({
       historicalProvinceDataForGraph: provinceHistoricalData,
     });
-    console.log(this.state.historicalProvinceDataForGraph);
   };
 
   provinceData = () => {
@@ -117,7 +111,7 @@ class App extends Component {
             </p>
             <button
               className="button is-danger is-rounded"
-              onClick={() => this.provinceData()}
+              onClick={() => this.dateFunction()}
             >
               Click Me
             </button>
@@ -125,6 +119,7 @@ class App extends Component {
           <main className="columns">
             <Table
               className="column"
+              dateEven={this.dateFunction()}
               tableInfo={this.state.canadianSummary}
               provinceNames={this.state.historicalProvinceDataForGraph}
               clickEventForGraph={this.provinceGraph}
