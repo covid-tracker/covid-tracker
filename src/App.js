@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
+import BarChart from "./components/BarChart";
 import Map from "./components/Map";
 import Table from "./components/Table";
 import { MetroSpinner } from "react-spinners-kit";
@@ -9,8 +10,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "",
-      toDate: "",
+      fromDate: "2020-04-29T00:00:00Z",
+      toDate: "2020-04-29T01:00:00Z",
       fromDateAll: "",
       toDateAll: "",
       loading: false,
@@ -98,6 +99,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.historicalProvinceDataForGraph);
     const { loading } = this.state;
     return (
       <section className="section">
@@ -109,17 +111,12 @@ class App extends Component {
             <p className="subtitle">
               AKA<strong> Apocalypse Clock</strong>!
             </p>
-            <button
-              className="button is-danger is-rounded"
-              onClick={() => this.dateFunction()}
-            >
-              Click Me
-            </button>
           </header>
+          <BarChart barChartInfo={this.state.canadianSummary} />
           <main className="columns">
             <Table
               className="column"
-              dateEven={this.dateFunction()}
+              // dateEven={this.dateFunction()}
               tableInfo={this.state.canadianSummary}
               provinceNames={this.state.historicalProvinceDataForGraph}
               clickEventForGraph={this.provinceGraph}

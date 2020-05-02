@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  // VictoryBar,
-  VictoryChart,
-  // Bar,
-  // VictoryTheme,
-  VictoryLine,
-  VictoryScatter,
-} from "victory";
+import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
 
 const cartesianInterpolations = [
   "basis",
@@ -24,31 +17,11 @@ const cartesianInterpolations = [
 
 const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
 
-// const InterpolationSelect = ({ currentValue, values, onChange }) => (
-//   <select onChange={onChange} value={currentValue} style={{ width: 75 }}>
-//     {values.map((value) => (
-//       <option value={value} key={value}>
-//         {value}
-//       </option>
-//     ))}
-//   </select>
-// );
-
 class Chart extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     clicked: false,
-  //     style: {
-  //       data: { fill: "teal" },
-  //     },
-  //   };
-  // }
-
   constructor() {
     super();
     this.state = {
-      xAndYValue: {},
+      xAndYValue: [],
     };
   }
 
@@ -64,40 +37,33 @@ class Chart extends Component {
 
   render() {
     console.log(this.state.xAndYValue);
-
     return (
-      <div>
-        {/* <InterpolationSelect
-          currentValue={this.state.interpolation}
-          values={
-            this.state.polar ? polarInterpolations : cartesianInterpolations
-          }
-          onChange={(event) =>
-            this.setState({ interpolation: event.target.value })
-          }
-        />
-        <input
-          type="checkbox"
-          id="polar"
-          value={this.state.polar}
-          onChange={(event) =>
-            this.setState({
-              polar: event.target.checked,
-              interpolation: "linear",
-            })
-          }
-          style={{ marginLeft: 25, marginRight: 5 }}
-        />
-        <label htmlFor="polar">polar</label> */}
+      <div className="box">
         <button className="button" onClick={() => this.coordinateValues()}>
           Click Me
         </button>
-        <VictoryChart height={600} width={600}>
+        <VictoryChart
+          className="image"
+          height={600}
+          width={600}
+          animate={{ duration: 0, easing: "exp" }}
+        >
           <VictoryLine
             interpolation={this.props.graphStyle.interpolation}
-            style={{ data: { stroke: "#c43a31" } }}
+            style={{ data: { stroke: "#4F7CFF" } }}
+            data={this.state.xAndYValue}
+            theme={VictoryTheme.material}
+            animate={{
+              onExit: {
+                duration: 300,
+                before: () => ({
+                  _y: 0,
+                  fill: "orange",
+                  label: "BYE",
+                }),
+              },
+            }}
           />
-          <VictoryScatter size={4} style={{ data: { fill: "#c43a31" } }} />
         </VictoryChart>
       </div>
     );

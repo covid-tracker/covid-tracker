@@ -2,7 +2,7 @@ import React, { Component } from "react";
 class Table extends Component {
   render() {
     return (
-      <section className="section">
+      <section className="section box">
         <div className="container" style={{ textAlign: "center" }}>
           <header>
             <h1 className="title" style={{ textAlign: "center" }}>
@@ -14,7 +14,6 @@ class Table extends Component {
                   <tr>
                     <th
                       style={{
-                        backgroundColor: "Black",
                         color: "white",
                         textAlign: "center",
                       }}
@@ -23,7 +22,6 @@ class Table extends Component {
                     </th>
                     <th
                       style={{
-                        backgroundColor: "Black",
                         color: "white",
                         textAlign: "center",
                       }}
