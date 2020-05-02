@@ -3,6 +3,7 @@ import axios from "axios";
 import Chart from "./components/Chart";
 import Map from "./components/Map";
 import Table from "./components/Table";
+import Widget from "./components/Widget";
 import { MetroSpinner } from "react-spinners-kit";
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
       loading: false,
       canadianSummary: [],
       canadianSummaryAll: [],
+      canadianSummaryCanada: [],
       provinceData: [],
       historicalProvinceDataForGraph: [],
       graphComponentData: {
@@ -37,6 +39,7 @@ class App extends Component {
       this.setState({
         canadianSummary: response.data,
       });
+      // console.log(this.state.canadianSummary);
     });
 
     axios({
@@ -49,6 +52,19 @@ class App extends Component {
     }).then((response) => {
       this.setState({
         canadianSummaryAll: response.data,
+      });
+    });
+
+    axios({
+      url: `https://api.covid19api.com/summary`,
+      method: `GET`,
+      params: {
+        from: this.state.fromDateAll,
+        to: this.state.toDateAll,
+      },
+    }).then((response) => {
+      this.setState({
+        canadianSummaryCanada: response.data.Countries[39],
       });
     });
   }
@@ -109,26 +125,21 @@ class App extends Component {
             <p className="subtitle">
               AKA<strong> Apocalypse Clock</strong>!
             </p>
-            <button
-              className="button is-danger is-rounded"
-              onClick={() => this.dateFunction()}
-            >
-              Click Me
-            </button>
           </header>
           <main className="columns">
             <Table
-              className="column"
+              className="mainChart column"
               // dateEven={this.dateFunction()}
               tableInfo={this.state.canadianSummary}
               provinceNames={this.state.historicalProvinceDataForGraph}
               clickEventForGraph={this.provinceGraph}
             />
             <Chart
-              className="column"
+              className="mainChart column"
               graphStyle={this.state.graphComponentData}
               provinceNames={this.state.historicalProvinceDataForGraph}
             />
+            <Widget widgetData={this.state.canadianSummaryCanada} />
           </main>
           <Map markerData={this.state.canadianSummary} />
           <MetroSpinner size={70} color="#686769" loading={loading} />
