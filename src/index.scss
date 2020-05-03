@@ -22,4 +22,8 @@ $table-cell-heading-color: #ffffff;
 $table-color: #ffffff;
 $table-background-color: #2d345b;
 $table-cell-border: 1px solid $blueAccent;
+
+* {
+  // border: 1px solid white;
+}
 @import "node_modules/bulmaswatch/minty/bulmaswatch";
