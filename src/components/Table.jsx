@@ -2,8 +2,8 @@ import React, { Component } from "react";
 class Table extends Component {
   render() {
     return (
-      <section className="section">
-        <div className="box container" style={{ textAlign: "center" }}>
+      <section className="section box">
+        <div className="container" style={{ textAlign: "center" }}>
           <header>
             <h1 className="title" style={{ textAlign: "center" }}>
               Click Province Name
