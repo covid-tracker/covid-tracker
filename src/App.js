@@ -4,6 +4,7 @@ import Chart from "./components/Chart";
 import Map from "./components/Map";
 import Table from "./components/Table";
 import Widget from "./components/Widget";
+import BarChart from "./components/BarChart";
 import { MetroSpinner } from "react-spinners-kit";
 
 class App extends Component {
@@ -139,6 +140,7 @@ class App extends Component {
               graphStyle={this.state.graphComponentData}
               provinceNames={this.state.historicalProvinceDataForGraph}
             />
+            <BarChart barChartInfo={this.state.canadianSummary} />
             <Widget widgetData={this.state.canadianSummaryCanada} />
           </main>
           <Map markerData={this.state.canadianSummary} />
