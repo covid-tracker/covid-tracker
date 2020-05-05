@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { VictoryChart, VictoryTheme, VictoryBar, VictoryLabel } from "victory";
+import { VictoryChart, VictoryTheme, VictoryBar } from "victory";
 class BarChart extends Component {
   constructor() {
     super();
@@ -7,7 +7,6 @@ class BarChart extends Component {
       xAndYValue: [],
     };
   }
-
   coordinateValues = () => {
     let newArray = this.props.barChartInfo.map((e) => {
       let data = { x: e.Province, y: e.Cases };
@@ -21,13 +20,12 @@ class BarChart extends Component {
     return (
       <div>
         <button
-          className="button is-rounded is-success"
+          className="button button-rounded"
           onClick={this.coordinateValues}
         >
           Click
         </button>
         <VictoryChart
-          height={650}
           style={{ marginLeft: 100 }}
           theme={VictoryTheme.material}
           domainPadding={{ x: 10 }}
@@ -38,14 +36,10 @@ class BarChart extends Component {
         >
           <VictoryBar
             horizontal
-            cornerRadius={{ topLeft: 10, topRight: 10 }}
-            labels={({ datum }) => datum.y}
             style={{
-              data: { fill: "#4f7cff" },
-              labels: { fill: "#4f7cff" },
+              data: { fill: "#c43a31" },
             }}
             data={this.state.xAndYValue}
-            labelComponent={<VictoryLabel dy={0} />}
           />
         </VictoryChart>
       </div>
