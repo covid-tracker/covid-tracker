@@ -6,12 +6,15 @@ $purpleAccent: #6c31f3;
 $redAccent: #f35163;
 
 // main //
-.section {
-  background: #1f2442;
+h2 {
+  color: #ffffff;
 }
 
-.section h1 {
-  color: #575a86;
+.section {
+  background: #1f2442;
+  h1 {
+    color: #575a86;
+  }
 }
 
 $content-heading-color: #575a86;
@@ -34,6 +37,7 @@ $table-cell-border: 1px solid #1f2442;
   color: #2e335a;
   display: block;
   padding: 1.25rem;
+  margin: 0.8rem;
 }
 
 .widgetOne {
@@ -48,11 +52,8 @@ $table-cell-border: 1px solid #1f2442;
   background-color: #f35163;
 }
 
-.widTitle {
-  color: red;
-  font-size: 1.75rem;
-  font-weight: 600;
-  line-height: 1.125;
+li {
+  margin: 1rem;
 }
 
 @import "node_modules/bulmaswatch/minty/bulmaswatch";
