@@ -1,27 +1,26 @@
 import React, { Component } from "react";
 import {
-  // VictoryBar,
   VictoryChart,
-  // Bar,
   VictoryTheme,
   VictoryLine,
   VictoryScatter,
 } from "victory";
 
-const cartesianInterpolations = [
-  "basis",
-  "bundle",
-  "cardinal",
-  "catmullRom",
-  "linear",
-  "monotoneX",
-  "monotoneY",
-  "natural",
-  "step",
-  "stepAfter",
-  "stepBefore",
-];
-const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
+// const cartesianInterpolations = [
+//   "basis",
+//   "bundle",
+//   "cardinal",
+//   "catmullRom",
+//   "linear",
+//   "monotoneX",
+//   "monotoneY",
+//   "natural",
+//   "step",
+//   "stepAfter",
+//   "stepBefore",
+// ];
+
+// const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
 
 class Chart extends Component {
   constructor() {
@@ -44,7 +43,7 @@ class Chart extends Component {
   render() {
     // console.log(this.state.xAndYValue);
     return (
-      <div>
+      <div className="box">
         <button className="button" onClick={() => this.coordinateValues()}>
           Click Me
         </button>
