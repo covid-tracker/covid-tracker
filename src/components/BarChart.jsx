@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { VictoryChart, VictoryTheme, VictoryBar, VictoryLabel } from "victory";
-
 class BarChart extends Component {
   constructor() {
     super();
@@ -14,12 +13,10 @@ class BarChart extends Component {
       let data = { x: e.Province, y: e.Cases };
       return data;
     });
-
     this.setState({
       xAndYValue: newArray,
     });
   };
-
   render() {
     return (
       <div>
@@ -30,8 +27,9 @@ class BarChart extends Component {
           Click
         </button>
         <VictoryChart
-          theme={VictoryTheme.material}
           height={650}
+          style={{ marginLeft: 100 }}
+          theme={VictoryTheme.material}
           domainPadding={{ x: 10 }}
           animate={{
             duration: 700,
@@ -54,5 +52,4 @@ class BarChart extends Component {
     );
   }
 }
-
 export default BarChart;

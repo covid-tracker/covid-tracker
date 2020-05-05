@@ -3,7 +3,9 @@ import axios from "axios";
 import Chart from "./components/Chart";
 import BarChart from "./components/BarChart";
 import Map from "./components/Map";
-// import Table from "./components/Table";
+import Table from "./components/Table";
+import Widget from "./components/Widget";
+import BarChart from "./components/BarChart";
 import { MetroSpinner } from "react-spinners-kit";
 import BarChartNew from "./components/BarChartNew";
 
@@ -18,6 +20,7 @@ class App extends Component {
       loading: false,
       canadianSummary: [],
       canadianSummaryAll: [],
+      canadianSummaryCanada: [],
       provinceData: [],
       historicalProvinceDataForGraph: [],
       graphComponentData: {
@@ -77,6 +80,19 @@ class App extends Component {
     }).then((response) => {
       this.setState({
         canadianSummaryAll: response.data,
+      });
+    });
+
+    axios({
+      url: `https://api.covid19api.com/summary`,
+      method: `GET`,
+      params: {
+        from: this.state.fromDateAll,
+        to: this.state.toDateAll,
+      },
+    }).then((response) => {
+      this.setState({
+        canadianSummaryCanada: response.data.Countries[39],
       });
     });
   }
@@ -152,10 +168,12 @@ class App extends Component {
               clickEventForGraph={this.provinceGraph}
             /> */}
             <Chart
-              className="column"
-              graphStyle={graphComponentData}
+              className="mainChart column"
+              graphStyle={this.state.graphComponentData}
               provinceNames={this.state.historicalProvinceDataForGraph}
             />
+            <BarChart barChartInfo={this.state.canadianSummary} />
+            <Widget widgetData={this.state.canadianSummaryCanada} />
           </main>
           <Map markerData={this.state.canadianSummary} />
           <MetroSpinner size={70} color="#686769" loading={loading} />
@@ -164,4 +182,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;

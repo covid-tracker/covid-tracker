@@ -43,19 +43,32 @@ class Chart extends Component {
           Click Me
         </button>
         <VictoryChart
-          className="image"
           height={600}
           width={600}
-          animate={{ duration: 0, easing: "exp" }}
+          animate={{ duration: 1000, easing: "elastic" }}
         >
           <VictoryLine
             interpolation={this.props.graphStyle.interpolation}
-            style={{ data: { stroke: "#4F7CFF" } }}
+            style={{ data: { stroke: "#c43a31" } }}
             data={this.state.xAndYValue}
-            theme={VictoryTheme.material}
             animate={{
               onExit: {
-                duration: 300,
+                duration: 500,
+                before: () => ({
+                  _y: 0,
+                  fill: "orange",
+                  label: "BYE",
+                }),
+              },
+            }}
+          />
+          <VictoryScatter
+            size={4}
+            style={{ data: { fill: "#c43a31" } }}
+            data={this.state.xAndYValue}
+            animate={{
+              onExit: {
+                duration: 500,
                 before: () => ({
                   _y: 0,
                   fill: "orange",
@@ -69,4 +82,5 @@ class Chart extends Component {
     );
   }
 }
+
 export default Chart;
