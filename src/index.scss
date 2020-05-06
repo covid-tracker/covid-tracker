@@ -27,32 +27,4 @@ $table-color: #ffffff;
 $table-background-color: #2d345b;
 $table-cell-border: 1px solid #1f2442;
 
-// Widget Start //
-.widBox {
-  border-radius: 25px;
-  box-shadow: 0 0 0 1px #dbdbdb;
-  color: #2e335a;
-  display: block;
-  padding: 1.25rem;
-}
-
-.widgetOne {
-  background-color: #4f7cff;
-}
-
-.widgetTwo {
-  background-color: #6c31f3;
-}
-
-.widgetThree {
-  background-color: #f35163;
-}
-
-.widTitle {
-  color: red;
-  font-size: 1.75rem;
-  font-weight: 600;
-  line-height: 1.125;
-}
-
 @import "node_modules/bulmaswatch/minty/bulmaswatch";
