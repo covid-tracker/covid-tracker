@@ -12,19 +12,15 @@ class Widget extends Component {
               <li>
                 <div className="widBox widgetOne">
                   <h3>National Confirmed Cases</h3>
-                  <h2 class="widTitle">
-                    {this.props.widgetData.TotalConfirmed}
-                  </h2>
+                  <h2>{this.props.widgetData.TotalConfirmed}</h2>
                 </div>
                 <div className="widBox widgetTwo">
                   <h3>National Confirmed Deaths</h3>
-                  <h2 class="widTitle">{this.props.widgetData.TotalDeaths}</h2>
+                  <h2>{this.props.widgetData.TotalDeaths}</h2>
                 </div>
                 <div className="widBox widgetThree">
                   <h3>National Recovered Patients</h3>
-                  <h2 class="widTitle">
-                    {this.props.widgetData.TotalRecovered}
-                  </h2>
+                  <h2>{this.props.widgetData.TotalRecovered}</h2>
                 </div>
               </li>
             </ul>
