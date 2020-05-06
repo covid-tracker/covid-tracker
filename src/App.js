@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Chart from "./components/Chart";
-// import BarChart from "./components/BarChart";
 import Map from "./components/Map";
 // import Table from "./components/Table";
 import Widget from "./components/Widget";
@@ -171,5 +170,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
