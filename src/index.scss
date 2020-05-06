@@ -6,12 +6,15 @@ $purpleAccent: #6c31f3;
 $redAccent: #f35163;
 
 // main //
-.section {
-  background: #1f2442;
+h2 {
+  color: #ffffff;
 }
 
-.section h1 {
-  color: #575a86;
+.section {
+  background: #1f2442;
+  h1 {
+    color: #575a86;
+  }
 }
 
 $content-heading-color: #575a86;
@@ -26,5 +29,31 @@ $table-cell-heading-color: #ffffff;
 $table-color: #ffffff;
 $table-background-color: #2d345b;
 $table-cell-border: 1px solid #1f2442;
+
+// Widget Start //
+.widBox {
+  border-radius: 25px;
+  box-shadow: 0 0 0 1px #dbdbdb;
+  color: #2e335a;
+  display: block;
+  padding: 1.25rem;
+  margin: 0.8rem;
+}
+
+.widgetOne {
+  background-color: #4f7cff;
+}
+
+.widgetTwo {
+  background-color: #6c31f3;
+}
+
+.widgetThree {
+  background-color: #f35163;
+}
+
+li {
+  margin: 1rem;
+}
 
 @import "node_modules/bulmaswatch/minty/bulmaswatch";
