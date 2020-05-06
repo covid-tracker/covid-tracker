@@ -11,8 +11,8 @@ const style = {
 class Map extends Component {
   state = {
     viewport: {
-      width: 100,
-      height: 200,
+      width: 900,
+      height: 500,
       latitude: 53.76,
       longitude: -98.81,
       zoom: 2.6,
