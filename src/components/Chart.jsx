@@ -42,7 +42,7 @@ class Chart extends Component {
         </button>
         <VictoryChart
           className="image"
-          height={600}
+          height={500}
           width={600}
           animate={{ duration: 0, easing: "exp" }}
         >

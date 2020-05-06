@@ -5,23 +5,21 @@ class Widget extends Component {
     console.log(this.props.widgetData);
     return (
       <div className="box container" style={{ textAlign: "center" }}>
-        <h1 class="title">Live Count</h1>
-        <ul>
-          <li>
-            <div className="widBox widgetOne">
-              <h3>National Confirmed Cases</h3>
-              <h2>{this.props.widgetData.TotalConfirmed}</h2>
-            </div>
-            <div className="widBox widgetTwo">
-              <h3>National Confirmed Deaths</h3>
-              <h2>{this.props.widgetData.TotalDeaths}</h2>
-            </div>
-            <div className="widBox widgetThree">
-              <h3>National Recovered Patients</h3>
-              <h2>{this.props.widgetData.TotalRecovered}</h2>
-            </div>
-          </li>
-        </ul>
+        <h1 class="title">National Live Count</h1>
+        <div className="columns">
+          <div className="column widBox widgetOne">
+            <h3>Cases</h3>
+            <h2>{this.props.widgetData.TotalConfirmed}</h2>
+          </div>
+          <div className="column widBox widgetTwo">
+            <h3>Deaths</h3>
+            <h2>{this.props.widgetData.TotalDeaths}</h2>
+          </div>
+          <div className="column widBox widgetThree">
+            <h3>Recovered</h3>
+            <h2>{this.props.widgetData.TotalRecovered}</h2>
+          </div>
+        </div>
       </div>
     );
   }
