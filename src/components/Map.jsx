@@ -14,6 +14,7 @@ class Map extends Component {
     viewport: {
       width: "auto",
       height: 500,
+      width: 590,
       latitude: 63,
       longitude: -96.81,
       zoom: 2.25,
@@ -23,6 +24,7 @@ class Map extends Component {
   render() {
     return (
       <div className="box container" style={{ textAlign: "center" }}>
+        {/* <div className="map-wrapper"> */}
         <ReactMapGL
           style={{ minWidth: "100%", maxWidth: "100%" }}
           {...this.state.viewport}
@@ -30,6 +32,7 @@ class Map extends Component {
             "pk.eyJ1IjoieGVub2pheCIsImEiOiJjazk5MDlpNDEwN2o2M21ueDVoNXQ1eWpnIn0.-Sy_LkU_ZYcmyH09Zl-MYw"
           }
           onViewportChange={(viewport) => this.setState({ viewport })}
+          mapStyle="mapbox://styles/mapbox/dark-v10"
         >
           {this.props.markerData.map((province) => {
             return (
@@ -44,6 +47,7 @@ class Map extends Component {
             );
           })}
         </ReactMapGL>
+        {/* </div> */}
       </div>
     );
   }
