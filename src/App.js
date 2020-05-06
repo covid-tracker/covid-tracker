@@ -5,6 +5,7 @@ import Chart from "./components/Chart";
 import Map from "./components/Map";
 // import Table from "./components/Table";
 import Widget from "./components/Widget";
+import LogoMain from "./components/LogoMain";
 import { MetroSpinner } from "react-spinners-kit";
 import BarChartNew from "./components/BarChartNew";
 
@@ -28,6 +29,7 @@ class App extends Component {
       },
     };
   }
+
   // async componentDidMount() {
   //   let fromDate = new Date();
   //   fromDate.setHours(-8, 0, 0, 0);
@@ -136,41 +138,36 @@ class App extends Component {
   render() {
     const { loading, canadianSummary, graphComponentData } = this.state;
     return (
-      <section className="section">
-        <header>
-          <h1 className="title" style={{ textAlign: "center" }}>
-            COVID Tracker
-          </h1>
-          <p className="subtitle">
-            AKA<strong> Apocalypse Clock</strong>!
-          </p>
-        </header>
-        <div className="container columns" style={{ textAlign: "center" }}>
-          <BarChartNew
-            barChartInfo={canadianSummary}
-            className="column"
-            clickEventForGraph={this.provinceGraph}
-          />
+      <main className="section">
+        <section className="columns">
+          <div className="column is-3">
+            <BarChartNew
+              barChartInfo={canadianSummary}
+              clickEventForGraph={this.provinceGraph}
+            />
+          </div>
+          <div className="column is-5">
+            <LogoMain />
+            <Map markerData={this.state.canadianSummary} />
+          </div>
+          <div className="column is-4">
+            <Widget widgetData={this.state.canadianSummaryCanada} />
+            <Chart
+              graphStyle={graphComponentData}
+              provinceNames={this.state.historicalProvinceDataForGraph}
+            />
+          </div>
           {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
-          <main className="columns">
-            {/* <Table
+          {/* <Table
               className="column"
               // dateEven={this.dateFunction()}
               tableInfo={this.state.canadianSummary}
               provinceNames={this.state.historicalProvinceDataForGraph}
               clickEventForGraph={this.provinceGraph}
             /> */}
-            <Chart
-              className="column"
-              graphStyle={graphComponentData}
-              provinceNames={this.state.historicalProvinceDataForGraph}
-            />
-          </main>
-          <Widget widgetData={this.state.canadianSummaryCanada} />
-          <Map markerData={this.state.canadianSummary} />
-          <MetroSpinner size={70} color="#686769" loading={loading} />
-        </div>
-      </section>
+        </section>
+        <MetroSpinner size={70} color="#686769" loading={loading} />
+      </main>
     );
   }
 }

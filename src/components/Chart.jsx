@@ -1,27 +1,19 @@
 import React, { Component } from "react";
-import {
-  // VictoryBar,
-  VictoryChart,
-  // Bar,
-  VictoryTheme,
-  VictoryLine,
-  VictoryScatter,
-} from "victory";
-
-const cartesianInterpolations = [
-  "basis",
-  "bundle",
-  "cardinal",
-  "catmullRom",
-  "linear",
-  "monotoneX",
-  "monotoneY",
-  "natural",
-  "step",
-  "stepAfter",
-  "stepBefore",
-];
-const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
+import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
+// const cartesianInterpolations = [
+//   "basis",
+//   "bundle",
+//   "cardinal",
+//   "catmullRom",
+//   "linear",
+//   "monotoneX",
+//   "monotoneY",
+//   "natural",
+//   "step",
+//   "stepAfter",
+//   "stepBefore",
+// ];
+// const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
 
 class Chart extends Component {
   constructor() {
@@ -44,37 +36,24 @@ class Chart extends Component {
   render() {
     // console.log(this.state.xAndYValue);
     return (
-      <div>
+      <div className="box">
         <button className="button" onClick={() => this.coordinateValues()}>
           Click Me
         </button>
         <VictoryChart
+          className="image"
           height={600}
           width={600}
-          animate={{ duration: 1000, easing: "elastic" }}
+          animate={{ duration: 0, easing: "exp" }}
         >
           <VictoryLine
             interpolation={this.props.graphStyle.interpolation}
-            style={{ data: { stroke: "#c43a31" } }}
+            style={{ data: { stroke: "#4F7CFF" } }}
             data={this.state.xAndYValue}
+            theme={VictoryTheme.material}
             animate={{
               onExit: {
-                duration: 500,
-                before: () => ({
-                  _y: 0,
-                  fill: "orange",
-                  label: "BYE",
-                }),
-              },
-            }}
-          />
-          <VictoryScatter
-            size={4}
-            style={{ data: { fill: "#c43a31" } }}
-            data={this.state.xAndYValue}
-            animate={{
-              onExit: {
-                duration: 500,
+                duration: 300,
                 before: () => ({
                   _y: 0,
                   fill: "orange",

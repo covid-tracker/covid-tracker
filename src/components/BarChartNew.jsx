@@ -28,11 +28,11 @@ class BarChartNew extends Component {
           Pull data
         </button>
         <BarChart
-          width={500}
+          width={300}
           height={600}
           data={this.state.xAndYValue}
           maxBarSize={20}
-          //   style={{ paddingLeft: 20 }}
+          style={{ paddingLeft: 0 }}
           layout={"vertical"}
         >
           <CartesianGrid strokeDasharray="1 1" />
