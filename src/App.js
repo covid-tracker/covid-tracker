@@ -18,6 +18,7 @@ class App extends Component {
       loading: false,
       canadianSummary: [],
       canadianSummaryAll: [],
+      canadianSummaryCanada: [],
       provinceData: [],
       historicalProvinceDataForGraph: [],
       graphComponentData: {
