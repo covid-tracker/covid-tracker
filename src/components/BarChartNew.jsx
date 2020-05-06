@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
-
 class BarChartNew extends Component {
   constructor() {
     super();
@@ -14,7 +13,6 @@ class BarChartNew extends Component {
       let data = { province: e.Province, cases: e.Cases };
       return data;
     });
-
     this.setState({
       xAndYValue: newArray,
     });

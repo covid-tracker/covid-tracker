@@ -3,6 +3,7 @@ import axios from "axios";
 import Chart from "./components/Chart";
 import Map from "./components/Map";
 // import Table from "./components/Table";
+import Widget from "./components/Widget";
 import { MetroSpinner } from "react-spinners-kit";
 import BarChartNew from "./components/BarChartNew";
 
@@ -25,16 +26,13 @@ class App extends Component {
       },
     };
   }
-
   // async componentDidMount() {
   //   let fromDate = new Date();
   //   fromDate.setHours(-8, 0, 0, 0);
   //   fromDate = fromDate.toISOString().split(".")[0] + "Z";
-
   //   let toDate = new Date();
   //   toDate.setHours(-5, 0, 0, 0);
   //   toDate = toDate.toISOString().split(".")[0] + "Z";
-
   //   const response = await axios({
   //     url: "https://api.covid19api.com/country/canada/status/confirmed/live",
   //     method: "GET",
@@ -43,14 +41,12 @@ class App extends Component {
   //       to: "2020-04-29T02:00:00Z",
   //     },
   //   }).catch((err) => console.log(err, "An Error occured"));
-
   //   this.setState({
   //     canadianSummary: response.data,
   //     fromDate,
   //     toDate,
   //   });
   // }
-
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/total/country/south-africa/status/confirmed`,
@@ -78,6 +74,20 @@ class App extends Component {
         canadianSummaryAll: response.data,
       });
     });
+
+    axios({
+      url: `https://api.covid19api.com/summary`,
+      method: `GET`,
+      params: {
+        from: this.state.fromDateAll,
+        to: this.state.toDateAll,
+      },
+    }).then((response) => {
+      this.setState({
+        canadianSummaryCanada: response.data.Countries[39],
+      });
+      console.log(this.state.canadianSummaryCanada);
+    });
   }
 
   // dateFunction = () => {
@@ -94,7 +104,6 @@ class App extends Component {
   //     toDate: yesterdayStringTime,
   //   });
   // };
-
   // provinceGraph = (singleProvince) => {
   //   let provinceHistoricalData = this.state.canadianSummaryAll.filter(
   //     (provinceName) => {
@@ -109,7 +118,6 @@ class App extends Component {
   //     historicalProvinceDataForGraph: provinceHistoricalData,
   //   });
   // };
-
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
@@ -156,6 +164,7 @@ class App extends Component {
               provinceNames={this.state.historicalProvinceDataForGraph}
             />
           </main>
+          <Widget widgetData={this.state.canadianSummaryCanada} />
           <Map markerData={this.state.canadianSummary} />
           <MetroSpinner size={70} color="#686769" loading={loading} />
         </div>
