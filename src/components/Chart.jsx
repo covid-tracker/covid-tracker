@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
-
 // const cartesianInterpolations = [
 //   "basis",
 //   "bundle",
@@ -14,7 +13,6 @@ import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
 //   "stepAfter",
 //   "stepBefore",
 // ];
-
 // const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
 
 class Chart extends Component {
@@ -44,7 +42,7 @@ class Chart extends Component {
         </button>
         <VictoryChart
           className="image"
-          height={600}
+          height={500}
           width={600}
           animate={{ duration: 0, easing: "exp" }}
         >
