@@ -8,11 +8,12 @@ const style = {
   background: "#111",
   borderRadius: "50px",
 };
+
 class Map extends Component {
   state = {
     viewport: {
-      width: 900,
-      height: 500,
+      width: 100,
+      height: 200,
       latitude: 53.76,
       longitude: -98.81,
       zoom: 2.6,

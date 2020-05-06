@@ -2,11 +2,11 @@ import React, { Component } from "react";
 class Table extends Component {
   render() {
     return (
-      <section className="section">
-        <div className="box container" style={{ textAlign: "center" }}>
+      <section className="section box">
+        <div className="container" style={{ textAlign: "center" }}>
           <header>
             <h1 className="title" style={{ textAlign: "center" }}>
-              Click Province Name
+              Todays Stats
             </h1>
             <main className="columns">
               <table className="table is-bordered is-hoverable is-striped column">
@@ -14,7 +14,6 @@ class Table extends Component {
                   <tr>
                     <th
                       style={{
-                        backgroundColor: "#575a86",
                         color: "white",
                         textAlign: "center",
                       }}
@@ -23,7 +22,6 @@ class Table extends Component {
                     </th>
                     <th
                       style={{
-                        backgroundColor: "#575a86",
                         color: "white",
                         textAlign: "center",
                       }}

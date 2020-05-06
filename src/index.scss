@@ -4,55 +4,26 @@ $lightBG: #2e335a;
 $blueAccent: #4f7cff;
 $purpleAccent: #6c31f3;
 $redAccent: #f35163;
-
 // main //
 .section {
   background: #1f2442;
 }
 
-.section h1 {
-  color: #575a86;
+.title {
+  color: #ffffff;
 }
-
-$content-heading-color: #575a86;
-
 // Box classes //
 $box-radius: 25px;
 $box-color: #2e335a;
 $box-background-color: #2e335a;
-
+$scheme-main: black;
 // table Start //
 $table-cell-heading-color: #ffffff;
 $table-color: #ffffff;
 $table-background-color: #2d345b;
-$table-cell-border: 1px solid #1f2442;
+$table-cell-border: 1px solid $blueAccent;
 
-// Widget Start //
-.widBox {
-  border-radius: 25px;
-  box-shadow: 0 0 0 1px #dbdbdb;
-  color: #2e335a;
-  display: block;
-  padding: 1.25rem;
+* {
+  // border: 1px solid white;
 }
-
-.widgetOne {
-  background-color: #4f7cff;
-}
-
-.widgetTwo {
-  background-color: #6c31f3;
-}
-
-.widgetThree {
-  background-color: #f35163;
-}
-
-.widTitle {
-  color: red;
-  font-size: 1.75rem;
-  font-weight: 600;
-  line-height: 1.125;
-}
-
 @import "node_modules/bulmaswatch/minty/bulmaswatch";
