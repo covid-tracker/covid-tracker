@@ -8,11 +8,12 @@ const style = {
   background: "#111",
   borderRadius: "50px",
 };
+
 class Map extends Component {
   state = {
     viewport: {
-      width: 600,
       height: 500,
+      width: 590,
       latitude: 63,
       longitude: -96.81,
       zoom: 2.25,
@@ -22,7 +23,9 @@ class Map extends Component {
   render() {
     return (
       <div className="box container" style={{ textAlign: "center" }}>
+        {/* <div className="map-wrapper"> */}
         <ReactMapGL
+          style={{ minWidth: "100%", maxWidth: "100%" }}
           {...this.state.viewport}
           mapboxApiAccessToken={
             "pk.eyJ1IjoieGVub2pheCIsImEiOiJjazk5MDlpNDEwN2o2M21ueDVoNXQ1eWpnIn0.-Sy_LkU_ZYcmyH09Zl-MYw"
@@ -42,6 +45,7 @@ class Map extends Component {
             );
           })}
         </ReactMapGL>
+        {/* </div> */}
       </div>
     );
   }
