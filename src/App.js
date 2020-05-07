@@ -108,6 +108,7 @@ class App extends Component {
   //     toDate: yesterdayStringTime,
   //   });
   // };
+
   // provinceGraph = (singleProvince) => {
   //   let provinceHistoricalData = this.state.canadianSummaryAll.filter(
   //     (provinceName) => {
@@ -122,6 +123,7 @@ class App extends Component {
   //     historicalProvinceDataForGraph: provinceHistoricalData,
   //   });
   // };
+
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {

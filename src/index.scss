@@ -25,6 +25,13 @@ h2 {
     #1f2442 77%,
     #1f2442
   );
+  position: relative;
+  overflow: hidden;
+  position: absolute;
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+  height: 100%;
 
   h1 {
     color: white;
@@ -135,3 +142,13 @@ h3 {
   font-weight: 700;
   letter-spacing: 1px;
 }
+
+// FOR FULL COVERAGE //
+
+// position: relative;
+// overflow: hidden;
+// position: absolute;
+// object-fit: cover;
+// object-position: center center;
+// width: 100%;
+// height: 100%;
