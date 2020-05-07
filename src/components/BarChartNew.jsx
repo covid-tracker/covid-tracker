@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+
 class BarChartNew extends Component {
   constructor() {
     super();

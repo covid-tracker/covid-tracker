@@ -8,7 +8,7 @@ class Widget extends Component {
         <h1 class="title">National Live Count</h1>
         <div className="columns">
           <div className="column widBox widgetOne">
-            <h3>ACTIVE CASES</h3>
+            <h3>CASES</h3>
             <h2>{this.props.widgetData.TotalConfirmed}</h2>
           </div>
           <div className="column widBox widgetThree">
