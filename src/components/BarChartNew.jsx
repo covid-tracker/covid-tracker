@@ -27,12 +27,12 @@ class BarChartNew extends Component {
   render() {
     return (
       <div className="box" style={{ width: "100%", height: 650 }}>
-        <button
+        {/* <button
           className="button is-rounded is-info"
           onClick={this.coordinateValues}
         >
           Pull data
-        </button>
+        </button> */}
         <ResponsiveContainer>
           <BarChart
             width={"auto"}

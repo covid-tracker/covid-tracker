@@ -14,8 +14,7 @@ class Map extends Component {
     viewport: {
       width: "auto",
       height: 500,
-      width: 590,
-      latitude: 63.8,
+      latitude: 63,
       longitude: -96.81,
       zoom: 2.2,
     },
