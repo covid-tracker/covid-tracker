@@ -15,16 +15,15 @@ class Map extends Component {
       width: "auto",
       height: 500,
       width: 590,
-      latitude: 63,
+      latitude: 63.8,
       longitude: -96.81,
-      zoom: 2.25,
+      zoom: 2.2,
     },
   };
 
   render() {
     return (
       <div className="box container" style={{ textAlign: "center" }}>
-        {/* <div className="map-wrapper"> */}
         <ReactMapGL
           style={{ minWidth: "100%", maxWidth: "100%" }}
           {...this.state.viewport}
