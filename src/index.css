@@ -4,6 +4,10 @@ h2 {
   font-size: 3rem;
 }
 
+p {
+  color: #575a86;
+}
+
 .section {
   background: #1f2442;
 }
@@ -20,7 +24,7 @@ h2 {
 .widBox {
   border-radius: 25px;
   -webkit-box-shadow: 0 0 0 1px #dbdbdb;
-          box-shadow: 0 0 0 1px #dbdbdb;
+  box-shadow: 0 0 0 1px #dbdbdb;
   color: #2e335a;
   display: block;
   padding: 0.4rem;

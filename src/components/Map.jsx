@@ -22,7 +22,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div className="box container" style={{ textAlign: "center" }}>
+      <div className="customBox boxTwo shadow" style={{ textAlign: "center" }}>
         <ReactMapGL
           style={{ minWidth: "100%", maxWidth: "100%" }}
           {...this.state.viewport}

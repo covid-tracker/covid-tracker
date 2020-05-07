@@ -26,7 +26,7 @@ class BarChartNew extends Component {
   };
   render() {
     return (
-      <div className="box" style={{ width: "100%", height: 650 }}>
+      <div className="customBox" style={{ width: "100%", height: 650 }}>
         {/* <button
           className="button is-rounded is-info"
           onClick={this.coordinateValues}
