@@ -4,17 +4,25 @@ $lightBG: #2e335a;
 $blueAccent: #4f7cff;
 $purpleAccent: #6c31f3;
 $redAccent: #f35163;
+$size-1: 3rem;
 
 // Main //
+// Font for main header
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
 
 h2 {
   color: #ffffff;
+  font-size: $size-1;
 }
 
 .section {
   background: #1f2442;
   h1 {
-    color: #575a86;
+    color: white;
+    font-family: "Josefin Sans", sans-serif;
+  }
+  .subtitle {
+    color: $blueAccent;
   }
 }
 
@@ -25,7 +33,6 @@ $content-heading-color: #575a86;
 // Box classes //
 
 $box-radius: 25px;
-$box-color: #2e335a;
 $box-background-color: #2e335a;
 
 // Box classes end //
@@ -78,4 +85,19 @@ li {
 
 // Widget End //
 
+BarChart {
+  margin: 0 auto;
+}
+
 @import "node_modules/bulmaswatch/minty/bulmaswatch";
+
+// Styling here to override bulma settings
+h2 {
+  font-size: 35px;
+  letter-spacing: 3px;
+}
+
+h3 {
+  font-weight: 700;
+  letter-spacing: 1px;
+}

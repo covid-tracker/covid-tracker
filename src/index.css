@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+h2 {
+  color: #ffffff;
+  font-size: 3rem;
+}
+
+.section {
+  background: #1f2442;
+}
+
+.section h1 {
+  color: white;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.section .subtitle {
+  color: #4f7cff;
+}
+
+.widBox {
+  border-radius: 25px;
+  -webkit-box-shadow: 0 0 0 1px #dbdbdb;
+          box-shadow: 0 0 0 1px #dbdbdb;
+  color: #2e335a;
+  display: block;
+  padding: 0.4rem;
+  margin: 0.8rem;
+}
+
+.widgetOne {
+  background-color: #4f7cff;
+}
+
+.widgetTwo {
+  background-color: #6c31f3;
+}
+
+.widgetThree {
+  background-color: #f35163;
+}
+
+li {
+  margin: 1rem;
+}
+
+BarChart {
+  margin: 0 auto;
+}
+/*# sourceMappingURL=index.css.map */
