@@ -16,7 +16,8 @@ h2 {
 }
 
 .section {
-  background: #1f2442;
+  background-image: linear-gradient(to right, #1a1e35, #313761, #1a1e35);
+
   h1 {
     color: white;
     font-family: "Josefin Sans", sans-serif;
@@ -31,6 +32,13 @@ $content-heading-color: #575a86;
 // Main End //
 
 // Box classes //
+.yo {
+  box-shadow: none;
+  background-color: #2e335a;
+  border: 1px solid red;
+  border-radius: 25px;
+  padding: 1.25rem;
+}
 
 $box-radius: 25px;
 $box-background-color: #2e335a;
