@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+
 class BarChartNew extends Component {
   constructor() {
     super();
@@ -15,6 +16,7 @@ class BarChartNew extends Component {
       xAndYValue: "",
     };
   }
+
   coordinateValues = () => {
     let newArray = this.props.barChartInfo.map((e) => {
       let data = { province: e.Province, cases: e.Cases };
@@ -24,6 +26,7 @@ class BarChartNew extends Component {
       xAndYValue: newArray,
     });
   };
+
   render() {
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
@@ -60,4 +63,5 @@ class BarChartNew extends Component {
     );
   }
 }
+
 export default BarChartNew;
