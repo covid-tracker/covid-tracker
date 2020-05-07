@@ -4,7 +4,7 @@ class LogoMain extends Component {
   render() {
     console.log(this.props.widgetData);
     return (
-      <section className="box container">
+      <section className="customBox boxTwo shadow">
         <div style={{ textAlign: "center" }}>
           <h1 className="title" style={{ textAlign: "center" }}>
             COVID Tracker
