@@ -16,6 +16,7 @@ class BarChartNew extends Component {
       xAndYValue: "",
     };
   }
+
   coordinateValues = () => {
     let newArray = this.props.barChartInfo.map((e) => {
       let data = { province: e.Province, cases: e.Cases };
@@ -25,9 +26,10 @@ class BarChartNew extends Component {
       xAndYValue: newArray,
     });
   };
+
   render() {
     return (
-      <div className="box" style={{ width: "100%", height: 650 }}>
+      <div className="customBox" style={{ width: "100%", height: 650 }}>
         {/* <button
           className="button is-rounded is-info"
           onClick={this.coordinateValues}
@@ -61,4 +63,5 @@ class BarChartNew extends Component {
     );
   }
 }
+
 export default BarChartNew;

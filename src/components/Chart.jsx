@@ -36,7 +36,7 @@ class Chart extends Component {
   render() {
     // console.log(this.state.xAndYValue);
     return (
-      <div className="box">
+      <div className="customBox shadowTwo">
         {/* <button className="button" onClick={() => this.coordinateValues()}>
           Click Me
         </button> */}
@@ -67,4 +67,5 @@ class Chart extends Component {
     );
   }
 }
+
 export default Chart;

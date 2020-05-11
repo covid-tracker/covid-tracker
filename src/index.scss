@@ -16,7 +16,22 @@ h2 {
 }
 
 .section {
-  background-image: linear-gradient(to right, #1a1e35, #313761, #1a1e35);
+  background: linear-gradient(
+    to right,
+    #1f2442,
+    #1f2442 15%,
+    #262a4a 15%,
+    #262a4a 77%,
+    #1f2442 77%,
+    #1f2442
+  );
+  position: relative;
+  overflow: hidden;
+  position: absolute;
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+  height: 100%;
 
   h1 {
     color: white;
@@ -32,12 +47,31 @@ $content-heading-color: #575a86;
 // Main End //
 
 // Box classes //
-.yo {
-  box-shadow: none;
+.customBox {
   background-color: #2e335a;
-  border: 1px solid red;
   border-radius: 25px;
   padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 8px 10px 14px #1f2442;
+}
+
+.boxTwo {
+  background-color: #1f2442;
+  box-shadow: none;
+}
+
+.shadow {
+  box-shadow: 0px 10px 20px #1f2442;
+  border: 0.45px solid #000000;
+}
+
+.shadowTwo {
+  box-shadow: -8px 10px 14px #1f2442;
+}
+
+.shadowThree {
+  box-shadow: 7px 7px 20px #1f2442;
+  border: 0.5px solid #000000;
 }
 
 $box-radius: 25px;
@@ -68,11 +102,10 @@ $table-cell-border: 1px solid $blueAccent;
 
 .widBox {
   border-radius: 25px;
-  box-shadow: 0 0 0 1px #dbdbdb;
   color: #2e335a;
   display: block;
   padding: 0.4rem;
-  margin: 0.3rem;
+  margin: 0.4rem;
 }
 
 .widgetOne {
