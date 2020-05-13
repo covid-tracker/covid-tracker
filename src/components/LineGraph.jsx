@@ -15,7 +15,7 @@ import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
 // ];
 // const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
 
-class Chart extends Component {
+class LineGraph extends Component {
   constructor() {
     super();
     this.state = {
@@ -34,7 +34,6 @@ class Chart extends Component {
   };
 
   render() {
-    // console.log(this.state.xAndYValue);
     return (
       <div className="customBox shadowTwo">
         {/* <button className="button" onClick={() => this.coordinateValues()}>
@@ -68,4 +67,4 @@ class Chart extends Component {
   }
 }
 
-export default Chart;
+export default LineGraph;
