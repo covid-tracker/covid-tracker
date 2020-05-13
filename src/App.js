@@ -6,8 +6,8 @@ import Map from "./components/Map";
 import Widget from "./components/Widget";
 import BarGraph from "./components/BarGraph";
 import LogoMain from "./components/LogoMain";
+import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
-// import { MetroSpinner } from "react-spinners-kit";
 
 class App extends Component {
   constructor() {
@@ -140,6 +140,7 @@ class App extends Component {
   render() {
     const { loading, canadianSummaryAll, graphComponentData } = this.state;
     return (
+      <body>
       <main className="section">
         <section className="columns">
           <div className="column is-3">
