@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.5.0",
+    "@testing-library/jest-dom": "^5.7.0",
     "@testing-library/react": "^10.0.4",
-    "@testing-library/user-event": "^10.1.0",
+    "@testing-library/user-event": "^10.2.0",
     "axios": "^0.19.2",
     "bulma": "^0.8.2",
     "bulmaswatch": "^0.8.1",
@@ -19,7 +19,7 @@
     "react-scripts": "3.4.1",
     "react-spinners-kit": "^1.9.1",
     "recharts": "^1.8.5",
-    "victory": "^34.2.0"
+    "victory": "^34.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

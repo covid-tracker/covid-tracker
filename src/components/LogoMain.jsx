@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 class LogoMain extends Component {
   render() {
-    console.log(this.props.widgetData);
     return (
       <section className="customBox boxTwo shadow">
         <div style={{ textAlign: "center" }}>

@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-class BarChartNew extends Component {
+class BarGraph extends Component {
   constructor() {
     super();
     this.state = {
@@ -30,12 +30,12 @@ class BarChartNew extends Component {
   render() {
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
-        {/* <button
+        <button
           className="button is-rounded is-info"
           onClick={this.coordinateValues}
         >
           Pull data
-        </button> */}
+        </button>
         <ResponsiveContainer>
           <BarChart
             width={"auto"}
@@ -64,4 +64,4 @@ class BarChartNew extends Component {
   }
 }
 
-export default BarChartNew;
+export default BarGraph;

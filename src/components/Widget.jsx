@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 class Widget extends Component {
   render() {
-    console.log(this.props.widgetData);
     return (
       <div className="customBox shadowTwo" style={{ textAlign: "center" }}>
         <h1 class="title">National Live Count</h1>
