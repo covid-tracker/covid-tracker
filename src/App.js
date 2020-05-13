@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Chart from "./components/Chart";
+import LineGraph from "./components/LineGraph";
 import Map from "./components/Map";
 // import Table from "./components/Table";
 import Widget from "./components/Widget";
 import LogoMain from "./components/LogoMain";
-import BarChartNew from "./components/BarChartNew";
+import BarGraph from "./components/BarGraph";
 
 import { MetroSpinner } from "react-spinners-kit";
 
@@ -13,8 +13,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-03-01T00:00:00Z",
-      toDate: "2020-04-01T00:00:00Z",
+      fromDate: "2020-05-02T00:00:00Z",
+      toDate: "2020-05-02T01:00:00Z",
       fromDateAll: "",
       toDateAll: "",
       loading: false,
@@ -51,9 +51,10 @@ class App extends Component {
   //     toDate,
   //   });
   // }
+
   componentDidMount() {
     axios({
-      url: `https://api.covid19api.com/total/country/south-africa/status/confirmed`,
+      url: `https://api.covid19api.com/total/country/canada/status/confirmed`,
       method: `GET`,
       params: {
         from: this.state.fromDate,
@@ -70,8 +71,8 @@ class App extends Component {
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
       params: {
-        from: this.state.fromDateAll,
-        to: this.state.toDateAll,
+        from: this.state.fromDate,
+        to: this.state.toDate,
       },
     }).then((response) => {
       this.setState({
@@ -88,7 +89,7 @@ class App extends Component {
       },
     }).then((response) => {
       this.setState({
-        canadianSummaryCanada: response.data.Countries[39],
+        canadianSummaryCanada: response.data.Countries[30],
       });
       console.log(this.state.canadianSummaryCanada);
     });
@@ -138,14 +139,14 @@ class App extends Component {
   };
 
   render() {
-    const { loading, canadianSummary, graphComponentData } = this.state;
+    const { loading, canadianSummaryAll, graphComponentData } = this.state;
     return (
       <body>
         <main className="section">
           <section className="columns">
             <div className="column is-3">
-              <BarChartNew
-                barChartInfo={canadianSummary}
+              <BarGraph
+                barChartInfo={canadianSummaryAll}
                 clickEventForGraph={this.provinceGraph}
               />
             </div>
@@ -155,7 +156,7 @@ class App extends Component {
             </div>
             <div className="column is-4">
               <Widget widgetData={this.state.canadianSummaryCanada} />
-              <Chart
+              <LineGraph
                 graphStyle={graphComponentData}
                 provinceNames={this.state.historicalProvinceDataForGraph}
               />
