@@ -37,9 +37,9 @@ class LineGraph extends Component {
     console.log(this.state.xAndYValue);
     return (
       <div className="customBox shadowTwo">
-        <button className="button" onClick={() => this.coordinateValues()}>
+        {/* <button className="button" onClick={() => this.coordinateValues()}>
           Click Me
-        </button>
+        </button> */}
         <VictoryChart
           className="image"
           height={500}

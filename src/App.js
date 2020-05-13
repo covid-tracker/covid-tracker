@@ -4,10 +4,10 @@ import LineGraph from "./components/LineGraph";
 import Map from "./components/Map";
 // import Table from "./components/Table";
 import Widget from "./components/Widget";
-import LogoMain from "./components/LogoMain";
 import BarGraph from "./components/BarGraph";
-
+import LogoMain from "./components/LogoMain";
 import { MetroSpinner } from "react-spinners-kit";
+import { motion } from "framer-motion";
 
 class App extends Component {
   constructor() {
@@ -64,7 +64,6 @@ class App extends Component {
       this.setState({
         canadianSummary: response.data,
       });
-      console.log(this.state.canadianSummary);
     });
 
     axios({
@@ -75,6 +74,7 @@ class App extends Component {
         to: this.state.toDate,
       },
     }).then((response) => {
+      // console.log(response.data);
       this.setState({
         canadianSummaryAll: response.data,
       });
@@ -91,7 +91,6 @@ class App extends Component {
       this.setState({
         canadianSummaryCanada: response.data.Countries[30],
       });
-      console.log(this.state.canadianSummaryCanada);
     });
   }
 
@@ -142,37 +141,36 @@ class App extends Component {
     const { loading, canadianSummaryAll, graphComponentData } = this.state;
     return (
       <body>
-        <main className="section">
-          <section className="columns">
-            <div className="column is-3">
-              <BarGraph
-                barChartInfo={canadianSummaryAll}
-                clickEventForGraph={this.provinceGraph}
-              />
-            </div>
-            <div className="column is-5">
-              <LogoMain />
-              <Map markerData={this.state.canadianSummary} />
-            </div>
-            <div className="column is-4">
-              <Widget widgetData={this.state.canadianSummaryCanada} />
-              <LineGraph
-                graphStyle={graphComponentData}
-                provinceNames={this.state.historicalProvinceDataForGraph}
-              />
-            </div>
-            {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
-            {/* <Table
+      <main className="section">
+        <section className="columns">
+          <div className="column is-3">
+            <BarGraph
+              barChartInfo={canadianSummaryAll}
+              clickEventForGraph={this.provinceGraph}
+            />
+          </div>
+          <div className="column is-5">
+            <LogoMain />
+            <Map markerData={this.state.canadianSummaryAll} />
+          </div>
+          <div className="column is-4">
+            <Widget widgetData={this.state.canadianSummaryCanada} />
+            <LineGraph
+              graphStyle={graphComponentData}
+              provinceNames={this.state.historicalProvinceDataForGraph}
+            />
+          </div>
+          {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
+          {/* <Table
               className="column"
               // dateEven={this.dateFunction()}
               tableInfo={this.state.canadianSummary}
               provinceNames={this.state.historicalProvinceDataForGraph}
               clickEventForGraph={this.provinceGraph}
             /> */}
-          </section>
-          <MetroSpinner size={70} color="#686769" loading={loading} />
-        </main>
-      </body>
+        </section>
+        {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
+      </main>
     );
   }
 }
