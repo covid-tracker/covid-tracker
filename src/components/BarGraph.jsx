@@ -15,9 +15,18 @@ class BarGraph extends Component {
     this.state = {
       xAndYValue: "",
     };
+    this.initData = this.initData.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener("load", this.initData);
   }
 
-  coordinateValues = () => {
+  _onClickMap = (map, evt) => {
+    console.log(map);
+    console.log(evt);
+  };
+
+  initData() {
     let newArray = this.props.barChartInfo.map((e) => {
       let data = { province: e.Province, cases: e.Cases };
       return data;
@@ -25,17 +34,11 @@ class BarGraph extends Component {
     this.setState({
       xAndYValue: newArray,
     });
-  };
+  }
 
   render() {
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
-        <button
-          className="button is-rounded is-info"
-          onClick={this.coordinateValues}
-        >
-          Pull data
-        </button>
         <ResponsiveContainer>
           <BarChart
             width={"auto"}
@@ -56,7 +59,13 @@ class BarGraph extends Component {
             <Tooltip
               wrapperStyle={{ borderRadius: 20, backgroundColor: "#f35163" }}
             />
-            <Bar dataKey="cases" fill="#4f7cff" barSize={30} radius={2} />
+            <Bar
+              dataKey="cases"
+              fill="#4f7cff"
+              barSize={30}
+              radius={2}
+              onClick={this._onClickMap}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>

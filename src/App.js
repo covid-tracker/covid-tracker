@@ -141,36 +141,37 @@ class App extends Component {
     const { loading, canadianSummaryAll, graphComponentData } = this.state;
     return (
       <body>
-      <main className="section">
-        <section className="columns">
-          <div className="column is-3">
-            <BarGraph
-              barChartInfo={canadianSummaryAll}
-              clickEventForGraph={this.provinceGraph}
-            />
-          </div>
-          <div className="column is-5">
-            <LogoMain />
-            <Map markerData={this.state.canadianSummaryAll} />
-          </div>
-          <div className="column is-4">
-            <Widget widgetData={this.state.canadianSummaryCanada} />
-            <LineGraph
-              graphStyle={graphComponentData}
-              provinceNames={this.state.historicalProvinceDataForGraph}
-            />
-          </div>
-          {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
-          {/* <Table
-              className="column"
-              // dateEven={this.dateFunction()}
-              tableInfo={this.state.canadianSummary}
-              provinceNames={this.state.historicalProvinceDataForGraph}
-              clickEventForGraph={this.provinceGraph}
-            /> */}
-        </section>
-        {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
-      </main>
+        <main className="section">
+          <section className="columns">
+            <div className="column is-3">
+              <BarGraph
+                barChartInfo={canadianSummaryAll}
+                clickEventForGraph={this.provinceGraph}
+              />
+            </div>
+            <div className="column is-5">
+              <LogoMain />
+              <Map markerData={this.state.canadianSummaryAll} />
+            </div>
+            <div className="column is-4">
+              <Widget widgetData={this.state.canadianSummaryCanada} />
+              <LineGraph
+                graphStyle={graphComponentData}
+                provinceNames={this.state.historicalProvinceDataForGraph}
+              />
+            </div>
+            {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
+            {/* <Table
+                className="column"
+                // dateEven={this.dateFunction()}
+                tableInfo={this.state.canadianSummary}
+                provinceNames={this.state.historicalProvinceDataForGraph}
+                clickEventForGraph={this.provinceGraph}
+              /> */}
+          </section>
+          {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
+        </main>
+      </body>
     );
   }
 }
