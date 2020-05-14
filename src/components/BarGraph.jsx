@@ -14,6 +14,7 @@ class BarGraph extends Component {
     super();
     this.state = {
       xAndYValue: "",
+      childrenData: "",
     };
   }
 
@@ -26,6 +27,8 @@ class BarGraph extends Component {
       xAndYValue: newArray,
     });
   };
+
+  specificProvince = () => {};
 
   render() {
     return (
@@ -52,6 +55,7 @@ class BarGraph extends Component {
               orientation={"left"}
               dataKey={"province"}
               stroke="#f35163"
+              onClick={console.log(this.state)}
             />
             <Tooltip
               wrapperStyle={{ borderRadius: 20, backgroundColor: "#f35163" }}

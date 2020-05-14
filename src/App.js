@@ -7,7 +7,7 @@ import Widget from "./components/Widget";
 import BarGraph from "./components/BarGraph";
 import LogoMain from "./components/LogoMain";
 import { motion } from "framer-motion";
-// import { MetroSpinner } from "react-spinners-kit";
+import { MetroSpinner } from "react-spinners-kit";
 
 class App extends Component {
   constructor() {
@@ -74,7 +74,6 @@ class App extends Component {
         to: this.state.toDate,
       },
     }).then((response) => {
-      // console.log(response.data);
       this.setState({
         canadianSummaryAll: response.data,
       });
@@ -109,20 +108,20 @@ class App extends Component {
   //   });
   // };
 
-  // provinceGraph = (singleProvince) => {
-  //   let provinceHistoricalData = this.state.canadianSummaryAll.filter(
-  //     (provinceName) => {
-  //       if (provinceName.Province === singleProvince.Province) {
-  //         return {
-  //           finalizedCases: provinceName,
-  //         };
-  //       }
-  //     }
-  //   );
-  //   this.setState({
-  //     historicalProvinceDataForGraph: provinceHistoricalData,
-  //   });
-  // };
+  provinceGraph = (singleProvince) => {
+    let provinceHistoricalData = this.state.canadianSummaryAll.filter(
+      (provinceName) => {
+        if (provinceName.Province === singleProvince.Province) {
+          return {
+            finalizedCases: provinceName,
+          };
+        }
+      }
+    );
+    this.setState({
+      historicalProvinceDataForGraph: provinceHistoricalData,
+    });
+  };
 
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
@@ -154,10 +153,7 @@ class App extends Component {
           </div>
           <div className="column is-4">
             <Widget widgetData={this.state.canadianSummaryCanada} />
-            <LineGraph
-              graphStyle={graphComponentData}
-              provinceNames={this.state.historicalProvinceDataForGraph}
-            />
+            <LineGraph graphStyle={graphComponentData} />
           </div>
           {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
           {/* <Table
