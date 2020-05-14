@@ -28,6 +28,7 @@ class BarGraph extends Component {
   };
 
   render() {
+    console.log(this.state.wordsByLine);
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
         <button
