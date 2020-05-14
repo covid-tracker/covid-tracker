@@ -162,12 +162,12 @@ class App extends Component {
             </div>
             {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
             {/* <Table
-              className="column"
-              // dateEven={this.dateFunction()}
-              tableInfo={this.state.canadianSummary}
-              provinceNames={this.state.historicalProvinceDataForGraph}
-              clickEventForGraph={this.provinceGraph}
-            /> */}
+                className="column"
+                // dateEven={this.dateFunction()}
+                tableInfo={this.state.canadianSummary}
+                provinceNames={this.state.historicalProvinceDataForGraph}
+                clickEventForGraph={this.provinceGraph}
+              /> */}
           </section>
           {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
         </main>
