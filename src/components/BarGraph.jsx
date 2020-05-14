@@ -13,7 +13,11 @@ class BarGraph extends Component {
   constructor() {
     super();
     this.state = {
-      xAndYValue: "",
+      xAndYValue: null,
+      activeProvince: {
+        name: null,
+        cases: null,
+      },
     };
     this.initData = this.initData.bind(this);
   }
@@ -21,9 +25,15 @@ class BarGraph extends Component {
     window.addEventListener("load", this.initData);
   }
 
-  _onClickMap = (map, evt) => {
-    console.log(map);
-    console.log(evt);
+  _onBarClick = (obj, $event) => {
+    // Captures the chart element you click
+    // Contained in that is the attributes for province and cases at some depth in the object
+    const province = obj.activePayload[0].payload.province;
+    const caseCount = obj.activePayload[0].payload.cases;
+    console.log(province);
+    console.log(caseCount);
+    alert(`You select ${province}, which has ${caseCount} cases`);
+    // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
   };
 
   initData() {
@@ -47,6 +57,7 @@ class BarGraph extends Component {
             maxBarSize={20}
             layout={"vertical"}
             style={{ paddingBottom: 20 }}
+            onClick={this._onBarClick}
           >
             <CartesianGrid strokeDasharray="1 1" />
             <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />
@@ -59,13 +70,7 @@ class BarGraph extends Component {
             <Tooltip
               wrapperStyle={{ borderRadius: 20, backgroundColor: "#f35163" }}
             />
-            <Bar
-              dataKey="cases"
-              fill="#4f7cff"
-              barSize={30}
-              radius={2}
-              onClick={this._onClickMap}
-            />
+            <Bar dataKey="cases" fill="#4f7cff" barSize={30} radius={2} />
           </BarChart>
         </ResponsiveContainer>
       </div>
