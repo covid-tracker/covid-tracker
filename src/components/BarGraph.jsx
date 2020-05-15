@@ -21,19 +21,25 @@ class BarGraph extends Component {
     };
     this.initData = this.initData.bind(this);
   }
+
   componentDidMount() {
     window.addEventListener("load", this.initData);
   }
 
-  _onBarClick = (obj, $event) => {
-    // Captures the chart element you click
-    // Contained in that is the attributes for province and cases at some depth in the object
-    const province = obj.activePayload[0].payload.province;
-    const caseCount = obj.activePayload[0].payload.cases;
-    console.log(province);
-    console.log(caseCount);
-    alert(`You select ${province}, which has ${caseCount} cases`);
-    // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
+  _onBarClick = (obj, event) => {
+    if (!obj || !event != null) {
+      return false;
+      // console.log(`Failed`);
+      // Captures the chart element you click
+      // Contained in that is the attributes for province and cases at some depth in the object
+    } else {
+      const province = obj.activePayload[0].payload.province;
+      const caseCount = obj.activePayload[0].payload.cases;
+      console.log(province);
+      console.log(caseCount);
+      alert(`You select ${province}, which has ${caseCount} cases`);
+      // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
+    }
   };
 
   initData() {
