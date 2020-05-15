@@ -6,8 +6,8 @@ import Map from "./components/Map";
 import Widget from "./components/Widget";
 import BarGraph from "./components/BarGraph";
 import LogoMain from "./components/LogoMain";
-import { motion } from "framer-motion";
 import { MetroSpinner } from "react-spinners-kit";
+import { motion } from "framer-motion";
 
 class App extends Component {
   constructor() {
@@ -139,33 +139,38 @@ class App extends Component {
   render() {
     const { loading, canadianSummaryAll, graphComponentData } = this.state;
     return (
-      <main className="section">
-        <section className="columns">
-          <div className="column is-3">
-            <BarGraph
-              barChartInfo={canadianSummaryAll}
-              clickEventForGraph={this.provinceGraph}
-            />
-          </div>
-          <div className="column is-5">
-            <LogoMain />
-            <Map markerData={this.state.canadianSummaryAll} />
-          </div>
-          <div className="column is-4">
-            <Widget widgetData={this.state.canadianSummaryCanada} />
-            <LineGraph graphStyle={graphComponentData} />
-          </div>
-          {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
-          {/* <Table
-              className="column"
-              // dateEven={this.dateFunction()}
-              tableInfo={this.state.canadianSummary}
-              provinceNames={this.state.historicalProvinceDataForGraph}
-              clickEventForGraph={this.provinceGraph}
-            /> */}
-        </section>
-        {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
-      </main>
+      <body>
+        <main className="section">
+          <section className="columns">
+            <div className="column is-3">
+              <BarGraph
+                barChartInfo={canadianSummaryAll}
+                clickEventForGraph={this.provinceGraph}
+              />
+            </div>
+            <div className="column is-5">
+              <LogoMain />
+              <Map markerData={this.state.canadianSummaryAll} />
+            </div>
+            <div className="column is-4">
+              <Widget widgetData={this.state.canadianSummaryCanada} />
+              <LineGraph
+                graphStyle={graphComponentData}
+                provinceNames={this.state.historicalProvinceDataForGraph}
+              />
+            </div>
+            {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
+            {/* <Table
+                className="column"
+                // dateEven={this.dateFunction()}
+                tableInfo={this.state.canadianSummary}
+                provinceNames={this.state.historicalProvinceDataForGraph}
+                clickEventForGraph={this.provinceGraph}
+              /> */}
+          </section>
+          {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
+        </main>
+      </body>
     );
   }
 }
