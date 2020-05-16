@@ -27,6 +27,7 @@ class App extends Component {
         interpolation: "natural",
         polar: false,
       },
+      lineGraphData: "",
     };
   }
 
@@ -136,6 +137,13 @@ class App extends Component {
     });
   };
 
+  functionForLineGraph = (provinceInfoForLineGraph) => {
+    this.setState({
+      lineGraphData: provinceInfoForLineGraph,
+    });
+    // console.log("Function for Line Graph", this.state.lineGraphData);
+  };
+
   render() {
     const { loading, canadianSummaryAll, graphComponentData } = this.state;
     return (
@@ -146,6 +154,7 @@ class App extends Component {
               <BarGraph
                 barChartInfo={canadianSummaryAll}
                 clickEventForGraph={this.provinceGraph}
+                lineGraphHandler={this.functionForLineGraph}
               />
             </div>
             <div className="column is-5">

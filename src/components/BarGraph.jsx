@@ -18,6 +18,7 @@ class BarGraph extends Component {
         name: null,
         cases: null,
       },
+      dataForLineGraph: "",
     };
     this.initData = this.initData.bind(this);
   }
@@ -27,15 +28,23 @@ class BarGraph extends Component {
   }
 
   _onBarClick = (obj, $event) => {
-    // Captures the chart element you click
-    // Contained in that is the attributes for province and cases at some depth in the object
-    if (!obj || !$event) return false;
+    // if (!obj || $event != null) {
+    //   return false;
+    //   // console.log(`Failed`);
+    //   // Captures the chart element you click
+    //   // Contained in that is the attributes for province and cases at some depth in the object
+    // } else {
     const province = obj.activePayload[0].payload.province;
     const caseCount = obj.activePayload[0].payload.cases;
-    console.log(province);
-    console.log(caseCount);
+    console.log("onBarClick");
+    // console.log("Province from BarGraph", province);
+    // console.log(caseCount);
     alert(`You select ${province}, which has ${caseCount} cases`);
+    this.setState({
+      dataForLineGraph: province,
+    });
     // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
+    // }
   };
 
   initData() {
@@ -49,7 +58,6 @@ class BarGraph extends Component {
   }
 
   render() {
-    console.log(this.state.wordsByLine);
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
         <ResponsiveContainer>
@@ -60,7 +68,10 @@ class BarGraph extends Component {
             maxBarSize={20}
             layout={"vertical"}
             style={{ paddingBottom: 20 }}
-            onClick={this._onBarClick}
+            onClick={() => (
+              this._onBarClick(),
+              this.props.lineGraphHandler(this.state.dataForLineGraph)
+            )}
           >
             <CartesianGrid strokeDasharray="1 1" />
             <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />

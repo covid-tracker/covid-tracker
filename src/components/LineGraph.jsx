@@ -34,7 +34,7 @@ class LineGraph extends Component {
   };
 
   render() {
-    console.log(this.state.xAndYValue);
+    // console.log(this.state.xAndYValue);
     return (
       <div className="customBox shadowTwo">
         {/* <button className="button" onClick={() => this.coordinateValues()}>
