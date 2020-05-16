@@ -4,12 +4,18 @@ h2 {
   font-size: 3rem;
 }
 
-p {
-  color: #575a86;
-}
-
 .section {
-  background: #1f2442;
+  background: -webkit-gradient(linear, left top, right top, from(#1f2442), color-stop(15%, #1f2442), color-stop(15%, #262a4a), color-stop(77%, #262a4a), color-stop(77%, #1f2442), to(#1f2442));
+  background: linear-gradient(to right, #1f2442, #1f2442 15%, #262a4a 15%, #262a4a 77%, #1f2442 77%, #1f2442);
+  position: relative;
+  overflow: hidden;
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .section h1 {
@@ -21,14 +27,44 @@ p {
   color: #4f7cff;
 }
 
+.customBox {
+  background-color: #2e335a;
+  border-radius: 25px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  -webkit-box-shadow: 8px 10px 14px #1f2442;
+          box-shadow: 8px 10px 14px #1f2442;
+}
+
+.boxTwo {
+  background-color: #1f2442;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 10px 20px #1f2442;
+          box-shadow: 0px 10px 20px #1f2442;
+  border: 0.45px solid #000000;
+}
+
+.shadowTwo {
+  -webkit-box-shadow: -8px 10px 14px #1f2442;
+          box-shadow: -8px 10px 14px #1f2442;
+}
+
+.shadowThree {
+  -webkit-box-shadow: 7px 7px 20px #1f2442;
+          box-shadow: 7px 7px 20px #1f2442;
+  border: 0.5px solid #000000;
+}
+
 .widBox {
   border-radius: 25px;
-  -webkit-box-shadow: 0 0 0 1px #dbdbdb;
-  box-shadow: 0 0 0 1px #dbdbdb;
   color: #2e335a;
   display: block;
   padding: 0.4rem;
-  margin: 0.8rem;
+  margin: 0.4rem;
 }
 
 .widgetOne {
@@ -49,5 +85,20 @@ li {
 
 BarChart {
   margin: 0 auto;
+}
+
+h2 {
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+body {
+  height: 95vh;
 }
 /*# sourceMappingURL=index.css.map */
