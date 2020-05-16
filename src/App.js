@@ -6,9 +6,9 @@ import Map from "./components/Map";
 import Widget from "./components/Widget";
 import BarGraph from "./components/BarGraph";
 import LogoMain from "./components/LogoMain";
+import Footer from "./components/Footer";
 import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
-
 class App extends Component {
   constructor() {
     super();
@@ -27,9 +27,9 @@ class App extends Component {
         interpolation: "natural",
         polar: false,
       },
+      lineGraphData: "",
     };
   }
-
   // async componentDidMount() {
   //   let fromDate = new Date();
   //   fromDate.setHours(-8, 0, 0, 0);
@@ -51,7 +51,6 @@ class App extends Component {
   //     toDate,
   //   });
   // }
-
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/total/country/canada/status/confirmed`,
@@ -74,7 +73,6 @@ class App extends Component {
         to: this.state.toDate,
       },
     }).then((response) => {
-      // console.log(response.data);
       this.setState({
         canadianSummaryAll: response.data,
       });
@@ -93,7 +91,6 @@ class App extends Component {
       });
     });
   }
-
   // dateFunction = () => {
   //   let date = new Date();
   //   date.setDate(date.getDate() - 1);
@@ -108,21 +105,20 @@ class App extends Component {
   //     toDate: yesterdayStringTime,
   //   });
   // };
-
-  // provinceGraph = (singleProvince) => {
-  //   let provinceHistoricalData = this.state.canadianSummaryAll.filter(
-  //     (provinceName) => {
-  //       if (provinceName.Province === singleProvince.Province) {
-  //         return {
-  //           finalizedCases: provinceName,
-  //         };
-  //       }
-  //     }
-  //   );
-  //   this.setState({
-  //     historicalProvinceDataForGraph: provinceHistoricalData,
-  //   });
-  // };
+  provinceGraph = (singleProvince) => {
+    let provinceHistoricalData = this.state.canadianSummaryAll.filter(
+      (provinceName) => {
+        if (provinceName.Province === singleProvince.Province) {
+          return {
+            finalizedCases: provinceName,
+          };
+        }
+      }
+    );
+    this.setState({
+      historicalProvinceDataForGraph: provinceHistoricalData,
+    });
+  };
 
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
@@ -132,9 +128,17 @@ class App extends Component {
         date: provinceName.Date,
       };
     });
+
     this.setState({
       provinceData: provinceInfo,
     });
+  };
+
+  functionForLineGraph = (provinceInfoForLineGraph) => {
+    this.setState({
+      lineGraphData: provinceInfoForLineGraph,
+    });
+    // console.log("Function for Line Graph", this.state.lineGraphData);
   };
 
   render() {
@@ -142,34 +146,48 @@ class App extends Component {
     return (
       <body>
         <main className="section">
-          <section className="columns">
-            <div className="column is-3">
-              <BarGraph
-                barChartInfo={canadianSummaryAll}
-                clickEventForGraph={this.provinceGraph}
-              />
-            </div>
-            <div className="column is-5">
-              <LogoMain />
-              <Map markerData={this.state.canadianSummaryAll} />
-            </div>
-            <div className="column is-4">
-              <Widget widgetData={this.state.canadianSummaryCanada} />
-              <LineGraph
-                graphStyle={graphComponentData}
-                provinceNames={this.state.historicalProvinceDataForGraph}
-              />
-            </div>
-            {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
-            {/* <Table
+          <motion.div
+            intial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            translate={{
+              duration: 5,
+            }}
+          >
+            <section className="columns">
+              <div className="column is-3">
+                <BarGraph
+                  barChartInfo={canadianSummaryAll}
+                  clickEventForGraph={this.provinceGraph}
+                  lineGraphHandler={() => this.functionForLineGraph()}
+                />
+              </div>
+              <div className="column is-5">
+                <LogoMain />
+                <Map markerData={this.state.canadianSummaryAll} />
+              </div>
+              <div className="column is-4">
+                <Widget widgetData={this.state.canadianSummaryCanada} />
+                <LineGraph
+                  graphStyle={graphComponentData}
+                  provinceNames={this.state.historicalProvinceDataForGraph}
+                />
+              </div>
+              {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
+              {/* <Table
                 className="column"
                 // dateEven={this.dateFunction()}
                 tableInfo={this.state.canadianSummary}
                 provinceNames={this.state.historicalProvinceDataForGraph}
                 clickEventForGraph={this.provinceGraph}
               /> */}
-          </section>
-          {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
+            </section>
+            <Footer />
+            {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
+          </motion.div>
         </main>
       </body>
     );
