@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL, { Popup } from "react-map-gl";
 
 const style = {
   padding: "3px 10px",

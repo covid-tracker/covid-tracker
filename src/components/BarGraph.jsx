@@ -36,13 +36,10 @@ class BarGraph extends Component {
     // } else {
     const province = obj.activePayload[0].payload.province;
     const caseCount = obj.activePayload[0].payload.cases;
-    // console.log("Province from BarGraph", province);
-    // console.log(caseCount);
     alert(`You select ${province}, which has ${caseCount} cases`);
     this.setState({
       dataForLineGraph: province,
     });
-    console.log("hello");
     // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
     // }
   };
@@ -62,16 +59,18 @@ class BarGraph extends Component {
       <div className="customBox" style={{ width: "100%", height: 650 }}>
         <ResponsiveContainer>
           <BarChart
-            width={"auto"}
-            height={"auto"}
             data={this.state.xAndYValue}
             maxBarSize={20}
             layout={"vertical"}
             style={{ paddingBottom: 20 }}
-            onClick={() => (
-              this._onBarClick,
-              this.props.lineGraphHandler(this.state.dataForLineGraph)
-            )}
+            onClick={
+              (() => {
+                this._onBarClick();
+              },
+              () => {
+                this.props.lineGraphHandler(this.state.xAndYValue);
+              })
+            }
           >
             <CartesianGrid strokeDasharray="1 1" />
             <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />

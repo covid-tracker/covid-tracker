@@ -7,7 +7,7 @@ import Widget from "./components/Widget";
 import BarGraph from "./components/BarGraph";
 import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
-import { MetroSpinner } from "react-spinners-kit";
+// import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
 class App extends Component {
   constructor() {
@@ -17,7 +17,7 @@ class App extends Component {
       toDate: "2020-05-02T01:00:00Z",
       fromDateAll: "",
       toDateAll: "",
-      loading: false,
+      // loading: false,
       canadianSummary: [],
       canadianSummaryAll: [],
       canadianSummaryCanada: [],
@@ -135,14 +135,18 @@ class App extends Component {
   };
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
+    let province = provinceInfoForLineGraph.map((e) => e.province);
     this.setState({
-      lineGraphData: provinceInfoForLineGraph,
+      lineGraphData: province,
     });
-    // console.log("Function for Line Graph", this.state.lineGraphData);
+
+    let specificProvince = this.state.lineGraphData.filter((e) => {
+      console.log(e);
+    });
   };
 
   render() {
-    const { loading, canadianSummaryAll, graphComponentData } = this.state;
+    const { canadianSummaryAll, graphComponentData } = this.state;
     return (
       <body>
         <main className="section">
@@ -162,7 +166,7 @@ class App extends Component {
                 <BarGraph
                   barChartInfo={canadianSummaryAll}
                   clickEventForGraph={this.provinceGraph}
-                  lineGraphHandler={() => this.functionForLineGraph()}
+                  lineGraphHandler={this.functionForLineGraph}
                 />
               </div>
               <div className="column is-5">
