@@ -69,7 +69,7 @@ class BarGraph extends Component {
             layout={"vertical"}
             style={{ paddingBottom: 20 }}
             onClick={() => (
-              this._onBarClick,
+              this._onBarClick(),
               this.props.lineGraphHandler(this.state.dataForLineGraph)
             )}
           >

@@ -7,7 +7,7 @@ import Widget from "./components/Widget";
 import BarGraph from "./components/BarGraph";
 import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
-import { MetroSpinner } from "react-spinners-kit";
+// import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
 class App extends Component {
   constructor() {
@@ -138,7 +138,7 @@ class App extends Component {
     this.setState({
       lineGraphData: provinceInfoForLineGraph,
     });
-    ``;
+
     // console.log("Function for Line Graph", this.state.lineGraphData);
   };
 
