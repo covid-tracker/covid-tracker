@@ -22,6 +22,7 @@ class Map extends Component {
   };
 
   render() {
+    // console.log(this.props.markerData);
     return (
       <div className="customBox boxTwo shadow" style={{ textAlign: "center" }}>
         <ReactMapGL
