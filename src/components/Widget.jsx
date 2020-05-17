@@ -4,7 +4,7 @@ class Widget extends Component {
   render() {
     return (
       <div className="customBox shadowTwo" style={{ textAlign: "center" }}>
-        <h1 class="title">National Live Count</h1>
+        <h1 className="title">National Live Count</h1>
         <div className="is-multiline columns">
           <div className="column widBox widgetOne shadowThree">
             <h3>CASES</h3>

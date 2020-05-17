@@ -62,8 +62,6 @@ class BarGraph extends Component {
       <div className="customBox" style={{ width: "100%", height: 650 }}>
         <ResponsiveContainer>
           <BarChart
-            width={"auto"}
-            height={"auto"}
             data={this.state.xAndYValue}
             maxBarSize={20}
             layout={"vertical"}
