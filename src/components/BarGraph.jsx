@@ -40,6 +40,7 @@ class BarGraph extends Component {
     this.setState({
       dataForLineGraph: province,
     });
+    // console.log(this.state.dataForLineGraph);
     // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
     // }
   };
@@ -64,12 +65,13 @@ class BarGraph extends Component {
             layout={"vertical"}
             style={{ paddingBottom: 20 }}
             onClick={
-              (() => {
-                this._onBarClick();
-              },
-              () => {
-                this.props.lineGraphHandler(this.state.xAndYValue);
-              })
+              this._onBarClick
+              // (() => {
+              //   this._onBarClick();
+              // },
+              // () => {
+              //   this.props.lineGraphHandler(this.state.xAndYValue);
+              // })
             }
           >
             <CartesianGrid strokeDasharray="1 1" />
@@ -83,7 +85,13 @@ class BarGraph extends Component {
             <Tooltip
               wrapperStyle={{ borderRadius: 20, backgroundColor: "#f35163" }}
             />
-            <Bar dataKey="cases" fill="#4f7cff" barSize={30} radius={2} />
+            <Bar
+              dataKey="cases"
+              fill="#4f7cff"
+              barSize={30}
+              radius={2}
+              onClick={this.props.lineGraphHandler(this.state.dataForLineGraph)}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -9,6 +9,7 @@ import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
 // import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
+
 class App extends Component {
   constructor() {
     super();
@@ -18,7 +19,7 @@ class App extends Component {
       fromDateAll: "",
       toDateAll: "",
       // loading: false,
-      canadianSummary: [],
+      canadianSummaryLineGraph: [],
       canadianSummaryAll: [],
       canadianSummaryCanada: [],
       provinceData: [],
@@ -53,15 +54,11 @@ class App extends Component {
   // }
   componentDidMount() {
     axios({
-      url: `https://api.covid19api.com/total/country/canada/status/confirmed`,
+      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
-      params: {
-        from: this.state.fromDate,
-        to: this.state.toDate,
-      },
     }).then((response) => {
       this.setState({
-        canadianSummary: response.data,
+        canadianSummaryLineGraph: response.data,
       });
     });
 
@@ -105,6 +102,7 @@ class App extends Component {
   //     toDate: yesterdayStringTime,
   //   });
   // };
+
   provinceGraph = (singleProvince) => {
     let provinceHistoricalData = this.state.canadianSummaryAll.filter(
       (provinceName) => {
@@ -135,18 +133,19 @@ class App extends Component {
   };
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
-    let province = provinceInfoForLineGraph.map((e) => e.province);
-    this.setState({
-      lineGraphData: province,
-    });
+    console.log(this.state.canadianSummaryLineGraph);
+    // let province = provinceInfoForLineGraph.map((e) => e.province);
+    // this.setState({
+    //   historicalData: province,
+    // });
 
-    let specificProvince = this.state.lineGraphData.filter((e) => {
-      console.log(e);
-    });
+    // let specificProvince = this.state.lineGraphData.filter((e) => {
+    //   console.log(e);
+    // });
   };
 
   render() {
-    const { canadianSummaryAll, graphComponentData } = this.state;
+    // const { canadianSummaryAll, graphComponentData } = this.state;
     return (
       <body>
         <main className="section">
@@ -164,7 +163,7 @@ class App extends Component {
             <section className="columns">
               <div className="column is-3">
                 <BarGraph
-                  barChartInfo={canadianSummaryAll}
+                  barChartInfo={this.state.canadianSummaryAll}
                   clickEventForGraph={this.provinceGraph}
                   lineGraphHandler={this.functionForLineGraph}
                 />
@@ -176,7 +175,7 @@ class App extends Component {
               <div className="column is-4">
                 <Widget widgetData={this.state.canadianSummaryCanada} />
                 <LineGraph
-                  graphStyle={graphComponentData}
+                  graphStyle={this.state.graphComponentData}
                   provinceNames={this.state.historicalProvinceDataForGraph}
                 />
               </div>
