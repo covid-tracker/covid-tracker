@@ -46,7 +46,7 @@ class BarGraph extends Component {
   };
 
   initData() {
-    let newArray = this.props.barChartInfo.map((e) => {
+    let newArray = this.props.canadianSummaryCanada.map((e) => {
       let data = { province: e.Province, cases: e.Cases };
       return data;
     });

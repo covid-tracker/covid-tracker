@@ -14,10 +14,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-05-02T00:00:00Z",
-      toDate: "2020-05-02T01:00:00Z",
-      fromDateAll: "",
-      toDateAll: "",
+      fromDate: "2020-05-01T00:00:00Z",
+      toDate: "2020-05-15T01:00:00Z",
+      fromDateAll: "2020-05-15T01:00:00Z",
+      toDateAll: "2020-05-15T01:00:00Z",
       // loading: false,
       canadianSummaryLineGraph: [],
       canadianSummaryAll: [],
@@ -145,6 +145,8 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.canadianSummaryAll);
+    console.log(this.state.canadianSummaryCanada);
     // const { canadianSummaryAll, graphComponentData } = this.state;
     return (
       <body>
