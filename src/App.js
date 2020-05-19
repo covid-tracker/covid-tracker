@@ -14,8 +14,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-05-02T00:00:00Z",
-      toDate: "2020-05-02T01:00:00Z",
+      fromDate: "2020-05-18T00:00:00Z",
+      toDate: "2020-05-18T01:00:00Z",
       fromDateAll: "",
       toDateAll: "",
       // loading: false,
@@ -29,6 +29,7 @@ class App extends Component {
         polar: false,
       },
       lineGraphData: "",
+      fullProvinceTimeline: "",
     };
   }
   // async componentDidMount() {
@@ -133,19 +134,26 @@ class App extends Component {
   };
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
-    console.log(this.state.canadianSummaryLineGraph);
-    // let province = provinceInfoForLineGraph.map((e) => e.province);
-    // this.setState({
-    //   historicalData: province,
-    // });
+    let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
+      (e) => {
+        if (e.Province === provinceInfoForLineGraph) {
+          return {
+            fullProvinceTimeline: {
+              xData: e.Cases,
+              yData: e.Date,
+            },
+          };
+        }
+      }
+    );
+    this.setState({
+      fullProvinceTimeline: filteredSpecificProvince,
+    });
 
-    // let specificProvince = this.state.lineGraphData.filter((e) => {
-    //   console.log(e);
-    // });
+    console.log(filteredSpecificProvince);
   };
 
   render() {
-    // const { canadianSummaryAll, graphComponentData } = this.state;;
     return (
       <body>
         <main className="section">

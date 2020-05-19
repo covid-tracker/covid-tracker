@@ -9,7 +9,7 @@
     "axios": "^0.19.2",
     "bulma": "^0.8.2",
     "bulmaswatch": "^0.8.1",
-    "framer": "^1.2.1",
+    "framer": "^1.2.2",
     "framer-motion": "^1.11.0",
     "mapbox-gl": "^1.10.1",
     "node-sass": "^4.14.1",
