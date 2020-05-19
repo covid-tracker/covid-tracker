@@ -64,15 +64,7 @@ class BarGraph extends Component {
             maxBarSize={20}
             layout={"vertical"}
             style={{ paddingBottom: 20 }}
-            onClick={
-              this._onBarClick
-              // (() => {
-              //   this._onBarClick();
-              // },
-              // () => {
-              //   this.props.lineGraphHandler(this.state.xAndYValue);
-              // })
-            }
+            onClick={this._onBarClick}
           >
             <CartesianGrid strokeDasharray="1 1" />
             <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />
@@ -90,7 +82,9 @@ class BarGraph extends Component {
               fill="#4f7cff"
               barSize={30}
               radius={2}
-              onClick={this.props.lineGraphHandler(this.state.dataForLineGraph)}
+              onClick={() =>
+                this.props.lineGraphHandler(this.state.dataForLineGraph)
+              }
             />
           </BarChart>
         </ResponsiveContainer>

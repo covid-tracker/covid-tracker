@@ -9,7 +9,6 @@ import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
 // import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
-
 class App extends Component {
   constructor() {
     super();
@@ -62,7 +61,6 @@ class App extends Component {
         canadianSummaryLineGraph: response.data,
       });
     });
-
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
@@ -75,7 +73,6 @@ class App extends Component {
         canadianSummaryAll: response.data,
       });
     });
-
     axios({
       url: `https://api.covid19api.com/summary`,
       method: `GET`,
@@ -103,7 +100,6 @@ class App extends Component {
   //     toDate: yesterdayStringTime,
   //   });
   // };
-
   provinceGraph = (singleProvince) => {
     let provinceHistoricalData = this.state.canadianSummaryAll.filter(
       (provinceName) => {
@@ -118,7 +114,6 @@ class App extends Component {
       historicalProvinceDataForGraph: provinceHistoricalData,
     });
   };
-
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
@@ -127,32 +122,27 @@ class App extends Component {
         date: provinceName.Date,
       };
     });
-
     this.setState({
       provinceData: provinceInfo,
     });
   };
-
   functionForLineGraph = (provinceInfoForLineGraph) => {
+    let fullProvinceTimeline;
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
       (e) => {
-        if (e.Province === provinceInfoForLineGraph) {
-          return {
-            fullProvinceTimeline: {
+        return e.Province === provinceInfoForLineGraph
+          ? {
               xData: e.Cases,
               yData: e.Date,
-            },
-          };
-        }
+            }
+          : null;
       }
     );
     this.setState({
       fullProvinceTimeline: filteredSpecificProvince,
     });
-
-    console.log(filteredSpecificProvince);
+    // console.log(this.state.fullProvinceTimeline);
   };
-
   render() {
     return (
       <body>
@@ -184,7 +174,7 @@ class App extends Component {
                 <Widget widgetData={this.state.canadianSummaryCanada} />
                 <LineGraph
                   graphStyle={this.state.graphComponentData}
-                  provinceNames={this.state.historicalProvinceDataForGraph}
+                  provinceNames={this.state.fullProvinceTimeline}
                 />
               </div>
               {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
@@ -204,5 +194,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;

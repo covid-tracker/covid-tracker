@@ -14,7 +14,6 @@ import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
 //   "stepBefore",
 // ];
 // const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
-
 class LineGraph extends Component {
   constructor() {
     super();
@@ -22,7 +21,6 @@ class LineGraph extends Component {
       xAndYValue: [],
     };
   }
-
   coordinateValues = () => {
     let newArray = this.props.provinceNames.map((e) => {
       let data = { x: e.Date, y: e.Cases };
@@ -31,14 +29,14 @@ class LineGraph extends Component {
     this.setState({
       xAndYValue: newArray,
     });
+    console.log(this.state.xAndYValue);
   };
-
   render() {
     return (
       <div className="customBox shadowTwo">
-        {/* <button className="button" onClick={() => this.coordinateValues()}>
+        <button className="button" onClick={() => this.coordinateValues()}>
           Click Me
-        </button> */}
+        </button>
         <VictoryChart
           className="image"
           height={500}
@@ -66,5 +64,4 @@ class LineGraph extends Component {
     );
   }
 }
-
 export default LineGraph;
