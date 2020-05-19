@@ -45,7 +45,7 @@ class BarGraph extends Component {
   };
 
   initData() {
-    let newArray = this.props.barChartInfo.map((e) => {
+    let newArray = this.props.canadianSummaryCanada.map((e) => {
       let data = { province: e.Province, cases: e.Cases };
       return data;
     });
@@ -64,12 +64,13 @@ class BarGraph extends Component {
             layout={"vertical"}
             style={{ paddingBottom: 20 }}
             onClick={
-              (() => {
-                this._onBarClick();
-              },
-              () => {
-                this.props.lineGraphHandler(this.state.xAndYValue);
-              })
+              this._onBarClick
+              // (() => {
+              //   this._onBarClick();
+              // },
+              // () => {
+              //   this.props.lineGraphHandler(this.state.xAndYValue);
+              // })
             }
           >
             <CartesianGrid strokeDasharray="1 1" />

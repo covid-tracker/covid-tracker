@@ -19,17 +19,17 @@ class LineGraph extends Component {
   constructor() {
     super();
     this.state = {
-      xAndYValue: [],
+      xAndYValueTwo: [],
     };
   }
 
   coordinateValues = () => {
-    let newArray = this.props.provinceNames.map((e) => {
+    let newArrayTwo = this.props.provinceNames.map((e) => {
       let data = { x: e.Date, y: e.Cases };
       return data;
     });
     this.setState({
-      xAndYValue: newArray,
+      xAndYValueTwo: newArrayTwo,
     });
   };
 
@@ -49,7 +49,7 @@ class LineGraph extends Component {
           <VictoryLine
             interpolation={this.props.graphStyle.interpolation}
             style={{ data: { stroke: "#4F7CFF" } }}
-            data={this.state.xAndYValue}
+            data={this.state.xAndYValueTwo}
             theme={VictoryTheme.material}
             animate={{
               onExit: {

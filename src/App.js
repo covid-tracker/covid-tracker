@@ -13,10 +13,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-05-02T00:00:00Z",
-      toDate: "2020-05-02T01:00:00Z",
-      fromDateAll: "",
-      toDateAll: "",
+      fromDate: "2020-05-01T00:00:00Z",
+      toDate: "2020-05-15T01:00:00Z",
+      fromDateAll: "2020-05-15T01:00:00Z",
+      toDateAll: "2020-05-15T01:00:00Z",
       // loading: false,
       canadianSummary: [],
       canadianSummaryAll: [],
@@ -146,7 +146,9 @@ class App extends Component {
   };
 
   render() {
-    const { canadianSummaryAll, graphComponentData } = this.state;
+    console.log(this.state.canadianSummaryAll);
+    console.log(this.state.canadianSummaryCanada);
+    // const { canadianSummaryAll, graphComponentData } = this.state;
     return (
       <body>
         <main className="section">
@@ -164,7 +166,7 @@ class App extends Component {
             <section className="columns">
               <div className="column is-3">
                 <BarGraph
-                  barChartInfo={canadianSummaryAll}
+                  barChartInfo={this.state.canadianSummaryAll}
                   clickEventForGraph={this.provinceGraph}
                   lineGraphHandler={this.functionForLineGraph}
                 />
@@ -176,8 +178,8 @@ class App extends Component {
               <div className="column is-4">
                 <Widget widgetData={this.state.canadianSummaryCanada} />
                 <LineGraph
-                  graphStyle={graphComponentData}
-                  provinceNames={this.state.historicalProvinceDataForGraph}
+                  graphStyle={this.state.graphComponentData}
+                  totalCount={this.state.canadianSummaryAll}
                 />
               </div>
               {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
