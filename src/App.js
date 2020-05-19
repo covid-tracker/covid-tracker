@@ -145,7 +145,7 @@ class App extends Component {
   };
 
   render() {
-    // const { canadianSummaryAll, graphComponentData } = this.state;
+    // const { canadianSummaryAll, graphComponentData } = this.state;;
     return (
       <body>
         <main className="section">

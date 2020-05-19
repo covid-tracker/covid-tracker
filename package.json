@@ -19,7 +19,7 @@
     "react-scripts": "3.4.1",
     "react-spinners-kit": "^1.9.1",
     "recharts": "^1.8.5",
-    "victory": "^34.3.5"
+    "victory": "^34.3.6"
   },
   "scripts": {
     "start": "react-scripts start",
