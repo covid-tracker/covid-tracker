@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class LogoMain extends Component {
   render() {
     return (
-      <section className="customBox boxTwo shadow">
+      <section className="customBox shadowTwo">
         <div style={{ textAlign: "center" }}>
           <h1 className="title" style={{ textAlign: "center" }}>
             COVID Tracker
