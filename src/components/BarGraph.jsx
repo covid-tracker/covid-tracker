@@ -14,11 +14,11 @@ class BarGraph extends Component {
     super();
     this.state = {
       xAndYValue: null,
-      activeProvince: {
-        name: null,
-        cases: null,
-      },
-      dataForLineGraph: "",
+      // activeProvince: {
+      //   name: null,
+      //   cases: null,
+      // },
+      dataForLineGraph: null,
     };
     this.initData = this.initData.bind(this);
   }
@@ -46,13 +46,14 @@ class BarGraph extends Component {
   };
 
   initData() {
-    let newArray = this.props.canadianSummaryCanada.map((e) => {
+    let newArray = this.props.barChartInfo.map((e) => {
       let data = { province: e.Province, cases: e.Cases };
       return data;
     });
     this.setState({
       xAndYValue: newArray,
     });
+    console.log(this.state.initData);
   }
 
   render() {
@@ -90,7 +91,10 @@ class BarGraph extends Component {
               fill="#4f7cff"
               barSize={30}
               radius={2}
-              onClick={this.props.lineGraphHandler(this.state.dataForLineGraph)}
+              cd
+              onClick={() =>
+                this.props.lineGraphHandler(this.state.dataForLineGraph)
+              }
             />
           </BarChart>
         </ResponsiveContainer>
