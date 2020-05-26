@@ -10,6 +10,9 @@ $size-1: 3rem;
 // Font for main header
 @import "node_modules/bulmaswatch/minty/bulmaswatch";
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+html {
+  font-size: 13px;
+}
 
 h2 {
   color: #ffffff;
@@ -129,6 +132,14 @@ li {
 
 BarChart {
   margin: 0 auto;
+}
+
+.recharts-surface {
+  overflow: visible;
+  padding-left: 25px;
+}
+svg > g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
+  transform: translate(0.001rem, 0);
 }
 
 // Footer Start //
