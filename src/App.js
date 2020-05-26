@@ -33,6 +33,7 @@ class App extends Component {
     };
     this.coordinateValues = this.coordinateValues.bind(this);
   }
+
   // async componentDidMount() {
   //   let fromDate = new Date();
   //   fromDate.setHours(-8, 0, 0, 0);
@@ -54,6 +55,7 @@ class App extends Component {
   //     toDate,
   //   });
   // }
+
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
@@ -90,6 +92,7 @@ class App extends Component {
     });
     // window.addEventListener("load", this.coordinateValues);
   }
+
   // dateFunction = () => {
   //   let date = new Date();
   //   date.setDate(date.getDate() - 1);
@@ -104,6 +107,7 @@ class App extends Component {
   //     toDate: yesterdayStringTime,
   //   });
   // };
+
   provinceGraph = (singleProvince) => {
     let provinceHistoricalData = this.state.canadianSummaryAll.filter(
       (provinceName) => {
@@ -152,24 +156,19 @@ class App extends Component {
         this.coordinateValues();
       }
     );
-    // console.log(this.state.fullProvinceTimeline);
   };
 
   coordinateValues() {
-    // console.log(this.state.fullProvinceTimeline);
     let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
       let data = { x: e.Date, y: e.Cases };
       return data;
     });
-    // console.log(lineGraphArray);
     this.setState({
       handOffToLineGraph: lineGraphArray,
     });
-    console.log(this.state.handOffToLineGraph);
   }
 
   render() {
-    // console.log(this.state.handOffToLineGraph);
     return (
       <body>
         <main className="section">

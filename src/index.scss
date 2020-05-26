@@ -102,6 +102,21 @@ $table-cell-border: 1px solid $blueAccent;
 
 // Map End //
 
+// BarGraph Start
+.recharts-surface {
+  overflow: visible;
+  padding-left: 25px;
+}
+
+.recharts-cartesian-axis {
+  padding-top: 10px;
+}
+
+svg > g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
+  transform: translate(0.001rem, 0);
+}
+// BarGraph End
+
 // Widget Start //
 
 .widBox {

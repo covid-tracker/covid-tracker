@@ -6,7 +6,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  Legend,
   ResponsiveContainer,
+  Sector,
 } from "recharts";
 
 class BarGraph extends Component {
@@ -67,6 +69,7 @@ class BarGraph extends Component {
             style={{ paddingBottom: 20 }}
             onClick={this._onBarClick}
           >
+            <Legend />
             <CartesianGrid strokeDasharray="1 1" />
             <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />
             <YAxis
@@ -76,14 +79,17 @@ class BarGraph extends Component {
               stroke="#f35163"
             />
             <Tooltip
-              wrapperStyle={{ borderRadius: 20, backgroundColor: "#f35163" }}
+              // wrapperStyle={{ borderRadius: 20 }}
+              // cursor={{ fill: "#ffffff", stroke: "#f35163" }}
+              onClick={() =>
+                this.props.lineGraphHandler(this.state.dataForLineGraph)
+              }
             />
             <Bar
               dataKey="cases"
               fill="#4f7cff"
               barSize={30}
               radius={2}
-              cd
               onClick={() =>
                 this.props.lineGraphHandler(this.state.dataForLineGraph)
               }
