@@ -9,7 +9,6 @@ import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
 // import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
-
 class App extends Component {
   constructor() {
     super();
@@ -66,7 +65,6 @@ class App extends Component {
         canadianSummaryLineGraph: response.data,
       });
     });
-
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
@@ -154,7 +152,9 @@ class App extends Component {
       {
         fullProvinceTimeline: filteredSpecificProvince,
       },
-      () => this.coordinateValues()
+      () => {
+        this.coordinateValues();
+      }
     );
   };
 
@@ -187,7 +187,6 @@ class App extends Component {
               <div className="column is-3">
                 <BarGraph
                   barChartInfo={this.state.canadianSummaryAll}
-                  clickEventForGraph={this.provinceGraph}
                   lineGraphHandler={this.functionForLineGraph}
                 />
               </div>
