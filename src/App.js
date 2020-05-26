@@ -9,6 +9,7 @@ import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
 // import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
+
 class App extends Component {
   constructor() {
     super();
@@ -23,6 +24,7 @@ class App extends Component {
       canadianSummaryCanada: [],
       provinceData: [],
       historicalProvinceDataForGraph: [],
+      handOffToLineGraph: [],
       graphComponentData: {
         interpolation: "natural",
         polar: false,
@@ -30,7 +32,9 @@ class App extends Component {
       lineGraphData: "",
       fullProvinceTimeline: "",
     };
+    this.coordinateValues = this.coordinateValues.bind(this);
   }
+
   // async componentDidMount() {
   //   let fromDate = new Date();
   //   fromDate.setHours(-8, 0, 0, 0);
@@ -52,6 +56,7 @@ class App extends Component {
   //     toDate,
   //   });
   // }
+
   componentDidMount() {
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
@@ -61,6 +66,7 @@ class App extends Component {
         canadianSummaryLineGraph: response.data,
       });
     });
+
     axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
@@ -73,6 +79,7 @@ class App extends Component {
         canadianSummaryAll: response.data,
       });
     });
+
     axios({
       url: `https://api.covid19api.com/summary`,
       method: `GET`,
@@ -85,7 +92,9 @@ class App extends Component {
         canadianSummaryCanada: response.data.Countries[30],
       });
     });
+    // window.addEventListener("load", this.coordinateValues);
   }
+
   // dateFunction = () => {
   //   let date = new Date();
   //   date.setDate(date.getDate() - 1);
@@ -100,6 +109,7 @@ class App extends Component {
   //     toDate: yesterdayStringTime,
   //   });
   // };
+
   provinceGraph = (singleProvince) => {
     let provinceHistoricalData = this.state.canadianSummaryAll.filter(
       (provinceName) => {
@@ -114,6 +124,7 @@ class App extends Component {
       historicalProvinceDataForGraph: provinceHistoricalData,
     });
   };
+
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
@@ -126,6 +137,7 @@ class App extends Component {
       provinceData: provinceInfo,
     });
   };
+
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let fullProvinceTimeline;
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
@@ -138,11 +150,24 @@ class App extends Component {
           : null;
       }
     );
-    this.setState({
-      fullProvinceTimeline: filteredSpecificProvince,
-    });
-    // console.log(this.state.fullProvinceTimeline);
+    this.setState(
+      {
+        fullProvinceTimeline: filteredSpecificProvince,
+      },
+      () => this.coordinateValues()
+    );
   };
+
+  coordinateValues() {
+    let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
+      let data = { x: e.Date, y: e.Cases };
+      return data;
+    });
+    this.setState({
+      handOffToLineGraph: lineGraphArray,
+    });
+  }
+
   render() {
     return (
       <body>
@@ -174,7 +199,8 @@ class App extends Component {
                 <Widget widgetData={this.state.canadianSummaryCanada} />
                 <LineGraph
                   graphStyle={this.state.graphComponentData}
-                  provinceNames={this.state.fullProvinceTimeline}
+                  lineGraphFinalFunction={this.state.handOffToLineGraph}
+                  // provinceNames={this.state.fullProvinceTimeline}
                 />
               </div>
               {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
