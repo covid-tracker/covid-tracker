@@ -20,6 +20,7 @@ class App extends Component {
       // loading: false,
       canadianSummaryLineGraph: [],
       canadianSummaryAll: [],
+      canadianSummaryBarGraph: [],
       canadianSummaryCanada: [],
       provinceData: [],
       historicalProvinceDataForGraph: [],
@@ -30,6 +31,7 @@ class App extends Component {
       },
       lineGraphData: "",
       fullProvinceTimeline: "",
+      // init:0,
     };
     this.coordinateValues = this.coordinateValues.bind(this);
   }
@@ -56,41 +58,41 @@ class App extends Component {
   //   });
   // }
 
-  componentDidMount() {
-    axios({
+  async componentDidMount() {
+    const { data: canadianSummaryLineGraph } = await axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
-    }).then((response) => {
-      this.setState({
-        canadianSummaryLineGraph: response.data,
-      });
     });
-    axios({
+    const { data: canadianSummaryAll } = await axios({
       url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
       method: `GET`,
       params: {
         from: this.state.fromDate,
         to: this.state.toDate,
       },
-    }).then((response) => {
-      this.setState({
-        canadianSummaryAll: response.data,
-      });
     });
-
-    axios({
+    const { data: canadianSummaryBarGraph } = await axios({
+      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
+      method: `GET`,
+      params: {
+        from: this.state.fromDate,
+        to: this.state.toDate,
+      },
+    });
+    const { data: canadianSummaryCanada } = await axios({
       url: `https://api.covid19api.com/summary`,
       method: `GET`,
       params: {
         from: this.state.fromDateAll,
         to: this.state.toDateAll,
       },
-    }).then((response) => {
-      this.setState({
-        canadianSummaryCanada: response.data.Countries[30],
-      });
     });
-    // window.addEventListener("load", this.coordinateValues);
+    this.setState({
+      canadianSummaryBarGraph,
+      canadianSummaryLineGraph,
+      canadianSummaryAll,
+      canadianSummaryCanada: canadianSummaryCanada.Countries[30],
+    });
   }
 
   // dateFunction = () => {
@@ -186,7 +188,7 @@ class App extends Component {
             <section className="columns">
               <div className="column is-3">
                 <BarGraph
-                  barChartInfo={this.state.canadianSummaryAll}
+                  barChartInfo={this.state.canadianSummaryBarGraph}
                   lineGraphHandler={this.functionForLineGraph}
                 />
               </div>
