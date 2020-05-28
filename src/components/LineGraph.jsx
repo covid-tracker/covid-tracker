@@ -17,7 +17,7 @@ import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
 
 class LineGraph extends Component {
   render() {
-    console.log(this.props.lineGraphFinalFunction);
+    // console.log(this.props.lineGraphFinalFunction);
     return (
       <div className="customBox shadowTwo">
         <VictoryChart
