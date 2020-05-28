@@ -8,30 +8,16 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  Sector,
 } from "recharts";
 
 class BarGraph extends Component {
   constructor() {
     super();
     this.state = {
-      xAndYValue: null,
       dataForLineGraph: null,
       isLoaded: false,
-      // init: 0,
     };
-    this.initData = this.initData.bind(this);
   }
-
-  componentDidUpdate() {
-    window.addEventListener("load", () => {
-      this.initData();
-    });
-  }
-
-  // setTimeout(() => {
-  //           this.setState({ "load": false });
-  //       }, 300);
 
   _onBarClick = (obj, $event) => {
     // if (!obj || !$event != null) {
@@ -52,25 +38,15 @@ class BarGraph extends Component {
     // }
   };
 
-  initData() {
-    console.log(this.props.barChartInfo);
-    let newArray = this.props.barChartInfo.map((e) => {
-      let data = { province: e.Province, cases: e.Cases };
-      return data;
-    });
-    this.setState({
-      xAndYValue: newArray,
-    });
-  }
-
   render() {
-    console.log(this.props.barChartInfo);
-    console.log(this.state.xAndYValue);
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
         <ResponsiveContainer>
           <BarChart
-            data={this.state.xAndYValue}
+            data={this.props.barChartInfo.map((e) => ({
+              province: e.Province,
+              cases: e.Cases,
+            }))}
             maxBarSize={20}
             layout={"vertical"}
             style={{ paddingBottom: 20 }}
