@@ -9,6 +9,11 @@ import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
 // import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
+
+const provinceDataURL =
+  "https://api.covid19api.com/country/canada/status/confirmed/live";
+const summaryDataURL = "https://api.covid19api.com/summary";
+
 class App extends Component {
   constructor() {
     super();

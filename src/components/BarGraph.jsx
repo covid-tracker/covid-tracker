@@ -43,10 +43,14 @@ class BarGraph extends Component {
       <div className="customBox" style={{ width: "100%", height: 650 }}>
         <ResponsiveContainer>
           <BarChart
-            data={this.props.barChartInfo.map((e) => ({
-              province: e.Province,
-              cases: e.Cases,
-            }))}
+            data={this.props.barChartInfo.map((e) => {
+              return (e.Province !== "") & (e.Cases !== 0)
+                ? {
+                    province: e.Province,
+                    cases: e.Cases,
+                  }
+                : null;
+            })}
             maxBarSize={20}
             layout={"vertical"}
             style={{ paddingBottom: 20 }}
