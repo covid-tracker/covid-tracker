@@ -9,6 +9,11 @@ import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
 // import { MetroSpinner } from "react-spinners-kit";
 import { motion } from "framer-motion";
+
+const provinceDataURL =
+  "https://api.covid19api.com/country/canada/status/confirmed/live";
+const summaryDataURL = "https://api.covid19api.com/summary";
+
 class App extends Component {
   constructor() {
     super();
@@ -56,40 +61,40 @@ class App extends Component {
   //   });
   // }
 
-  componentDidMount() {
-    axios({
-      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
-      method: `GET`,
-    }).then((response) => {
-      this.setState({
-        canadianSummaryLineGraph: response.data,
+  async componentDidMount() {
+    try {
+      const { data: canadianSummaryLineGraph } = await axios({
+        url: provinceDataURL,
+        method: `GET`,
       });
-    });
-    axios({
-      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
-      method: `GET`,
-      params: {
-        from: this.state.fromDate,
-        to: this.state.toDate,
-      },
-    }).then((response) => {
-      this.setState({
-        canadianSummaryAll: response.data,
-      });
-    });
 
-    axios({
-      url: `https://api.covid19api.com/summary`,
-      method: `GET`,
-      params: {
-        from: this.state.fromDateAll,
-        to: this.state.toDateAll,
-      },
-    }).then((response) => {
-      this.setState({
-        canadianSummaryCanada: response.data.Countries[30],
+      const { data: canadianSummaryAll } = await axios({
+        url: provinceDataURL,
+        method: `GET`,
+        params: {
+          from: this.state.fromDate,
+          to: this.state.toDate,
+        },
       });
-    });
+
+      const { data: canadianSummaryCanada } = await axios({
+        url: summaryDataURL,
+        method: `GET`,
+        params: {
+          from: this.state.fromDateAll,
+          to: this.state.toDateAll,
+        },
+      });
+
+      this.setState({
+        canadianSummaryLineGraph,
+        canadianSummaryAll,
+        canadianSummaryCanada: canadianSummaryCanada.Countries[30],
+      });
+    } catch (error) {
+      console.log("Error Bitch!", error);
+    }
+
     // window.addEventListener("load", this.coordinateValues);
   }
 

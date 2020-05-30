@@ -32,9 +32,9 @@ class BarGraph extends Component {
   _onBarClick = (obj, $event) => {
     // if (!obj || $event != null) {
     //   return false;
-    //   // console.log(`Failed`);
-    //   // Captures the chart element you click
-    //   // Contained in that is the attributes for province and cases at some depth in the object
+    // console.log(`Failed`);
+    // Captures the chart element you click
+    // Contained in that is the attributes for province and cases at some depth in the object
     // } else {
     const province = obj.activePayload[0].payload.province;
     const caseCount = obj.activePayload[0].payload.cases;
@@ -55,7 +55,6 @@ class BarGraph extends Component {
     this.setState({
       xAndYValue: newArray,
     });
-    console.log(this.state.initData);
   }
 
   render() {

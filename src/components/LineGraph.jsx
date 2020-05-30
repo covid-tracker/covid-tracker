@@ -17,7 +17,6 @@ import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
 
 class LineGraph extends Component {
   render() {
-    console.log(this.props.lineGraphFinalFunction);
     return (
       <div className="customBox shadowTwo">
         <VictoryChart
@@ -36,7 +35,7 @@ class LineGraph extends Component {
               tickLabels: { fill: "white", fontSize: 20 },
               data: {
                 stroke: "#4F7CFF",
-                strokeWidth: 10,
+                strokeWidth: 7,
                 strokeLinecap: "round",
               },
               // labels: { fontSize: 15, fill: "#111", padding: 5 },
