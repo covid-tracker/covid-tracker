@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 class Widget extends Component {
   render() {
+    // console.log(this.props.widgetData.TotalConfirmed);
     return (
       <div className="customBox shadowTwo" style={{ textAlign: "center" }}>
         <h1 className="title">National Live Count</h1>

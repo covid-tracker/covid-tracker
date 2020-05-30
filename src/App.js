@@ -25,6 +25,7 @@ class App extends Component {
       // loading: false,
       canadianSummaryLineGraph: [],
       canadianSummaryAll: [],
+      canadianSummaryBarGraph: [],
       canadianSummaryCanada: [],
       provinceData: [],
       historicalProvinceDataForGraph: [],
@@ -35,6 +36,7 @@ class App extends Component {
       },
       lineGraphData: "",
       fullProvinceTimeline: "",
+      // init:0,
     };
     this.coordinateValues = this.coordinateValues.bind(this);
   }
@@ -62,40 +64,40 @@ class App extends Component {
   // }
 
   async componentDidMount() {
-    try {
-      const { data: canadianSummaryLineGraph } = await axios({
-        url: provinceDataURL,
-        method: `GET`,
-      });
-
-      const { data: canadianSummaryAll } = await axios({
-        url: provinceDataURL,
-        method: `GET`,
-        params: {
-          from: this.state.fromDate,
-          to: this.state.toDate,
-        },
-      });
-
-      const { data: canadianSummaryCanada } = await axios({
-        url: summaryDataURL,
-        method: `GET`,
-        params: {
-          from: this.state.fromDateAll,
-          to: this.state.toDateAll,
-        },
-      });
-
-      this.setState({
-        canadianSummaryLineGraph,
-        canadianSummaryAll,
-        canadianSummaryCanada: canadianSummaryCanada.Countries[30],
-      });
-    } catch (error) {
-      console.log("Error Bitch!", error);
-    }
-
-    // window.addEventListener("load", this.coordinateValues);
+    const { data: canadianSummaryLineGraph } = await axios({
+      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
+      method: `GET`,
+    });
+    const { data: canadianSummaryAll } = await axios({
+      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
+      method: `GET`,
+      params: {
+        from: this.state.fromDate,
+        to: this.state.toDate,
+      },
+    });
+    const { data: canadianSummaryBarGraph } = await axios({
+      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
+      method: `GET`,
+      params: {
+        from: this.state.fromDate,
+        to: this.state.toDate,
+      },
+    });
+    const { data: canadianSummaryCanada } = await axios({
+      url: `https://api.covid19api.com/summary`,
+      method: `GET`,
+      params: {
+        from: this.state.fromDateAll,
+        to: this.state.toDateAll,
+      },
+    });
+    this.setState({
+      canadianSummaryBarGraph,
+      canadianSummaryLineGraph,
+      canadianSummaryAll,
+      canadianSummaryCanada: canadianSummaryCanada.Countries[30],
+    });
   }
 
   // dateFunction = () => {
@@ -191,7 +193,7 @@ class App extends Component {
             <section className="columns">
               <div className="column is-3">
                 <BarGraph
-                  barChartInfo={this.state.canadianSummaryAll}
+                  barChartInfo={this.state.canadianSummaryBarGraph}
                   lineGraphHandler={this.functionForLineGraph}
                 />
               </div>
