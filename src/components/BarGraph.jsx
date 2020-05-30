@@ -15,7 +15,7 @@ class BarGraph extends Component {
     super();
     this.state = {
       dataForLineGraph: null,
-      isLoaded: false,
+      // isLoaded: false,
     };
   }
 
