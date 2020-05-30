@@ -52,7 +52,7 @@ class BarGraph extends Component {
             style={{ paddingBottom: 20 }}
             onClick={this._onBarClick}
           >
-            <Legend />
+            {/* <Legend /> */}
             <CartesianGrid strokeDasharray="1 1" />
             <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />
             <YAxis
