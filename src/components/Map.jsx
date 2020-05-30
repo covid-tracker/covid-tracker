@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactMapGL, { Popup } from "react-map-gl";
+import ReactMapGL, { Marker } from "react-map-gl";
 
 const style = {
   padding: "3px 10px",
@@ -14,9 +14,9 @@ class Map extends Component {
     viewport: {
       width: "auto",
       height: 500,
-      latitude: 63,
+      latitude: 57,
       longitude: -96.81,
-      zoom: 2.2,
+      zoom: 2.3,
     },
     showPopup: true,
   };
@@ -35,17 +35,17 @@ class Map extends Component {
         >
           {this.props.markerData.map((province) => {
             return (
-              <Popup
+              <Marker
                 latitude={parseFloat(province.Lat)}
                 longitude={parseFloat(province.Lon)}
-                closeButton={true}
-                closeOnClick={false}
-                onClose={() => this.setState({ showPopup: false })}
-                anchor="top"
-                dynamicPosition={false}
+                // closeButton={true}
+                // closeOnClick={false}
+                // onClose={() => this.setState({ showPopup: false })}
+                // anchor="top"
+                // dynamicPosition={false}
               >
                 <div style={style}>{province.Cases}</div>
-              </Popup>
+              </Marker>
             );
           })}
         </ReactMapGL>
