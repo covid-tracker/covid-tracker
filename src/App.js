@@ -31,6 +31,7 @@ class App extends Component {
       provinceData: [],
       historicalProvinceDataForGraph: [],
       handOffToLineGraph: [],
+      filteredEmptyString: [],
       graphComponentData: {
         interpolation: "natural",
         polar: false,
@@ -100,6 +101,30 @@ class App extends Component {
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
     });
   }
+
+  // filteredEmptyString = () => {
+  //   let rawBarData = this.state.canadianSummaryBarGraph.filter((Boolean) => {
+  //     return {
+  //       province: Boolean.Province,
+  //     };
+  //   });
+  //   this.setState({
+  //     filteredEmptyString: rawBarData,
+  //   });
+  // };
+
+  provinceData = () => {
+    let provinceInfo = this.state.canadianSummary.map((provinceName) => {
+      return {
+        province: provinceName.Province,
+        cases: provinceName.Cases,
+        date: provinceName.Date,
+      };
+    });
+    this.setState({
+      provinceData: provinceInfo,
+    });
+  };
 
   // dateFunction = () => {
   //   let date = new Date();
