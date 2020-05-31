@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import LineGraph from "./components/LineGraph";
+import LineGraph2 from "./components/LineGraph2";
 import Map from "./components/Map";
 // import Table from "./components/Table";
 import Widget from "./components/Widget";
@@ -149,8 +150,8 @@ class App extends Component {
       (e) => {
         return e.Province === provinceInfoForLineGraph
           ? {
-              xData: e.Cases,
-              yData: e.Date,
+              pv: e.Cases,
+              name: e.Date,
             }
           : null;
       }
@@ -167,7 +168,7 @@ class App extends Component {
 
   coordinateValues() {
     let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
-      let data = { x: e.Date, y: e.Cases };
+      let data = { name: e.Date, pv: e.Cases };
       return data;
     });
     this.setState({
@@ -203,10 +204,14 @@ class App extends Component {
               </div>
               <div className="column is-4">
                 <Widget widgetData={this.state.canadianSummaryCanada} />
-                <LineGraph
+                {/* <LineGraph
                   graphStyle={this.state.graphComponentData}
                   lineGraphFinalFunction={this.state.handOffToLineGraph}
                   // provinceNames={this.state.fullProvinceTimeline}
+                /> */}
+                <LineGraph2
+                  graphStyle={this.state.graphComponentData}
+                  lineGraphFinalFunction={this.state.handOffToLineGraph}
                 />
               </div>
               {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
