@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
+import { VictoryChart, VictoryTheme, VictoryLine, VictoryAxis } from "victory";
 // const cartesianInterpolations = [
 //   "basis",
 //   "bundle",
@@ -13,7 +13,7 @@ import { VictoryChart, VictoryTheme, VictoryLine } from "victory";
 //   "stepAfter",
 //   "stepBefore",
 // ];
-// const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];
+// const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];\
 
 class LineGraph extends Component {
   render() {
@@ -30,6 +30,20 @@ class LineGraph extends Component {
             tickLabels: { fill: "white", fontSize: 20 },
           }}
         >
+          {/* <VictoryAxis
+            // scale="time"
+            // standalone={false}
+            // style={styles.axisYears}
+            // tickValues={tickValues}
+            tickFormat={(x) => {
+              if (x.getFullYear() === 2000) {
+                return x.getFullYear();
+              }
+              if (x.getFullYear() % 10 === 0) {
+                return x.getFullYear().toString().slice(2);
+              }
+            }}
+          /> */}
           <VictoryLine
             interpolation={this.props.graphStyle.interpolation}
             style={{
