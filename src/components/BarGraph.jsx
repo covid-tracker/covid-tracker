@@ -39,17 +39,15 @@ class BarGraph extends Component {
   };
 
   render() {
+    console.log(this.props.barChartInfo);
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
         <ResponsiveContainer>
           <BarChart
             data={this.props.barChartInfo.map((e) => {
-              return (e.Province !== "") & (e.Cases !== 0)
-                ? {
-                    province: e.Province,
-                    cases: e.Cases,
-                  }
-                : null;
+              return e.Province !== ""
+                ? { province: e.Province, cases: e.Cases }
+                : {};
             })}
             maxBarSize={20}
             layout={"vertical"}
