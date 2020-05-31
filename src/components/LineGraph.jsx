@@ -1,19 +1,5 @@
 import React, { Component } from "react";
 import { VictoryChart, VictoryTheme, VictoryLine, VictoryAxis } from "victory";
-// const cartesianInterpolations = [
-//   "basis",
-//   "bundle",
-//   "cardinal",
-//   "catmullRom",
-//   "linear",
-//   "monotoneX",
-//   "monotoneY",
-//   "natural",
-//   "step",
-//   "stepAfter",
-//   "stepBefore",
-// ];
-// const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];\
 
 class LineGraph extends Component {
   render() {

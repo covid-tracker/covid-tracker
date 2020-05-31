@@ -175,8 +175,8 @@ class App extends Component {
       (e) => {
         return e.Province === provinceInfoForLineGraph
           ? {
-              pv: e.Cases,
-              name: e.Date,
+              cases: e.Cases,
+              date: e.Date,
             }
           : null;
       }
@@ -193,7 +193,7 @@ class App extends Component {
 
   coordinateValues() {
     let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
-      let data = { name: e.Date, pv: e.Cases };
+      let data = { date: e.Date, cases: e.Cases };
       return data;
     });
     this.setState({
@@ -203,7 +203,7 @@ class App extends Component {
 
   render() {
     return (
-      <body>
+      <motion.div animate={{ scale: 2 }} transition={{ duration: 200 }}>
         <main className="section">
           <motion.div
             intial={{
@@ -239,20 +239,12 @@ class App extends Component {
                   lineGraphFinalFunction={this.state.handOffToLineGraph}
                 />
               </div>
-              {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
-              {/* <Table
-                className="column"
-                // dateEven={this.dateFunction()}
-                tableInfo={this.state.canadianSummary}
-                provinceNames={this.state.historicalProvinceDataForGraph}
-                clickEventForGraph={this.provinceGraph}
-              /> */}
             </section>
             <Footer />
             {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
           </motion.div>
         </main>
-      </body>
+      </motion.div>
     );
   }
 }
