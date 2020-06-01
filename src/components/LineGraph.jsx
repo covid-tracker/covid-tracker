@@ -1,75 +1,37 @@
 import React, { Component } from "react";
-import { VictoryChart, VictoryTheme, VictoryLine, VictoryAxis } from "victory";
-// const cartesianInterpolations = [
-//   "basis",
-//   "bundle",
-//   "cardinal",
-//   "catmullRom",
-//   "linear",
-//   "monotoneX",
-//   "monotoneY",
-//   "natural",
-//   "step",
-//   "stepAfter",
-//   "stepBefore",
-// ];
-// const polarInterpolations = ["basis", "cardinal", "catmullRom", "linear"];\
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
 
 class LineGraph extends Component {
   render() {
-    // console.log(this.props.lineGraphFinalFunction);
+    const { lineGraphFinalFunction } = this.props;
     return (
       <div className="customBox shadowTwo">
-        <VictoryChart
-          className="image"
-          height={500}
-          width={600}
-          animate={{ duration: 0, easing: "exp" }}
-          style={{
-            ticks: { stroke: "grey", size: 5 },
-            tickLabels: { fill: "white", fontSize: 20 },
-          }}
+        <LineChart
+          width={400}
+          height={480}
+          data={lineGraphFinalFunction}
+          margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
         >
-          {/* <VictoryAxis
-            // scale="time"
-            // standalone={false}
-            // style={styles.axisYears}
-            // tickValues={tickValues}
-            tickFormat={(x) => {
-              if (x.getFullYear() === 2000) {
-                return x.getFullYear();
-              }
-              if (x.getFullYear() % 10 === 0) {
-                return x.getFullYear().toString().slice(2);
-              }
-            }}
-          /> */}
-          <VictoryLine
-            interpolation={this.props.graphStyle.interpolation}
-            style={{
-              tickLabels: { fill: "white", fontSize: 20 },
-              data: {
-                stroke: "#4F7CFF",
-                strokeWidth: 7,
-                strokeLinecap: "round",
-              },
-              // labels: { fontSize: 15, fill: "#111", padding: 5 },
-            }}
-            data={this.props.lineGraphFinalFunction}
-            theme={VictoryTheme.material}
-            // labels={({ datum }) => datum.y}
-            animate={{
-              onExit: {
-                duration: 100,
-                before: () => ({
-                  _y: 0,
-                  fill: "orange",
-                  label: "BYE",
-                }),
-              },
-            }}
+          <CartesianGrid strokeDasharray="1 1" />
+          <XAxis dataKey="date" stroke="#f35163" />
+          <YAxis stroke="#f35163" />
+          <Tooltip />
+          <Line
+            dot={false}
+            animationDuration={3000}
+            type="monotone"
+            dataKey="cases"
+            stroke="#4f7cff"
+            strokeWidth="6"
           />
-        </VictoryChart>
+        </LineChart>
       </div>
     );
   }

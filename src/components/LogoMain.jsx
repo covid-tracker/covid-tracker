@@ -6,9 +6,9 @@ class LogoMain extends Component {
       <section className="customBox shadowTwo">
         <div style={{ textAlign: "center" }}>
           <h1 className="title" style={{ textAlign: "center" }}>
-            COVID Tracker
+            Canada COVID-19 Tracker
           </h1>
-          <p className="subtitle">Counting Down to the End Days</p>
+          <p className="subtitle">Provincial Case Numbers</p>
         </div>
       </section>
     );
