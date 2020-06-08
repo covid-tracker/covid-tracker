@@ -84,8 +84,8 @@ class LineGraph2 extends Component {
         </VictoryChart> */}
 
         <LineChart
-          width={730}
-          height={250}
+          width={400}
+          height={460}
           data={this.props.lineGraphFinalFunction}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         >
