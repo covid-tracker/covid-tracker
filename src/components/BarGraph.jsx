@@ -25,7 +25,7 @@ class BarGraph extends Component {
     //   // Captures the chart element you click
     //   // Contained in that is the attributes for province and cases at some depth in the object
     // } else {
-    const province = obj.activePayload[0].payload.province;
+    const province = obj.activePayload[0].payload.Province;
     // const caseCount = obj.activePayload[0].payload.cases;
     // alert(`You select ${province}, which has ${caseCount} cases`);
     this.setState({
@@ -45,7 +45,7 @@ class BarGraph extends Component {
           <BarChart
             data={barChartInfo.map((e) => {
               return e.Province !== ""
-                ? { province: e.Province, cases: e.Cases }
+                ? { Province: e.Province, Cases: e.Cases }
                 : {};
             })}
             maxBarSize={20}
@@ -58,12 +58,12 @@ class BarGraph extends Component {
             <YAxis
               type={"category"}
               orientation={"left"}
-              dataKey={"province"}
+              dataKey={"Province"}
               stroke="#f35163"
             />
             <Tooltip onClick={() => lineGraphHandler(dataForLineGraph)} />
             <Bar
-              dataKey="cases"
+              dataKey="Cases"
               fill="#4f7cff"
               barSize={30}
               radius={2}

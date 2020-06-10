@@ -20,14 +20,14 @@ class LineGraph extends Component {
           margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="1 1" />
-          <XAxis dataKey="date" stroke="#f35163" />
+          <XAxis dataKey="Date" stroke="#f35163" />
           <YAxis stroke="#f35163" />
           <Tooltip />
           <Line
             dot={false}
             animationDuration={3000}
             type="monotone"
-            dataKey="cases"
+            dataKey="Cases"
             stroke="#4f7cff"
             strokeWidth="6"
           />
