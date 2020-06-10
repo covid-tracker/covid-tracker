@@ -46,7 +46,7 @@ class BarGraph extends Component {
             data={barChartInfo.map((e) => {
               return e.Province !== ""
                 ? { Province: e.Province, Cases: e.Cases }
-                : {};
+                : null;
             })}
             maxBarSize={20}
             layout={"vertical"}
