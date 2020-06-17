@@ -7,6 +7,7 @@ const style = {
   cursor: "pointer",
   background: "#111",
   borderRadius: "50px",
+  fontSize: 15,
 };
 
 class Map extends Component {
@@ -44,12 +45,14 @@ class Map extends Component {
                 // anchor="top"
                 // dynamicPosition={false}
               >
-                <div style={style}>{province.Cases}</div>
+                <div style={style}>
+                  {/* {province.Cases !== "" ? province.Cases : null} */}
+                  {province.Cases}
+                </div>
               </Marker>
             );
           })}
         </ReactMapGL>
-        {/* </div> */}
       </div>
     );
   }

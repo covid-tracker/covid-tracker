@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -27,24 +26,24 @@ class BarGraph extends Component {
     //   // Contained in that is the attributes for province and cases at some depth in the object
     // } else {
     const province = obj.activePayload[0].payload.province;
-    const caseCount = obj.activePayload[0].payload.cases;
-    alert(`You select ${province}, which has ${caseCount} cases`);
+    // const caseCount = obj.activePayload[0].payload.cases;
+    // alert(`You select ${province}, which has ${caseCount} cases`);
     this.setState({
       dataForLineGraph: province,
       // init: 1,
     });
-    // console.log(this.state.dataForLineGraph);
     // You have the data you need now to use React Hooks to stoare this as global state that your Victory Chart can read from
     // }
   };
 
   render() {
-    console.log(this.props.barChartInfo);
+    const { dataForLineGraph } = this.state;
+    const { lineGraphHandler, barChartInfo } = this.props;
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
         <ResponsiveContainer>
           <BarChart
-            data={this.props.barChartInfo.map((e) => {
+            data={barChartInfo.map((e) => {
               return e.Province !== ""
                 ? { province: e.Province, cases: e.Cases }
                 : {};
@@ -54,7 +53,6 @@ class BarGraph extends Component {
             style={{ paddingBottom: 20 }}
             onClick={this._onBarClick}
           >
-            {/* <Legend /> */}
             <CartesianGrid strokeDasharray="1 1" />
             <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />
             <YAxis
@@ -63,21 +61,13 @@ class BarGraph extends Component {
               dataKey={"province"}
               stroke="#f35163"
             />
-            <Tooltip
-              // wrapperStyle={{ borderRadius: 20 }}
-              // cursor={{ fill: "#ffffff", stroke: "#f35163" }}
-              onClick={() =>
-                this.props.lineGraphHandler(this.state.dataForLineGraph)
-              }
-            />
+            <Tooltip onClick={() => lineGraphHandler(dataForLineGraph)} />
             <Bar
               dataKey="cases"
               fill="#4f7cff"
               barSize={30}
               radius={2}
-              onClick={() =>
-                this.props.lineGraphHandler(this.state.dataForLineGraph)
-              }
+              onClick={() => lineGraphHandler(dataForLineGraph)}
             />
           </BarChart>
         </ResponsiveContainer>

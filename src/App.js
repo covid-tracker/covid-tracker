@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import axios from "axios";
-import LineGraph from "./components/LineGraph";
-import LineGraph2 from "./components/LineGraph2";
-import Map from "./components/Map";
-// import Table from "./components/Table";
 import Widget from "./components/Widget";
-import BarGraph from "./components/BarGraph";
 import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
-// import { MetroSpinner } from "react-spinners-kit";
+
+// Rechart Graphs
+import LineGraph from "./components/LineGraph";
+import BarGraph from "./components/BarGraph";
+
+// MapBox
+import Map from "./components/Map";
+
+// Framer Motion for animations
 import { motion } from "framer-motion";
 
+// URLs
 const provinceDataURL =
   "https://api.covid19api.com/country/canada/status/confirmed/live";
 const summaryDataURL = "https://api.covid19api.com/summary";
@@ -19,11 +23,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-05-29T00:00:00Z",
-      toDate: "2020-05-29T01:00:00Z",
+      fromDate: "2020-05-30T00:00:00Z",
+      toDate: "2020-05-30T01:00:00Z",
       fromDateAll: "",
       toDateAll: "",
-      // loading: false,
       canadianSummaryLineGraph: [],
       canadianSummaryAll: [],
       canadianSummaryBarGraph: [],
@@ -66,34 +69,40 @@ class App extends Component {
   // }
 
   async componentDidMount() {
+    const { fromDate, toDate, fromDateAll, toDateAll } = this.state;
+
     const { data: canadianSummaryLineGraph } = await axios({
-      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
+      url: provinceDataURL,
       method: `GET`,
     });
+
     const { data: canadianSummaryAll } = await axios({
-      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
+      url: provinceDataURL,
       method: `GET`,
       params: {
-        from: this.state.fromDate,
-        to: this.state.toDate,
+        from: fromDate,
+        to: toDate,
       },
     });
+
     const { data: canadianSummaryBarGraph } = await axios({
-      url: `https://api.covid19api.com/country/canada/status/confirmed/live`,
+      url: provinceDataURL,
       method: `GET`,
       params: {
-        from: this.state.fromDate,
-        to: this.state.toDate,
+        from: fromDate,
+        to: toDate,
       },
     });
+
     const { data: canadianSummaryCanada } = await axios({
-      url: `https://api.covid19api.com/summary`,
+      url: summaryDataURL,
       method: `GET`,
       params: {
-        from: this.state.fromDateAll,
-        to: this.state.toDateAll,
+        from: fromDateAll,
+        to: toDateAll,
       },
     });
+
     this.setState({
       canadianSummaryBarGraph,
       canadianSummaryLineGraph,
@@ -170,13 +179,12 @@ class App extends Component {
   };
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
-    let fullProvinceTimeline;
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
       (e) => {
         return e.Province === provinceInfoForLineGraph
           ? {
-              pv: e.Cases,
-              name: e.Date,
+              cases: e.Cases,
+              date: e.Date,
             }
           : null;
       }
@@ -193,7 +201,7 @@ class App extends Component {
 
   coordinateValues() {
     let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
-      let data = { name: e.Date, pv: e.Cases };
+      let data = { date: e.Date, cases: e.Cases };
       return data;
     });
     this.setState({
@@ -202,8 +210,15 @@ class App extends Component {
   }
 
   render() {
+    const {
+      canadianSummaryBarGraph,
+      canadianSummaryAll,
+      canadianSummaryCanada,
+      graphComponentData,
+      handOffToLineGraph,
+    } = this.state;
     return (
-      <body>
+      <motion.div>
         <main className="section">
           <motion.div
             intial={{
@@ -219,40 +234,33 @@ class App extends Component {
             <section className="columns">
               <div className="column is-3">
                 <BarGraph
-                  barChartInfo={this.state.canadianSummaryBarGraph}
+                  barChartInfo={canadianSummaryBarGraph}
                   lineGraphHandler={this.functionForLineGraph}
                 />
               </div>
               <div className="column is-5">
                 <LogoMain />
-                <Map markerData={this.state.canadianSummaryAll} />
+                <motion.div whileHover={{ scale: 1.3, y: "-20px" }}>
+                  <Map markerData={canadianSummaryAll} />
+                </motion.div>
               </div>
               <div className="column is-4">
-                <Widget widgetData={this.state.canadianSummaryCanada} />
-                {/* <LineGraph
-                  graphStyle={this.state.graphComponentData}
-                  lineGraphFinalFunction={this.state.handOffToLineGraph}
-                  // provinceNames={this.state.fullProvinceTimeline}
-                /> */}
-                <LineGraph2
-                  graphStyle={this.state.graphComponentData}
-                  lineGraphFinalFunction={this.state.handOffToLineGraph}
-                />
+                <Widget widgetData={canadianSummaryCanada} />
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+                >
+                  <LineGraph
+                    graphStyle={graphComponentData}
+                    lineGraphFinalFunction={handOffToLineGraph}
+                  />
+                </motion.div>
               </div>
-              {/* <BarChart barChartInfo={canadianSummary} className="column" /> */}
-              {/* <Table
-                className="column"
-                // dateEven={this.dateFunction()}
-                tableInfo={this.state.canadianSummary}
-                provinceNames={this.state.historicalProvinceDataForGraph}
-                clickEventForGraph={this.provinceGraph}
-              /> */}
             </section>
             <Footer />
-            {/* <MetroSpinner size={70} color="#686769" loading={loading} /> */}
           </motion.div>
         </main>
-      </body>
+      </motion.div>
     );
   }
 }
