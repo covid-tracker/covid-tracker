@@ -18,7 +18,7 @@ class Widget extends Component {
             className="column widBox widgetOne shadowThree"
           >
             <h3>CASES</h3>
-            <h2>{TotalConfirmed - 91680}</h2>
+            <h2>{TotalConfirmed}</h2>
           </motion.div>
 
           <motion.div

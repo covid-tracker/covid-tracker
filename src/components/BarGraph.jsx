@@ -14,26 +14,39 @@ class BarGraph extends Component {
     super();
     this.state = {
       dataForLineGraph: null,
-      // isLoaded: false,
     };
   }
 
   _onBarClick = (obj, $event) => {
     // if (!obj || !$event != null) {
     //   return false;
-    // console.log(`Failed`);
+    //   console.log(`Failed`);
     //   // Captures the chart element you click
     //   // Contained in that is the attributes for province and cases at some depth in the object
     // } else {
-    const province = obj.activePayload[0].payload.province;
+
+    let province = obj.activePayload[0].payload.Province;
+
+    // let Cases = obj.activePayload[0].payload.Cases;
+
+    // console.log(province)
+
+    // // if (obj && obj.activePayload && obj.activePayload.length <= 0) {
+    // //   return province.push(obj.activePayload[0].payload.Cases);
+    // // }
+
+    // console.log(Cases)
+
     // const caseCount = obj.activePayload[0].payload.cases;
     // alert(`You select ${province}, which has ${caseCount} cases`);
+
     this.setState({
       dataForLineGraph: province,
       // init: 1,
     });
-    // You have the data you need now to use React Hooks to stoare this as global state that your Victory Chart can read from
+    // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
     // }
+    // console.log(this.state.dataForLineGraph)
   };
 
   render() {
@@ -41,12 +54,13 @@ class BarGraph extends Component {
     const { lineGraphHandler, barChartInfo } = this.props;
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
+        <p className="barGra">Double click Province</p>
         <ResponsiveContainer>
           <BarChart
             data={barChartInfo.map((e) => {
               return e.Province !== ""
-                ? { province: e.Province, cases: e.Cases }
-                : {};
+                ? { Province: e.Province, Cases: e.Cases }
+                : null;
             })}
             maxBarSize={20}
             layout={"vertical"}
@@ -58,12 +72,12 @@ class BarGraph extends Component {
             <YAxis
               type={"category"}
               orientation={"left"}
-              dataKey={"province"}
+              dataKey={"Province"}
               stroke="#f35163"
             />
             <Tooltip onClick={() => lineGraphHandler(dataForLineGraph)} />
             <Bar
-              dataKey="cases"
+              dataKey="Cases"
               fill="#4f7cff"
               barSize={30}
               radius={2}

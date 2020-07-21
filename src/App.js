@@ -3,16 +3,11 @@ import axios from "axios";
 import Widget from "./components/Widget";
 import LogoMain from "./components/LogoMain";
 import Footer from "./components/Footer";
-
-// Rechart Graphs
-import LineGraph from "./components/LineGraph";
-import BarGraph from "./components/BarGraph";
-
-// MapBox
-import Map from "./components/Map";
-
-// Framer Motion for animations
-import { motion } from "framer-motion";
+import LineGraph from "./components/LineGraph"; // Rechart Graphs
+import BarGraph from "./components/BarGraph"; // Rechart Graphs
+import Map from "./components/Map"; // MapBox
+import Loader from 'react-loader-spinner'
+import { motion } from "framer-motion"; //Framer motion for animations
 
 // URLs
 const provinceDataURL =
@@ -23,8 +18,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-05-30T00:00:00Z",
-      toDate: "2020-05-30T01:00:00Z",
+      fromDate: "2020-04-10T00:00:00Z",
+      toDate: "2020-04-10T01:00:00Z",
       fromDateAll: "",
       toDateAll: "",
       canadianSummaryLineGraph: [],
@@ -35,6 +30,8 @@ class App extends Component {
       historicalProvinceDataForGraph: [],
       handOffToLineGraph: [],
       filteredEmptyString: [],
+      finalArray: [],
+      loading: true,
       graphComponentData: {
         interpolation: "natural",
         polar: false,
@@ -70,7 +67,6 @@ class App extends Component {
 
   async componentDidMount() {
     const { fromDate, toDate, fromDateAll, toDateAll } = this.state;
-
     const { data: canadianSummaryLineGraph } = await axios({
       url: provinceDataURL,
       method: `GET`,
@@ -108,31 +104,10 @@ class App extends Component {
       canadianSummaryLineGraph,
       canadianSummaryAll,
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
+      loading: false,
     });
-  }
-
-  // filteredEmptyString = () => {
-  //   let rawBarData = this.state.canadianSummaryBarGraph.filter((Boolean) => {
-  //     return {
-  //       province: Boolean.Province,
-  //     };
-  //   });
-  //   this.setState({
-  //     filteredEmptyString: rawBarData,
-  //   });
-  // };
-
-  provinceData = () => {
-    let provinceInfo = this.state.canadianSummary.map((provinceName) => {
-      return {
-        province: provinceName.Province,
-        cases: provinceName.Cases,
-        date: provinceName.Date,
-      };
-    });
-    this.setState({
-      provinceData: provinceInfo,
-    });
+    console.log(this.state.canadianSummaryAll)
+    console.log(this.state.canadianSummaryAll.slice(1));
   };
 
   // dateFunction = () => {
@@ -153,11 +128,11 @@ class App extends Component {
   provinceGraph = (singleProvince) => {
     let provinceHistoricalData = this.state.canadianSummaryAll.filter(
       (provinceName) => {
-        if (provinceName.Province === singleProvince.Province) {
-          return {
+        return provinceName.Province === singleProvince.Province
+          ? {
             finalizedCases: provinceName,
-          };
-        }
+          }
+          : null;
       }
     );
     this.setState({
@@ -168,9 +143,9 @@ class App extends Component {
   provinceData = () => {
     let provinceInfo = this.state.canadianSummary.map((provinceName) => {
       return {
-        province: provinceName.Province,
-        cases: provinceName.Cases,
-        date: provinceName.Date,
+        Province: provinceName.Province,
+        Cases: provinceName.Cases,
+        Date: provinceName.Date,
       };
     });
     this.setState({
@@ -183,12 +158,13 @@ class App extends Component {
       (e) => {
         return e.Province === provinceInfoForLineGraph
           ? {
-              cases: e.Cases,
-              date: e.Date,
-            }
+            Cases: e.Cases,
+            Date: e.Date,
+          }
           : null;
       }
     );
+
     this.setState(
       {
         fullProvinceTimeline: filteredSpecificProvince,
@@ -201,13 +177,14 @@ class App extends Component {
 
   coordinateValues() {
     let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
-      let data = { date: e.Date, cases: e.Cases };
+      let data = { Date: e.Date, Cases: e.Cases };
       return data;
     });
     this.setState({
       handOffToLineGraph: lineGraphArray,
     });
   }
+
 
   render() {
     const {
@@ -217,8 +194,18 @@ class App extends Component {
       graphComponentData,
       handOffToLineGraph,
     } = this.state;
+    if (this.state.loading) {
+      return <div class="loadScreen"><Loader
+        type="MutatingDots"
+        color="#4f7cff"
+        secondaryColor="#f35163"
+        height={100}
+        width={100}
+      // timeout={4000} //3 secs
+      /></div>;
+    }
     return (
-      <motion.div>
+      < motion.div >
         <main className="section">
           <motion.div
             intial={{
@@ -260,7 +247,7 @@ class App extends Component {
             <Footer />
           </motion.div>
         </main>
-      </motion.div>
+      </motion.div >
     );
   }
 }
