@@ -7,7 +7,6 @@ $redAccent: #f35163;
 $size-1: 3rem;
 
 // Main //
-// Font for main header
 @import "node_modules/bulmaswatch/minty/bulmaswatch";
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
 html {
@@ -17,6 +16,10 @@ html {
 h2 {
   color: #ffffff;
   font-size: $size-1;
+}
+
+p {
+  font-size: 10rem;
 }
 
 .section {
@@ -47,8 +50,18 @@ h2 {
 }
 
 $content-heading-color: #575a86;
-
 // Main End //
+
+// Loader //
+.loadScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #000;
+}
+// Loader End //
 
 // Box classes //
 .customBox {
@@ -80,27 +93,14 @@ $content-heading-color: #575a86;
 
 $box-radius: 25px;
 $box-background-color: #2e335a;
-
 // Box classes end //
 
 // table Start //
-
 $table-cell-heading-color: #ffffff;
 $table-color: #ffffff;
 $table-background-color: #2d345b;
 $table-cell-border: 1px solid $blueAccent;
-
 // Table End //
-
-// Map Start //
-
-// .map-wrapper {
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-// }
-
-// Map End //
 
 // BarGraph Start
 .recharts-surface {
@@ -115,10 +115,18 @@ $table-cell-border: 1px solid $blueAccent;
 svg > g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
   transform: translate(0.001rem, 0);
 }
+
+.barGra {
+  color: white;
+  font-size: 20px;
+  margin-top: 3px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
 // BarGraph End
 
 // Widget Start //
-
 .widBox {
   border-radius: 25px;
   color: #2e335a;
@@ -142,9 +150,9 @@ svg > g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
 li {
   margin: 1rem;
 }
-
 // Widget End //
 
+// Charts Start //
 BarChart {
   margin: 0 auto;
 }
@@ -156,14 +164,16 @@ BarChart {
 svg > g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
   transform: translate(0.001rem, 0);
 }
+// Charts End
 
 // Footer Start //
-
 .footer {
   background-color: #2e335a;
   border-radius: 25px;
   padding: 1rem 1rem 1rem;
 }
+// Footer Ends //
+
 // Styling here to override bulma settings
 h2 {
   font-size: 1.8rem;
@@ -180,6 +190,7 @@ body {
   height: 95vh;
 }
 
-// .VictoryContainer g tspan {
-//   fill: red;
-// }
+p {
+  font-size: 10rem;
+}
+// Bulma override end //
