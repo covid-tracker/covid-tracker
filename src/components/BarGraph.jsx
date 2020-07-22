@@ -44,6 +44,7 @@ class BarGraph extends Component {
       provinceCaseNumber: cases,
     });
 
+
     // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
     // }
     console.log(this.state.provinceCaseNumber);
@@ -59,7 +60,7 @@ class BarGraph extends Component {
         <p className="barGra">Double click Province</p>
         <ResponsiveContainer>
           <BarChart
-            data={barChartInfo.map((e) => {
+            data={this.props.barChartInfo.map((e) => {
               return e.Province !== ""
                 ? { Province: e.Province, Cases: e.Cases }
                 : null;
@@ -77,13 +78,16 @@ class BarGraph extends Component {
               dataKey={"Province"}
               stroke="#f35163"
             />
+
             <Tooltip />
             <Bar
               dataKey="Cases"
               fill="#4f7cff"
               barSize={37}
               radius={2}
-              onClick={() => lineGraphHandler(dataForLineGraph)}
+              onClick={() => {
+                this.props.lineGraphHandler(this.state.dataForLineGraph);
+              }}
             />
           </BarChart>
         </ResponsiveContainer>
@@ -91,4 +95,5 @@ class BarGraph extends Component {
     );
   }
 }
+
 export default BarGraph;
