@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import {
   BarChart,
   Bar,
@@ -25,28 +26,34 @@ class BarGraph extends Component {
     //   // Captures the chart element you click
     //   // Contained in that is the attributes for province and cases at some depth in the object
     // } else {
+
     let cases = obj.activePayload[0].payload.Cases;
     let province = obj.activePayload[0].payload.Province;
+
     console.log(province);
     console.log(cases);
+
     // if (obj && obj.activePayload && obj.activePayload.length <= 0) {
     //   return province.push(obj.activePayload[0].payload.Cases);
     // }
+
+    alert(`You select ${province}, which has ${cases} cases`);
+
     this.setState({
       dataForLineGraph: province,
       provinceCaseNumber: cases,
     });
-    alert(`You select ${province}, which has ${cases} cases`);
+
+
     // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
     // }
-    // console.log(this.state.dataForLineGraph);
     console.log(this.state.provinceCaseNumber);
-    console.log(this.state.dataForLineGraph);
+    console.log(this.state.dataForLineGraph)
   };
 
   render() {
-    // const { dataForLineGraph } = this.state;
-    // const { lineGraphHandler, barChartInfo } = this.props;
+    const { dataForLineGraph } = this.state;
+    const { lineGraphHandler, barChartInfo } = this.props;
 
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
@@ -71,16 +78,12 @@ class BarGraph extends Component {
               dataKey={"Province"}
               stroke="#f35163"
             />
-            <Tooltip
-              onClick={() => {
-                this.props.lineGraphHandler(this.state.dataForLineGraph);
-              }}
-              // onClick={this._onBarClick}
-            />
+
+            <Tooltip />
             <Bar
               dataKey="Cases"
               fill="#4f7cff"
-              barSize={30}
+              barSize={37}
               radius={2}
               onClick={() => {
                 this.props.lineGraphHandler(this.state.dataForLineGraph);
@@ -92,4 +95,5 @@ class BarGraph extends Component {
     );
   }
 }
+
 export default BarGraph;

@@ -104,7 +104,7 @@ class App extends Component {
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
-
+    
     console.log(typeof this.state.fromDate);
     console.log(typeof this.state.toDate);
     // console.log(this.state.canadianSummaryAll);
@@ -153,6 +153,7 @@ class App extends Component {
       provinceData: provinceInfo,
     });
   };
+
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
