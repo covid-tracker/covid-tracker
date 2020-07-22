@@ -18,8 +18,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "2020-04-10T00:00:00Z",
-      toDate: "2020-04-10T01:00:00Z",
+      fromDate: "2020-07-19T00:00:00Z",
+      toDate: "2020-07-19T01:00:00Z",
       fromDateAll: "",
       toDateAll: "",
       canadianSummaryLineGraph: [],
@@ -100,14 +100,12 @@ class App extends Component {
     });
 
     this.setState({
-      canadianSummaryBarGraph,
+      canadianSummaryBarGraph: canadianSummaryBarGraph.slice(1),
       canadianSummaryLineGraph,
       canadianSummaryAll,
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
-    console.log(this.state.canadianSummaryAll)
-    console.log(this.state.canadianSummaryAll.slice(1));
   };
 
   // dateFunction = () => {
@@ -152,6 +150,7 @@ class App extends Component {
       provinceData: provinceInfo,
     });
   };
+
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
