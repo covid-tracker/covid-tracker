@@ -39,14 +39,8 @@ class Map extends Component {
               <Marker
                 latitude={parseFloat(province.Lat)}
                 longitude={parseFloat(province.Lon)}
-                // closeButton={true}
-                // closeOnClick={false}
-                // onClose={() => this.setState({ showPopup: false })}
-                // anchor="top"
-                // dynamicPosition={false}
               >
                 <div style={style}>
-                  {/* {province.Cases !== "" ? province.Cases : null} */}
                   {province.Cases}
                 </div>
               </Marker>
