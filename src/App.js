@@ -18,10 +18,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: "",
-      toDate: "",
-      fromDateAll: "",
-      toDateAll: "",
       canadianSummaryLineGraph: [],
       canadianSummaryAll: [],
       canadianSummaryBarGraph: [],
@@ -45,27 +41,19 @@ class App extends Component {
 
   // componentWillMount() {}
   async componentDidMount() {
-    let fromDateNew = new Date();
-    fromDateNew.setHours(-28, 0, 0, 0);
-    fromDateNew = fromDateNew.toISOString().split(".")[0] + "Z";
-    let toDateNew = new Date();
-    toDateNew.setHours(-10, 0, 0, 0);
-    toDateNew = toDateNew.toISOString().split(".")[0] + "Z";
-    this.setState({
-      // canadianSummary: response.data,
-      fromDate: fromDateNew,
-      toDate: toDateNew,
-    });
-    // const response = await axios({
-    //   url: "https://api.covid19api.com/country/canada/status/confirmed/live",
-    //   method: "GET",
-    //   params: {
-    //     from: fromDateNew,
-    //     to: toDateNew,
-    //   },
-    // }).catch((err) => console.log(err, "An Error occured"));
+    // To generate today's date
+    let fromDate = new Date();
+    let toDate = new Date();
 
-    const { fromDate, toDate, fromDateAll, toDateAll } = this.state;
+    // Adjusting time to get yesterday's date
+    fromDate.setHours(-28, 0, 0, 0);
+    toDate.setHours(-10, 0, 0, 0);
+
+    // fromDate and toDate Range
+    fromDate = fromDate.toISOString().split(".")[0] + "Z";
+    toDate = toDate.toISOString().split(".")[0] + "Z";
+
+    // const { fromDateAll, toDateAll } = this.state;
     const { data: canadianSummaryLineGraph } = await axios({
       url: provinceDataURL,
       method: `GET`,
@@ -74,25 +62,21 @@ class App extends Component {
       url: provinceDataURL,
       method: `GET`,
       params: {
-        from: fromDateNew,
-        to: toDateNew,
+        from: fromDate,
+        to: toDate,
       },
     });
     const { data: canadianSummaryBarGraph } = await axios({
       url: provinceDataURL,
       method: `GET`,
       params: {
-        from: fromDateNew,
-        to: toDateNew,
+        from: fromDate,
+        to: toDate,
       },
     });
     const { data: canadianSummaryCanada } = await axios({
       url: summaryDataURL,
       method: `GET`,
-      params: {
-        from: fromDateAll,
-        to: toDateAll,
-      },
     });
     this.setState({
       canadianSummaryBarGraph: canadianSummaryBarGraph.slice(1),
