@@ -20,35 +20,12 @@ class BarGraph extends Component {
   }
 
   _onBarClick = (obj, $event) => {
-    // if (!obj || !$event != null) {
-    //   return false;
-    //   console.log(`Failed`);
-    //   // Captures the chart element you click
-    //   // Contained in that is the attributes for province and cases at some depth in the object
-    // } else {
-
-    let cases = obj.activePayload[0].payload.Cases;
     let province = obj.activePayload[0].payload.Province;
+    alert(`You select ${province}`);
 
-    console.log(province);
-    console.log(cases);
-
-    // if (obj && obj.activePayload && obj.activePayload.length <= 0) {
-    //   return province.push(obj.activePayload[0].payload.Cases);
-    // }
-
-    alert(`You select ${province}, which has ${cases} cases`);
-
-    this.setState({
-      dataForLineGraph: province,
-      provinceCaseNumber: cases,
+    this.setState({ dataForLineGraph: province }, () => {
+      this.props.lineGraphHandler(this.state.dataForLineGraph);
     });
-
-
-    // You have the data you need now to use React Hooks to store this as global state that your Victory Chart can read from
-    // }
-    console.log(this.state.provinceCaseNumber);
-    console.log(this.state.dataForLineGraph)
   };
 
   render() {
@@ -85,9 +62,9 @@ class BarGraph extends Component {
               fill="#4f7cff"
               barSize={37}
               radius={2}
-              onClick={() => {
-                this.props.lineGraphHandler(this.state.dataForLineGraph);
-              }}
+              // onClick={() => {
+              //   this.props.lineGraphHandler(this.state.dataForLineGraph);
+              // }}
             />
           </BarChart>
         </ResponsiveContainer>
