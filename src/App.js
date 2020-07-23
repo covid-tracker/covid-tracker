@@ -25,8 +25,6 @@ class App extends Component {
       provinceData: [],
       historicalProvinceDataForGraph: [],
       handOffToLineGraph: [],
-      filteredEmptyString: [],
-      finalArray: [],
       loading: true,
       graphComponentData: {
         interpolation: "natural",
@@ -34,12 +32,10 @@ class App extends Component {
       },
       lineGraphData: "",
       fullProvinceTimeline: "",
-      // init:0,
     };
     this.coordinateValues = this.coordinateValues.bind(this);
   }
 
-  // componentWillMount() {}
   async componentDidMount() {
     // To generate today's date
     let fromDate = new Date();
@@ -58,6 +54,7 @@ class App extends Component {
       url: provinceDataURL,
       method: `GET`,
     });
+
     const { data: canadianSummaryAll } = await axios({
       url: provinceDataURL,
       method: `GET`,
@@ -66,6 +63,7 @@ class App extends Component {
         to: toDate,
       },
     });
+
     const { data: canadianSummaryBarGraph } = await axios({
       url: provinceDataURL,
       method: `GET`,
@@ -74,10 +72,12 @@ class App extends Component {
         to: toDate,
       },
     });
+
     const { data: canadianSummaryCanada } = await axios({
       url: summaryDataURL,
       method: `GET`,
     });
+
     this.setState({
       canadianSummaryBarGraph: canadianSummaryBarGraph.slice(1),
       canadianSummaryLineGraph,
@@ -85,35 +85,15 @@ class App extends Component {
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
-
-    console.log(this.state.fromDate);
-    console.log(this.state.toDate);
-    // console.log(this.state.canadianSummaryAll);
-    // console.log(this.state.canadianSummaryAll.slice(1));
   }
-  // dateFunction = () => {
-  //   let date = new Date();
-  //   date.setDate(date.getDate() - 1);
-  //   date.setHours(-4);
-  //   date.setMinutes(0);
-  //   date.setSeconds(0);
-  //   let yesterdayString = date.toISOString().split(".")[0] + "Z";
-  //   date.setHours(0);
-  //   let yesterdayStringTime = date.toISOString().split(".")[0] + "Z";
-  //   this.setState({
-  //     fromDate: yesterdayString,
-  //     toDate: yesterdayStringTime,
-  //   });
-  //   console.log(this.state.fromDate);
-  // };
 
   provinceGraph = (singleProvince) => {
     let provinceHistoricalData = this.state.canadianSummaryAll.filter(
       (provinceName) => {
         return provinceName.Province === singleProvince.Province
           ? {
-              finalizedCases: provinceName,
-            }
+            finalizedCases: provinceName,
+          }
           : null;
       }
     );
@@ -140,9 +120,9 @@ class App extends Component {
       (e) => {
         return e.Province === provinceInfoForLineGraph
           ? {
-              Cases: e.Cases,
-              Date: e.Date,
-            }
+            Cases: e.Cases,
+            Date: e.Date,
+          }
           : null;
       }
     );
@@ -178,7 +158,6 @@ class App extends Component {
             secondaryColor="#f35163"
             height={100}
             width={100}
-            // timeout={4000} //3 secs
           />
         </div>
       );
