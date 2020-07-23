@@ -18,8 +18,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      fromDate: null,
-      toDate: null,
+      fromDate: "",
+      toDate: "",
       fromDateAll: "",
       toDateAll: "",
       canadianSummaryLineGraph: [],
@@ -42,17 +42,14 @@ class App extends Component {
     };
     this.coordinateValues = this.coordinateValues.bind(this);
   }
-  // async componentDidMount() {
 
-  // }
-
-  componentWillMount() {}
+  // componentWillMount() {}
   async componentDidMount() {
     let fromDateNew = new Date();
-    fromDateNew.setHours(-48, 0, 0, 0);
+    fromDateNew.setHours(-28, 0, 0, 0);
     fromDateNew = fromDateNew.toISOString().split(".")[0] + "Z";
     let toDateNew = new Date();
-    toDateNew.setHours(-47, 0, 0, 0);
+    toDateNew.setHours(-10, 0, 0, 0);
     toDateNew = toDateNew.toISOString().split(".")[0] + "Z";
     this.setState({
       // canadianSummary: response.data,
@@ -77,16 +74,16 @@ class App extends Component {
       url: provinceDataURL,
       method: `GET`,
       params: {
-        from: fromDate,
-        to: toDate,
+        from: fromDateNew,
+        to: toDateNew,
       },
     });
     const { data: canadianSummaryBarGraph } = await axios({
       url: provinceDataURL,
       method: `GET`,
       params: {
-        from: fromDate,
-        to: toDate,
+        from: fromDateNew,
+        to: toDateNew,
       },
     });
     const { data: canadianSummaryCanada } = await axios({
@@ -104,9 +101,9 @@ class App extends Component {
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
-    
-    console.log(typeof this.state.fromDate);
-    console.log(typeof this.state.toDate);
+
+    console.log(this.state.fromDate);
+    console.log(this.state.toDate);
     // console.log(this.state.canadianSummaryAll);
     // console.log(this.state.canadianSummaryAll.slice(1));
   }
@@ -153,7 +150,6 @@ class App extends Component {
       provinceData: provinceInfo,
     });
   };
-
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
