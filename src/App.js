@@ -7,7 +7,7 @@ import LineGraph from "./components/LineGraph"; // Rechart Graphs
 import BarGraph from "./components/BarGraph"; // Rechart Graphs
 import Map from "./components/Map"; // MapBox
 import Loader from "react-loader-spinner";
-// import { motion } from "framer-motion"; //Framer motion for animations
+import { motion } from "framer-motion"; //Framer motion for animations
 
 // URLs
 const provinceDataURL =
@@ -92,8 +92,8 @@ class App extends Component {
       (provinceName) => {
         return provinceName.Province === singleProvince.Province
           ? {
-            finalizedCases: provinceName,
-          }
+              finalizedCases: provinceName,
+            }
           : null;
       }
     );
@@ -120,9 +120,9 @@ class App extends Component {
       (e) => {
         return e.Province === provinceInfoForLineGraph
           ? {
-            Cases: e.Cases,
-            Date: e.Date,
-          }
+              Cases: e.Cases,
+              Date: e.Date,
+            }
           : null;
       }
     );
@@ -163,49 +163,37 @@ class App extends Component {
       );
     }
     return (
-      // <motion.div>
-      <main className="section">
-        {/* <motion.div
-            intial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            translate={{
-              duration: 5,
-            }}
-          > */}
-        <section className="columns">
-          <div className="column is-3">
-            <BarGraph
-              barChartInfo={canadianSummaryBarGraph}
-              lineGraphHandler={this.functionForLineGraph}
-            />
-          </div>
-          <div className="column is-5">
-            <LogoMain onClick={this.dateFunction} />
-            {/* <motion.div whileHover={{ scale: 1.3, y: "-20px" }}> */}
-            <Map markerData={canadianSummaryAll} />
-            {/* </motion.div> */}
-          </div>
-          <div className="column is-4">
-            <Widget widgetData={canadianSummaryCanada} />
-            {/* <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-                > */}
-            <LineGraph
-              graphStyle={graphComponentData}
-              lineGraphFinalFunction={handOffToLineGraph}
-            />
-            {/* </motion.div> */}
-          </div>
-        </section>
-        <Footer />
-        {/* </motion.div> */}
-      </main>
-      // </motion.div>
+      <motion.div>
+        <main className="section">
+          <section className="columns">
+            <div className="column is-3">
+              <BarGraph
+                barChartInfo={canadianSummaryBarGraph}
+                lineGraphHandler={this.functionForLineGraph}
+              />
+            </div>
+            <div className="column is-5">
+              <LogoMain onClick={this.dateFunction} />
+              <motion.div whileHover={{ scale: 1.3, y: "-20px" }}>
+                <Map markerData={canadianSummaryAll} />
+              </motion.div>
+            </div>
+            <div className="column is-4">
+              <Widget widgetData={canadianSummaryCanada} />
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
+              >
+                <LineGraph
+                  graphStyle={graphComponentData}
+                  lineGraphFinalFunction={handOffToLineGraph}
+                />
+              </motion.div>
+            </div>
+          </section>
+          <Footer />
+        </main>
+      </motion.div>
     );
   }
 }
