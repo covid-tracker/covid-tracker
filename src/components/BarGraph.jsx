@@ -15,14 +15,11 @@ class BarGraph extends Component {
     super();
     this.state = {
       dataForLineGraph: null,
-      provinceCaseNumber: null,
     };
   }
 
   _onBarClick = (obj) => {
     let province = obj.activePayload[0].payload.Province;
-    alert(`You select ${province}`);
-
     this.setState({ dataForLineGraph: province }, () => {
       this.props.lineGraphHandler(this.state.dataForLineGraph);
     });
@@ -30,10 +27,8 @@ class BarGraph extends Component {
 
   render() {
     const { barChartInfo } = this.props;
-
     return (
       <div className="customBox" style={{ width: "100%", height: 650 }}>
-        <p className="barGra">Double click Province</p>
         <ResponsiveContainer>
           <BarChart
             data={barChartInfo.map((e) => {
