@@ -2,7 +2,7 @@
   "name": "corona-track",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https: //covid-tracker.github.io/covid-tracker/",
+  "homepage": "https://covid-tracker.github.io/covid-tracker/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^10.4.7",
