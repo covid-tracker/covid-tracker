@@ -191,7 +191,7 @@ class App extends Component {
               </motion.div>
             </div>
           </section>
-          <Footer />
+          <Footer class="footerContainer" />
         </main>
       </motion.div>
     );
