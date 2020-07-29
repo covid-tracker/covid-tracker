@@ -92,8 +92,8 @@ class App extends Component {
       (provinceName) => {
         return provinceName.Province === singleProvince.Province
           ? {
-              finalizedCases: provinceName,
-            }
+            finalizedCases: provinceName,
+          }
           : null;
       }
     );
@@ -120,9 +120,9 @@ class App extends Component {
       (e) => {
         return e.Province === provinceInfoForLineGraph
           ? {
-              Cases: e.Cases,
-              Date: e.Date,
-            }
+            Cases: e.Cases,
+            Date: e.Date,
+          }
           : null;
       }
     );
@@ -174,7 +174,7 @@ class App extends Component {
             </div>
             <div className="column is-5">
               <LogoMain onClick={this.dateFunction} />
-              <motion.div whileHover={{ scale: 1.3, y: "-20px" }}>
+              <motion.div whileHover={{ scale: 1.2, y: "-20px" }}>
                 <Map markerData={canadianSummaryAll} />
               </motion.div>
             </div>
@@ -191,7 +191,7 @@ class App extends Component {
               </motion.div>
             </div>
           </section>
-          <Footer />
+          <Footer class="footerContainer" />
         </main>
       </motion.div>
     );
