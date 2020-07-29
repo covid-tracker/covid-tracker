@@ -2,16 +2,16 @@
   "name": "corona-track",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vipinkirthane.github.io/covid-tracker",
+  "homepage": "https://covid-tracker.github.io/covid-tracker/",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.1",
+    "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^10.4.7",
-    "@testing-library/user-event": "^12.0.12",
+    "@testing-library/user-event": "^12.0.17",
     "axios": "^0.19.2",
     "bulma": "^0.9.0",
     "bulmaswatch": "^0.8.1",
     "framer": "^1.2.5",
-    "framer-motion": "^2.1.2",
+    "framer-motion": "^2.3.0",
     "gh-pages": "^3.1.0",
     "mapbox-gl": "^1.11.1",
     "node-sass": "^4.14.1",
@@ -21,8 +21,7 @@
     "react-map-gl": "^5.2.7",
     "react-scripts": "3.4.1",
     "react-spinners-kit": "^1.9.1",
-    "recharts": "^1.8.5",
-    "victory": "^35.0.5"
+    "recharts": "^1.8.5"
   },
   "scripts": {
     "start": "react-scripts start",
