@@ -14,7 +14,7 @@ class LineGraph extends Component {
     return (
       <div className="customBox shadowTwo">
         <h3 style={{ textAlign: "center", color: "white", fontSize: 15 }}>
-          Province Name
+          Province Cases
         </h3>
         <LineChart
           width={400}
