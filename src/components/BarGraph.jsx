@@ -28,7 +28,7 @@ class BarGraph extends Component {
   render() {
     const { barChartInfo } = this.props;
     return (
-      <div className="customBox" style={{ width: "100%", height: 650 }}>
+      <div className="customBox" style={{ width: "100%", height: 730 }}>
         <ResponsiveContainer>
           <BarChart
             data={barChartInfo.map((e) => {
