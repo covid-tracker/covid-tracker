@@ -18,6 +18,9 @@ class Map extends Component {
       latitude: 62,
       longitude: -96.81,
       zoom: 2.30,
+      isDrabble: "false",
+      cluster: "true",
+      clusterRadius: 80,
     },
     showPopup: true,
   };
