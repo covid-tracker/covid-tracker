@@ -28,7 +28,7 @@ class BarGraph extends Component {
   render() {
     const { barChartInfo } = this.props;
     return (
-      <div className="customBox" style={{ width: "100%", height: 747 }}>
+      <div className="customBox" style={{ width: "100%", height: 740 }}>
         <h1 className="title" style={{ textAlign: "center" }}>
           Click Province Bar
           </h1>
