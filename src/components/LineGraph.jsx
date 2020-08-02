@@ -51,7 +51,7 @@ class LineGraph extends Component {
           <LineChart
             width={510}
             height={430}
-            data={lineGraphFinalFunction}
+            data={exampleData}
             margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
             style={{ margin: "0 auto" }}
           >
