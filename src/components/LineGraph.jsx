@@ -17,8 +17,8 @@ class LineGraph extends Component {
           Province Cases
         </h3>
         <LineChart
-          width={500}
-          height={525}
+          width={490}
+          height={422}
           data={lineGraphFinalFunction}
           margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
           style={{ margin: "0 auto" }}

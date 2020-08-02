@@ -14,10 +14,10 @@ class Map extends Component {
   state = {
     viewport: {
       width: "auto",
-      height: 600,
+      height: 700,
       latitude: 62,
       longitude: -96.81,
-      zoom: 2.50,
+      zoom: 2.30,
     },
     showPopup: true,
   };
