@@ -9,7 +9,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-let data = [
+
+
+let exampleData = [
   {
     Date: 'Jan 1', Cases: 100,
   },
@@ -36,10 +38,6 @@ let data = [
   },
 ];
 
-
-
-
-
 class LineGraph extends Component {
   render() {
     const { lineGraphFinalFunction } = this.props;
@@ -49,11 +47,11 @@ class LineGraph extends Component {
         <h3 style={{ textAlign: "center", color: "white", fontSize: 15 }}>
           Province Cases
         </h3>
-        <ResponsiveContainer width='100%' aspect={3.5 / 3.0}>
+        <ResponsiveContainer width='100%' aspect={3.5 / 3.1}>
           <LineChart
-            width={490}
-            height={422}
-            data={data}
+            width={510}
+            height={430}
+            data={lineGraphFinalFunction}
             margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
             style={{ margin: "0 auto" }}
           >
