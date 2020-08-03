@@ -46,7 +46,7 @@ class LineGraph extends Component {
       <div className="customBox shadowTwo">
         <h3 style={{ textAlign: "center", color: "white", fontSize: 15 }}>
           Province Cases
-          {/* Put the line graph display province here here */}
+          {/* Put the line graph display province here here here */}
         </h3>
         <ResponsiveContainer width='100%' aspect={3.5 / 3.1}>
           <LineChart
