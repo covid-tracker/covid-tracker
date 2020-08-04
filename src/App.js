@@ -43,7 +43,7 @@ class App extends Component {
 
     // Adjusting time to get yesterday's date
     fromDate.setHours(-28, 0, 0, 0);
-    toDate.setHours(-10, 0, 0, 0);
+    toDate.setHours(-27, 0, 0, 0);
 
     // fromDate and toDate Range
     fromDate = fromDate.toISOString().split(".")[0] + "Z";
