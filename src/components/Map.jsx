@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
-
+//
 const style = {
   padding: "3px 10px",
   color: "#fff",
@@ -17,7 +17,7 @@ class Map extends Component {
       height: 716,
       latitude: 62,
       longitude: -96.81,
-      zoom: 2.30,
+      zoom: 2.3,
       isDrabble: "false",
       cluster: "true",
       clusterRadius: 80,
@@ -43,9 +43,7 @@ class Map extends Component {
                 latitude={parseFloat(province.Lat)}
                 longitude={parseFloat(province.Lon)}
               >
-                <div style={style}>
-                  {province.Cases}
-                </div>
+                <div style={style}>{province.Cases}</div>
               </Marker>
             );
           })}
