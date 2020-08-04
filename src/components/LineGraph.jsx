@@ -8,59 +8,65 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { motion } from "framer-motion";
 
-let exampleData = [
-  {
-    Date: "Jan 1",
-    Cases: 100,
-  },
-  {
-    Date: "Feb 1",
-    Cases: 500,
-  },
-  {
-    Date: "Mar 1",
-    Cases: 300,
-  },
-  {
-    Date: "Apr 1",
-    Cases: 800,
-  },
-  {
-    Date: "May 1",
-    Cases: 500,
-  },
-  {
-    Date: "Jun 1",
-    Cases: 1300,
-  },
-  {
-    Date: "Jul 1",
-    Cases: 1200,
-  },
-  {
-    Date: "Auq 1",
-    Cases: 2100,
-  },
-];
+// let exampleData = [
+//   {
+//     Date: "Jan 1",
+//     Cases: 100,
+//   },
+//   {
+//     Date: "Feb 1",
+//     Cases: 500,
+//   },
+//   {
+//     Date: "Mar 1",
+//     Cases: 300,
+//   },
+//   {
+//     Date: "Apr 1",
+//     Cases: 800,
+//   },
+//   {
+//     Date: "May 1",
+//     Cases: 500,
+//   },
+//   {
+//     Date: "Jun 1",
+//     Cases: 1300,
+//   },
+//   {
+//     Date: "Jul 1",
+//     Cases: 1200,
+//   },
+//   {
+//     Date: "Auq 1",
+//     Cases: 2100,
+//   },
+// ];
 
 class LineGraph extends Component {
   lineGraphRender = () => {
     if (this.props.lineGraphFinalFunction.length === 0) {
       return (
-        <h2
-          className="customBox shadowTwo"
-          style={{
-            fontSize: "2rem",
-            color: "#f35163",
-            textAlign: "center",
-            height: "40rem",
-            display: "flex",
-            alignItems: "center",
-          }}
+        <motion.div
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ ease: "linear", duration: 2, loop: Infinity }}
         >
-          Please choose a province by clicking on bar graph
-        </h2>
+          <h2
+            className="customBox shadowTwo"
+            style={{
+              fontSize: "2rem",
+              color: "#f35163",
+              textAlign: "center",
+              height: "40rem",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            Click Province Bar To Render Data For That Province
+          </h2>
+        </motion.div>
       );
     } else {
       return (
