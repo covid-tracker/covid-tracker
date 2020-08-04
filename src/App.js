@@ -42,7 +42,7 @@ class App extends Component {
     let toDate = new Date();
 
     // Adjusting time to get yesterday's date
-    fromDate.setHours(-28, 0, 0, 0);
+    fromDate.setHours(-30, 0, 0, 0);
     toDate.setHours(-27, 0, 0, 0);
 
     // fromDate and toDate Range
@@ -92,8 +92,8 @@ class App extends Component {
       (provinceName) => {
         return provinceName.Province === singleProvince.Province
           ? {
-              finalizedCases: provinceName,
-            }
+            finalizedCases: provinceName,
+          }
           : null;
       }
     );
@@ -120,10 +120,10 @@ class App extends Component {
       (e) => {
         return e.Province === provinceInfoForLineGraph
           ? {
-              Cases: e.Cases,
-              Date: e.Date,
-              Province: e.Province,
-            }
+            Cases: e.Cases,
+            Date: e.Date,
+            Province: e.Province,
+          }
           : null;
       }
     );
