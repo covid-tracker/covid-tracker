@@ -1,4 +1,4 @@
-import React, { Component, useRef, useEffect } from "react";
+import React, { Component } from "react";
 import {
   BarChart,
   Bar,
@@ -9,14 +9,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { motion } from "framer-motion";
-
-// const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-// const userMountEffect = (fun) => useEffect(fun, []);
-
-// const scrollFunc = () => {
-//   const myRef = useRef(null);
-//   userMountEffect(() => scrollToRef(myRef));
-// };
 
 class BarGraph extends Component {
   constructor() {
