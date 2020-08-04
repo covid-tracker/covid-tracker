@@ -43,7 +43,7 @@ class App extends Component {
 
     // Adjusting time to get yesterday's date
     fromDate.setHours(-28, 0, 0, 0);
-    toDate.setHours(-10, 0, 0, 0);
+    toDate.setHours(-27, 0, 0, 0);
 
     // fromDate and toDate Range
     fromDate = fromDate.toISOString().split(".")[0] + "Z";
@@ -122,6 +122,7 @@ class App extends Component {
           ? {
             Cases: e.Cases,
             Date: e.Date,
+            Province: e.Province,
           }
           : null;
       }
@@ -166,19 +167,8 @@ class App extends Component {
       <motion.div>
         <main className="section">
           <section className="columns">
-            <div className="column is-3">
-              <BarGraph
-                barChartInfo={canadianSummaryBarGraph}
-                lineGraphHandler={this.functionForLineGraph}
-              />
-            </div>
-            <div className="column is-5">
-              <LogoMain onClick={this.dateFunction} />
-              <motion.div whileHover={{ scale: 1.2, y: "-20px" }}>
-                <Map markerData={canadianSummaryAll} />
-              </motion.div>
-            </div>
             <div className="column is-4">
+              <LogoMain />
               <Widget widgetData={canadianSummaryCanada} />
               <motion.div
                 whileHover={{ scale: 1.1 }}
@@ -189,6 +179,17 @@ class App extends Component {
                   lineGraphFinalFunction={handOffToLineGraph}
                 />
               </motion.div>
+            </div>
+            <div className="column is-5">
+              <motion.div whileHover={{ scale: 1.2, y: "-20px" }}>
+                <Map markerData={canadianSummaryAll} />
+              </motion.div>
+            </div>
+            <div className="column is-3">
+              <BarGraph
+                barChartInfo={canadianSummaryBarGraph}
+                lineGraphHandler={this.functionForLineGraph}
+              />
             </div>
           </section>
           <Footer class="footerContainer" />
