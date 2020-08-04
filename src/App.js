@@ -92,8 +92,8 @@ class App extends Component {
       (provinceName) => {
         return provinceName.Province === singleProvince.Province
           ? {
-            finalizedCases: provinceName,
-          }
+              finalizedCases: provinceName,
+            }
           : null;
       }
     );
@@ -120,10 +120,10 @@ class App extends Component {
       (e) => {
         return e.Province === provinceInfoForLineGraph
           ? {
-            Cases: e.Cases,
-            Date: e.Date,
-            Province: e.Province,
-          }
+              Cases: e.Cases,
+              Date: e.Date,
+              Province: e.Province,
+            }
           : null;
       }
     );
@@ -166,6 +166,11 @@ class App extends Component {
     return (
       <motion.div>
         <main className="section">
+          <div className="columns">
+            <div className="column is-12">
+              <LogoMain />
+            </div>
+          </div>
           <section className="columns">
             <div className="column is-3">
               <BarGraph
@@ -179,7 +184,6 @@ class App extends Component {
               </motion.div>
             </div>
             <div className="column is-4">
-              <LogoMain />
               <Widget widgetData={canadianSummaryCanada} />
               <motion.div
                 whileHover={{ scale: 1.1 }}

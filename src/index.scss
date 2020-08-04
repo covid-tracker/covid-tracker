@@ -43,7 +43,6 @@ p {
   // justify-content: center;
   // align-items: center;
 
-
   h1 {
     color: white;
     font-family: "Josefin Sans", sans-serif;
@@ -63,7 +62,7 @@ $content-heading-color: #575a86;
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #1D1E3A;
+  background-color: #1d1e3a;
 }
 // Loader End //
 
@@ -164,7 +163,7 @@ svg > g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
 .footer {
   background-color: #2e335a;
   border-radius: 25px;
-  padding: .5rem .5rem .5rem;
+  padding: 0.5rem 0.5rem 0.5rem;
 }
 
 .footerContainer {
@@ -190,6 +189,10 @@ body {
 
 p {
   // font-size: 10rem;
+}
+
+LogoMain {
+  padding: 0 50%;
 }
 
 // Bulma override end //
