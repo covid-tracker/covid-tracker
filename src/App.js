@@ -166,10 +166,12 @@ class App extends Component {
     return (
       <motion.div>
         <main className="section">
-          <div className="columns">
-            <div className="column is-12">
+          <div className="columns is-centered">
+            <div className="column is-3"></div>
+            <div className="column is-5 ">
               <LogoMain />
             </div>
+            <div className="column is-4"></div>
           </div>
           <section className="columns">
             <div className="column is-3">
