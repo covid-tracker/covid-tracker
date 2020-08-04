@@ -48,7 +48,7 @@ class LineGraph extends Component {
           Province Cases
           {/* Put the line graph display province here here here */}
         </h3>
-        <ResponsiveContainer width='100%' aspect={3.5 / 3.1}>
+        <ResponsiveContainer width='100%' aspect={3.5 / 3.75}>
           <LineChart
             width={510}
             height={430}
