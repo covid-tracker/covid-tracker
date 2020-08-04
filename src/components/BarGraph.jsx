@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef, useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -9,6 +9,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { motion } from "framer-motion";
+
+// const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+// const userMountEffect = (fun) => useEffect(fun, []);
+
+// const scrollFunc = () => {
+//   const myRef = useRef(null);
+//   userMountEffect(() => scrollToRef(myRef));
+// };
 
 class BarGraph extends Component {
   constructor() {
@@ -30,12 +38,6 @@ class BarGraph extends Component {
     return (
       <motion.div whileTap={{ scale: 1.1, x: "-5px", y: "5px" }}>
         <div className="customBox" style={{ width: "100%", height: 740 }}>
-          <h1
-            className="title"
-            style={{ textAlign: "center", paddingTop: "5px" }}
-          >
-            Click Province Bar
-          </h1>
           <ResponsiveContainer>
             <BarChart
               data={barChartInfo.map((e) => {
