@@ -167,6 +167,17 @@ class App extends Component {
       <motion.div>
         <main className="section">
           <section className="columns">
+            <div className="column is-3">
+              <BarGraph
+                barChartInfo={canadianSummaryBarGraph}
+                lineGraphHandler={this.functionForLineGraph}
+              />
+            </div>
+            <div className="column is-5">
+              <motion.div whileHover={{ scale: 1.2, y: "-20px" }}>
+                <Map markerData={canadianSummaryAll} />
+              </motion.div>
+            </div>
             <div className="column is-4">
               <LogoMain />
               <Widget widgetData={canadianSummaryCanada} />
@@ -179,17 +190,6 @@ class App extends Component {
                   lineGraphFinalFunction={handOffToLineGraph}
                 />
               </motion.div>
-            </div>
-            <div className="column is-5">
-              <motion.div whileHover={{ scale: 1.2, y: "-20px" }}>
-                <Map markerData={canadianSummaryAll} />
-              </motion.div>
-            </div>
-            <div className="column is-3">
-              <BarGraph
-                barChartInfo={canadianSummaryBarGraph}
-                lineGraphHandler={this.functionForLineGraph}
-              />
             </div>
           </section>
           <Footer class="footerContainer" />
