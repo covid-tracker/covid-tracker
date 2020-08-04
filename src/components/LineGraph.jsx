@@ -64,7 +64,11 @@ class LineGraph extends Component {
               alignItems: "center",
             }}
           >
-            Click Province Bar To Render Data For That Province
+            <div
+              className="column widBox widgetThree shadowThree"
+            >
+              <h2>Click Province Bar To Render Data For That Province</h2>
+            </div>
           </h2>
         </motion.div>
       );
@@ -77,8 +81,8 @@ class LineGraph extends Component {
           </h3>
           <ResponsiveContainer width="100%" aspect={3.5 / 3.75}>
             <LineChart
-              width={510}
-              height={430}
+              // width={510}
+              // height={430}
               data={this.props.lineGraphFinalFunction}
               margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
               style={{ margin: "0 auto" }}
