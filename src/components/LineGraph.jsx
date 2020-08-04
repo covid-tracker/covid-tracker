@@ -10,41 +10,6 @@ import {
 } from "recharts";
 import { motion } from "framer-motion";
 
-// let exampleData = [
-//   {
-//     Date: "Jan 1",
-//     Cases: 100,
-//   },
-//   {
-//     Date: "Feb 1",
-//     Cases: 500,
-//   },
-//   {
-//     Date: "Mar 1",
-//     Cases: 300,
-//   },
-//   {
-//     Date: "Apr 1",
-//     Cases: 800,
-//   },
-//   {
-//     Date: "May 1",
-//     Cases: 500,
-//   },
-//   {
-//     Date: "Jun 1",
-//     Cases: 1300,
-//   },
-//   {
-//     Date: "Jul 1",
-//     Cases: 1200,
-//   },
-//   {
-//     Date: "Auq 1",
-//     Cases: 2100,
-//   },
-// ];
-
 class LineGraph extends Component {
   lineGraphRender = () => {
     if (this.props.lineGraphFinalFunction.length === 0) {
@@ -64,11 +29,7 @@ class LineGraph extends Component {
               alignItems: "center",
             }}
           >
-            <div
-              className="column widBox widgetThree shadowThree"
-            >
-              <h2>Click Province Bar To Render Data For That Province</h2>
-            </div>
+            CLICK A PROVINCE FROM "BAR GRAPH" TO DISPLAY CASE DATA
           </h2>
         </motion.div>
       );
