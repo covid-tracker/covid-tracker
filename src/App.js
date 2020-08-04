@@ -122,6 +122,7 @@ class App extends Component {
           ? {
             Cases: e.Cases,
             Date: e.Date,
+            Province: e.Province,
           }
           : null;
       }
