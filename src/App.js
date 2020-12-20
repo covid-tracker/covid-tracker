@@ -78,12 +78,13 @@ class App extends Component {
     });
 
     this.setState({
-      // canadianSummaryBarGraph: canadianSummaryBarGraph.slice(1),
+      canadianSummaryBarGraph: canadianSummaryBarGraph,
       canadianSummaryLineGraph,
       canadianSummaryAll,
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
+    console.log(canadianSummaryBarGraph[9].Cases)
   }
 
   provinceGraph = (singleProvince) => {
