@@ -21,8 +21,7 @@ class App extends Component {
       canadianSummaryAll: [],
       canadianSummaryBarGraph: [],
       canadianSummaryCanada: [],
-      provinceData: [],
-      historicalProvinceDataForGraph: [],
+      emptyProvinceCasesRemoved: [],
       handOffToLineGraph: [],
       loading: true,
       graphComponentData: {
@@ -87,33 +86,19 @@ class App extends Component {
     console.log(canadianSummaryBarGraph[9].Cases)
   }
 
-  provinceGraph = (singleProvince) => {
-    let provinceHistoricalData = this.state.canadianSummaryAll.filter(
-      (provinceName) => {
-        return provinceName.Province === singleProvince.Province
-          ? {
-            finalizedCases: provinceName,
-          }
-          : null;
-      }
-    );
-    this.setState({
-      historicalProvinceDataForGraph: provinceHistoricalData,
-    });
-  };
 
-  provinceData = () => {
-    let provinceInfo = this.state.canadianSummary.map((provinceName) => {
+  emptyProvinceCasesRemoved = () => {
+    let filteredCaseNumbers = this.state.canadianSummaryBarGraph.map((caseNumber) => {
       return {
-        Province: provinceName.Province,
-        Cases: provinceName.Cases,
-        Date: provinceName.Date,
+        Cases: caseNumber.Cases.filter(Boolean),
       };
     });
-    this.setState({
-      provinceData: provinceInfo,
-    });
-  };
+      this.setState({
+       emptyProvinceCasesRemoved: filteredCaseNumbers,
+      });
+      console.log(this.emptyProvinceCasesRemoved);
+    };
+
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
@@ -132,6 +117,7 @@ class App extends Component {
     });
   };
 
+
   coordinateValues() {
     let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
       let data = { Date: e.Date, Cases: e.Cases };
@@ -142,6 +128,7 @@ class App extends Component {
     });
   }
 
+  
   render() {
     const {
       canadianSummaryBarGraph,

@@ -18,7 +18,7 @@ class BarGraph extends Component {
     };
   }
 
-  _onBarClick = (obj) => {
+  onBarClick = (obj) => {
     let province = obj.activePayload[0].payload.Province;
     this.setState({ dataForLineGraph: province }, () => {
       this.props.lineGraphHandler(this.state.dataForLineGraph);
@@ -40,7 +40,7 @@ class BarGraph extends Component {
               maxBarSize={20}
               layout={"vertical"}
               style={{ paddingBottom: 20 }}
-              onClick={this._onBarClick}
+              onClick={this.onBarClick}
             >
               <CartesianGrid strokeDasharray="1 1" />
               <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />
