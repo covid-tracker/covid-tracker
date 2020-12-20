@@ -78,7 +78,7 @@ class App extends Component {
     });
 
     this.setState({
-      canadianSummaryBarGraph: canadianSummaryBarGraph.slice(1),
+      // canadianSummaryBarGraph: canadianSummaryBarGraph.slice(1),
       canadianSummaryLineGraph,
       canadianSummaryAll,
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
