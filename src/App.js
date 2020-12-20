@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import Widget from "./components/Widget";
 import LogoMain from "./components/LogoMain";
-// import Footer from "./components/Footer";
 import LineGraph from "./components/LineGraph"; // Rechart Graphs
 import BarGraph from "./components/BarGraph"; // Rechart Graphs
 import Map from "./components/Map"; // MapBox
@@ -79,12 +78,13 @@ class App extends Component {
     });
 
     this.setState({
-      canadianSummaryBarGraph: canadianSummaryBarGraph.slice(1),
+      canadianSummaryBarGraph: canadianSummaryBarGraph,
       canadianSummaryLineGraph,
       canadianSummaryAll,
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
+    console.log(canadianSummaryBarGraph[9].Cases)
   }
 
   provinceGraph = (singleProvince) => {
@@ -198,12 +198,10 @@ class App extends Component {
               </motion.div>
             </div>
           </section>
-          {/* <Footer class="footerContainer" /> */}
         </main>
       </motion.div>
     );
   }
 }
 
-// remove this //
 export default App;
