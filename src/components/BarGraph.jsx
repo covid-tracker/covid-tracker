@@ -18,7 +18,7 @@ class BarGraph extends Component {
     };
   }
 
-  _onBarClick = (obj) => {
+  onBarClick = (obj) => {
     let province = obj.activePayload[0].payload.Province;
     this.setState({ dataForLineGraph: province }, () => {
       this.props.lineGraphHandler(this.state.dataForLineGraph);
@@ -27,6 +27,7 @@ class BarGraph extends Component {
 
   render() {
     const { barChartInfo } = this.props;
+    // console.log(barChartInfo)
     return (
       <motion.div whileTap={{ scale: 1.1, x: "-5px", y: "5px" }}>
         <div className="customBox" style={{ width: "100%", height: 740 }}>
@@ -40,7 +41,7 @@ class BarGraph extends Component {
               maxBarSize={20}
               layout={"vertical"}
               style={{ paddingBottom: 20 }}
-              onClick={this._onBarClick}
+              onClick={this.onBarClick}
             >
               <CartesianGrid strokeDasharray="1 1" />
               <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />

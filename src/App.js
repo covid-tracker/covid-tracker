@@ -21,8 +21,7 @@ class App extends Component {
       canadianSummaryAll: [],
       canadianSummaryBarGraph: [],
       canadianSummaryCanada: [],
-      provinceData: [],
-      historicalProvinceDataForGraph: [],
+      emptyProvinceCasesRemoved: [],
       handOffToLineGraph: [],
       loading: true,
       graphComponentData: {
@@ -41,8 +40,8 @@ class App extends Component {
     let toDate = new Date();
 
     // Adjusting time to get yesterday's date
-    fromDate.setHours(-30, 0, 0, 0);
-    toDate.setHours(-27, 0, 0, 0);
+    fromDate.setHours(-1, 0, 0, 0);
+    toDate.setHours(-2, 0, 0, 0);
 
     // fromDate and toDate Range
     fromDate = fromDate.toISOString().split(".")[0] + "Z";
@@ -84,36 +83,26 @@ class App extends Component {
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
-    console.log(canadianSummaryBarGraph[9].Cases)
+    // console.log(canadianSummaryBarGraph[9].Cases)
+    // console.log(canadianSummaryCanada.Countries[30])
+    console.log(canadianSummaryAll)
   }
 
-  provinceGraph = (singleProvince) => {
-    let provinceHistoricalData = this.state.canadianSummaryAll.filter(
-      (provinceName) => {
-        return provinceName.Province === singleProvince.Province
-          ? {
-            finalizedCases: provinceName,
-          }
-          : null;
-      }
-    );
-    this.setState({
-      historicalProvinceDataForGraph: provinceHistoricalData,
-    });
-  };
+  // map through the canadian canada summary and kick out province and case number. then filter through throught that, if case = 0 remove it from the array // 
 
-  provinceData = () => {
-    let provinceInfo = this.state.canadianSummary.map((provinceName) => {
+// dummy fun
+  emptyProvinceCasesRemoved = () => {
+    let filteredCaseNumbers = this.state.canadianSummaryAll.map((e) => {
       return {
-        Province: provinceName.Province,
-        Cases: provinceName.Cases,
-        Date: provinceName.Date,
+        Cases: e.Cases.filter(Boolean),
       };
     });
-    this.setState({
-      provinceData: provinceInfo,
-    });
-  };
+      this.setState({
+       emptyProvinceCasesRemoved: filteredCaseNumbers,
+      });
+      console.log(this.emptyProvinceCasesRemoved);
+    };
+
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
@@ -130,7 +119,9 @@ class App extends Component {
     this.setState({ fullProvinceTimeline: filteredSpecificProvince }, () => {
       this.coordinateValues();
     });
+    // console.log(this.state.fullProvinceTimeline)
   };
+
 
   coordinateValues() {
     let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
@@ -140,8 +131,10 @@ class App extends Component {
     this.setState({
       handOffToLineGraph: lineGraphArray,
     });
+    // console.log(this.state.handOffToLineGraph)
   }
 
+  
   render() {
     const {
       canadianSummaryBarGraph,
