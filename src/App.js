@@ -40,8 +40,8 @@ class App extends Component {
     let toDate = new Date();
 
     // Adjusting time to get yesterday's date
-    fromDate.setHours(-30, 0, 0, 0);
-    toDate.setHours(-27, 0, 0, 0);
+    fromDate.setHours(-1, 0, 0, 0);
+    toDate.setHours(-2, 0, 0, 0);
 
     // fromDate and toDate Range
     fromDate = fromDate.toISOString().split(".")[0] + "Z";
@@ -83,14 +83,18 @@ class App extends Component {
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
-    console.log(canadianSummaryBarGraph[9].Cases)
+    // console.log(canadianSummaryBarGraph[9].Cases)
+    // console.log(canadianSummaryCanada.Countries[30])
+    console.log(canadianSummaryAll)
   }
 
+  // map through the canadian canada summary and kick out province and case number. then filter through throught that, if case = 0 remove it from the array // 
 
+// dummy fun
   emptyProvinceCasesRemoved = () => {
-    let filteredCaseNumbers = this.state.canadianSummaryBarGraph.map((caseNumber) => {
+    let filteredCaseNumbers = this.state.canadianSummaryAll.map((e) => {
       return {
-        Cases: caseNumber.Cases.filter(Boolean),
+        Cases: e.Cases.filter(Boolean),
       };
     });
       this.setState({
@@ -115,6 +119,7 @@ class App extends Component {
     this.setState({ fullProvinceTimeline: filteredSpecificProvince }, () => {
       this.coordinateValues();
     });
+    // console.log(this.state.fullProvinceTimeline)
   };
 
 
@@ -126,6 +131,7 @@ class App extends Component {
     this.setState({
       handOffToLineGraph: lineGraphArray,
     });
+    // console.log(this.state.handOffToLineGraph)
   }
 
   

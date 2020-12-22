@@ -27,6 +27,7 @@ class BarGraph extends Component {
 
   render() {
     const { barChartInfo } = this.props;
+    // console.log(barChartInfo)
     return (
       <motion.div whileTap={{ scale: 1.1, x: "-5px", y: "5px" }}>
         <div className="customBox" style={{ width: "100%", height: 740 }}>
