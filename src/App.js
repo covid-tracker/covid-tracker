@@ -40,8 +40,8 @@ class App extends Component {
     let toDate = new Date();
 
     // Adjusting time to get yesterday's date
-    fromDate.setHours(-1, 0, 0, 0);
-    toDate.setHours(-2, 0, 0, 0);
+    fromDate.setHours(-30, 0, 0, 0);
+    toDate.setHours(-27, 0, 0, 0);
 
     // fromDate and toDate Range
     fromDate = fromDate.toISOString().split(".")[0] + "Z";
@@ -84,25 +84,25 @@ class App extends Component {
       loading: false,
     });
     // console.log(canadianSummaryBarGraph[9].Cases)
-    // console.log(canadianSummaryCanada.Countries[30])
+    console.log(canadianSummaryBarGraph[9])
+    console.log(canadianSummaryCanada.Countries[30])
     console.log(canadianSummaryAll)
   }
 
-  // map through the canadian canada summary and kick out province and case number. then filter through throught that, if case = 0 remove it from the array // 
+  // map through the canadian canada summary and kick out province and case number. then filter through through that, if case = 0 remove it from the array // 
 
 // dummy fun
   emptyProvinceCasesRemoved = () => {
-    let filteredCaseNumbers = this.state.canadianSummaryAll.map((e) => {
+    let filteredCaseNumbers = this.state.canadianSummaryBarGraph.map((caseNumber) => {
       return {
-        Cases: e.Cases.filter(Boolean),
+        Cases: caseNumber.Cases.filter(Boolean),
       };
     });
       this.setState({
        emptyProvinceCasesRemoved: filteredCaseNumbers,
       });
-      console.log(this.emptyProvinceCasesRemoved);
+      // console.log(this.emptyProvinceCasesRemoved);
     };
-
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
@@ -122,7 +122,6 @@ class App extends Component {
     // console.log(this.state.fullProvinceTimeline)
   };
 
-
   coordinateValues() {
     let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
       let data = { Date: e.Date, Cases: e.Cases };
@@ -134,7 +133,6 @@ class App extends Component {
     // console.log(this.state.handOffToLineGraph)
   }
 
-  
   render() {
     const {
       canadianSummaryBarGraph,
@@ -157,7 +155,7 @@ class App extends Component {
       );
     }
     return (
-      <motion.div>
+      <motion.div>  
         <main className="section">
           <div className="columns is-centered">
             <div className="column is-3"></div>
