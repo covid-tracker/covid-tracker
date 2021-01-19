@@ -84,9 +84,10 @@ class App extends Component {
       loading: false,
     });
     // console.log(canadianSummaryBarGraph[9].Cases)
-    console.log(canadianSummaryBarGraph[9])
-    console.log(canadianSummaryCanada.Countries[30])
-    console.log(canadianSummaryAll)
+    // console.log(canadianSummaryBarGraph[9])
+    console.log(canadianSummaryCanada.Countries)
+    // console.log(canadianSummaryCanada.Countries[30])
+    // console.log(canadianSummaryAll)
   }
 
   // map through the canadian canada summary and kick out province and case number. then filter through through that, if case = 0 remove it from the array // 
