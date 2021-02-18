@@ -19,15 +19,15 @@ class BarGraph extends Component {
   }
 
   onBarClick = (obj) => {
-    let province = obj.activePayload[0].payload.Province;
-    this.setState({ dataForLineGraph: province }, () => {
+    let province = obj.activePayload[0].payload.State;
+    this.setState({ dataForLineGraph: province}, () => {
       this.props.lineGraphHandler(this.state.dataForLineGraph);
     });
   };
 
   render() {
     const { barChartInfo } = this.props;
-    // console.log(barChartInfo)
+    console.log(this.barChartInfo)
     return (
       <motion.div whileTap={{ scale: 1.1, x: "-5px", y: "5px" }}>
         <div className="customBox" style={{ width: "100%", height: 740 }}>
