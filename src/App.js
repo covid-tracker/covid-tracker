@@ -13,10 +13,14 @@ const provinceDataURL =
   "https://api.covid19api.com/country/canada/status/confirmed/live";
 const summaryDataURL = "https://api.covid19api.com/summary";
 
+const newApiResponse = "https://covid-19-statistics.p.rapidapi.com/provinces/"
+const newApiResponseTwo = "https://covid-19-statistics.p.rapidapi.com/reports"
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      newApiTwo: [],
       canadianSummaryLineGraph: [],
       canadianSummaryAll: [],
       canadianSummaryBarGraph: [],
@@ -47,29 +51,58 @@ class App extends Component {
     fromDate = fromDate.toISOString().split(".")[0] + "Z";
     toDate = toDate.toISOString().split(".")[0] + "Z";
 
-    // const { fromDateAll, toDateAll } = this.state;
-    const { data: canadianSummaryLineGraph } = await axios({
-      url: provinceDataURL,
-      method: `GET`,
-    });
 
-    const { data: canadianSummaryAll } = await axios({
-      url: provinceDataURL,
+
+            const { data: newApi } = await axios ({
+      url: newApiResponse,
       method: `GET`,
       params: {
-        from: fromDate,
-        to: toDate,
+        iso: `CAN`,
+        date: '2021-02-14',
       },
+      headers :{
+        'x-rapidapi-key': '63fefd3bbbmsh7e07abc4e3d579bp14f7e0jsnc007e001acd6',
+        'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com'
+      }
     });
 
-    const { data: canadianSummaryBarGraph } = await axios({
-      url: provinceDataURL,
+
+        const { data: newApiTwo } = await axios ({
+      url: newApiResponseTwo,
       method: `GET`,
       params: {
-        from: fromDate,
-        to: toDate,
+        iso: `CAN`,
+        date: '2021-02-14',
       },
+      headers :{
+        'x-rapidapi-key': '63fefd3bbbmsh7e07abc4e3d579bp14f7e0jsnc007e001acd6',
+        'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com'
+      }
     });
+
+    // // const { fromDateAll, toDateAll } = this.state;
+    // const { data: canadianSummaryLineGraph } = await axios({
+    //   url: provinceDataURL,
+    //   method: `GET`,
+    // });
+
+    // const { data: canadianSummaryAll } = await axios({
+    //   url: provinceDataURL,
+    //   method: `GET`,
+    //   params: {
+    //     from: fromDate,
+    //     to: toDate,
+    //   },
+    // });
+
+    // const { data: canadianSummaryBarGraph } = await axios({
+    //   url: provinceDataURL,
+    //   method: `GET`,
+    //   params: {
+    //     from: fromDate,
+    //     to: toDate,
+    //   },
+    // });
 
     const { data: canadianSummaryCanada } = await axios({
       url: summaryDataURL,
@@ -77,33 +110,47 @@ class App extends Component {
     });
 
     this.setState({
-      canadianSummaryBarGraph: canadianSummaryBarGraph,
-      canadianSummaryLineGraph,
-      canadianSummaryAll,
-      canadianSummaryCanada: canadianSummaryCanada.Countries[30],
-      loading: false,
+      newApiTwo,
+      newApi,
+      // canadianSummaryBarGraph: canadianSummaryBarGraph,
+      // canadianSummaryLineGraph,
+      // canadianSummaryAll,
+      // canadianSummaryCanada: canadianSummaryCanada.Countries[30],
+      // loading: false,
     });
-    // console.log(canadianSummaryBarGraph[9].Cases)
-    // console.log(canadianSummaryBarGraph[9])
-    console.log(canadianSummaryCanada.Countries)
-    // console.log(canadianSummaryCanada.Countries[30])
+    // console.log(canadianSummaryBarGraph)
+    // console.log(canadianSummaryLineGraph)
+    console.log(canadianSummaryCanada.Countries[30])
     // console.log(canadianSummaryAll)
+    console.log(newApi)
+    console.log(newApiTwo)
+    console.log(newApiTwo.data)
+    console.log(newApiTwo.data[0])
+    console.log(newApiTwo.data[0].region)
+
+
+    console.log(newApiTwo.data[0].region.province)
+    console.log(newApiTwo.data[0].date)
+    console.log(newApiTwo.data[0].confirmed)
   }
 
   // map through the canadian canada summary and kick out province and case number. then filter through through that, if case = 0 remove it from the array // 
 
-// dummy fun
-  emptyProvinceCasesRemoved = () => {
-    let filteredCaseNumbers = this.state.canadianSummaryBarGraph.map((caseNumber) => {
-      return {
-        Cases: caseNumber.Cases.filter(Boolean),
-      };
-    });
-      this.setState({
-       emptyProvinceCasesRemoved: filteredCaseNumbers,
-      });
-      // console.log(this.emptyProvinceCasesRemoved);
-    };
+
+// // dummy fun
+//   emptyProvinceCasesRemoved = () => {
+//     let filteredCaseNumbers = this.state.canadianSummaryBarGraph.map((caseNumber) => {
+//       return {
+//         Cases: caseNumber.Cases.filter(Boolean),
+//       };
+//     });
+//       this.setState({
+//         emptyProvinceCasesRemoved: filteredCaseNumbers,
+//       });
+//       // console.log(this.emptyProvinceCasesRemoved);
+//     };
+
+
 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
@@ -120,7 +167,6 @@ class App extends Component {
     this.setState({ fullProvinceTimeline: filteredSpecificProvince }, () => {
       this.coordinateValues();
     });
-    // console.log(this.state.fullProvinceTimeline)
   };
 
   coordinateValues() {
@@ -131,10 +177,11 @@ class App extends Component {
     this.setState({
       handOffToLineGraph: lineGraphArray,
     });
-    // console.log(this.state.handOffToLineGraph)
+    console.log(this.state.handOffToLineGraph)
   }
 
   render() {
+    // console.log(this.state.newApiTwo)
     const {
       canadianSummaryBarGraph,
       canadianSummaryAll,
@@ -144,7 +191,7 @@ class App extends Component {
     } = this.state;
     if (this.state.loading) {
       return (
-        <div class="loadScreen">
+        <div className="loadScreen">
           <Loader
             type="MutatingDots"
             color="#4f7cff"
