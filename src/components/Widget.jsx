@@ -8,6 +8,7 @@ class Widget extends Component {
       TotalRecovered,
       TotalDeaths,
     } = this.props.widgetData;
+    // console.log(this.props.widgetData)
     return (
       <div className="customBox shadowTwo" style={{ textAlign: "center" }}>
         <h1 className="title">National Live Count</h1>
