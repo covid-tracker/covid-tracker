@@ -111,7 +111,9 @@ class App extends Component {
       allProvinceData: allProvincialStats,
     });
     this.threeDataGather()
+  
   };
+
 
 
 
@@ -144,6 +146,7 @@ class App extends Component {
   // }
 
 
+
   // provinceGraph = (singleProvince) => {
   //   let provinceHistoricalData = this.state.canadianSummaryAll.filter(
   //     (provinceName) => {
@@ -161,6 +164,8 @@ class App extends Component {
 
   // map through the canadian canada summary and kick out province and case number. then filter through through that, if case = 0 remove it from the array // 
 
+  
+  // add a unique key, for each set in the array // 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
       (e) => {
