@@ -34,8 +34,8 @@ class BarGraph extends Component {
           <ResponsiveContainer>
             <BarChart
               data={barChartInfo.map((e) => {
-                return e.Province !== ""
-                  ? { Province: e.Province, Cases: e.Cases }
+                return e.Region.province !== ""
+                  ? { Province: e.Region.province, Cases: e.Confirmed}
                   : null;
               })}
               maxBarSize={20}

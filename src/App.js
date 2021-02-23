@@ -87,6 +87,7 @@ class App extends Component {
     });
     // this.allProvinceDataTwo(this.state.newApi)
     this.firstDataGather()
+    console.log(this.state.allProvinceData)
     console.log(this.state.newApi[0].region)
     console.log(this.state.newApi[0].region.province)
   }
@@ -111,11 +112,8 @@ class App extends Component {
       allProvinceData: allProvincialStats,
     });
     this.threeDataGather()
-  
+    console.log(this.state.allProvinceData)
   };
-
-
-
 
     threeDataGather() {  
     let allProvincialStatsThree = this.state.allProvinceData.map((provinceDataSetsThree) => {
@@ -205,8 +203,8 @@ class App extends Component {
     // console.log(newApi.data[0].date)
     // console.log(newApi.data[0].confirmed)
     const {
-      // allProvinceData,
-      canadianSummaryBarGraph,
+      allProvinceData,
+      // canadianSummaryBarGraph,
       canadianSummaryAll,
       canadianSummaryCanada,
       graphComponentData,
@@ -238,7 +236,8 @@ class App extends Component {
           <section className="columns">
             <div className="column is-3">
               <BarGraph
-                barChartInfo={canadianSummaryBarGraph}
+                // barChartInfo={canadianSummaryBarGraph}
+                barChartInfo={allProvinceData}
                 lineGraphHandler={this.functionForLineGraph}
               />
               <GetProvincialStats/>
