@@ -27,15 +27,16 @@ class BarGraph extends Component {
 
   render() {
     const { barChartInfo } = this.props;
-    console.log(this.barChartInfo)
+    // console.log(this.barChartInfo)
     return (
       <motion.div whileTap={{ scale: 1.1, x: "-5px", y: "5px" }}>
-        <div className="customBox" style={{ width: "100%", height: 740 }}>
+        <div className="customBox" style={{ textAlign: "center", width: "100%", height: 740 }}>
+          <h1 className="title">Total Confirmed Cases</h1>
           <ResponsiveContainer>
             <BarChart
               data={barChartInfo.map((e) => {
-                return e.Province !== ""
-                  ? { Province: e.Province, Cases: e.Cases }
+                return e.Region.province !== ""
+                  ? { Province: e.Region.province, Cases: e.Confirmed}
                   : null;
               })}
               maxBarSize={20}
