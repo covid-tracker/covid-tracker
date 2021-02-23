@@ -24,7 +24,6 @@ class App extends Component {
       allProvinceDataTwo: [],
       allProvinceDataThree: [],
 
-
       canadianSummaryLineGraph: [],
       canadianSummaryAll: [],
       canadianSummaryBarGraph: [],
@@ -92,11 +91,6 @@ class App extends Component {
     console.log(this.state.newApi[0].region.province)
   }
 
-
-
-
-
-
   firstDataGather() {  
     let allProvincialStats = this.state.newApi.map((provinceDataSets) => {
       return {
@@ -126,7 +120,6 @@ class App extends Component {
     });
   };
 
-
   // allProvinceDataTwo() {
   //   let allProvincialStatsTwo = this.state.newApi.map((provinceDataSetsTwo) => {
   //     let data = { Active: provinceDataSetsTwo.active,
@@ -142,8 +135,6 @@ class App extends Component {
   //     allProvinceDataTwo: allProvincialStatsTwo,
   //   });
   // }
-
-
 
   // provinceGraph = (singleProvince) => {
   //   let provinceHistoricalData = this.state.canadianSummaryAll.filter(
@@ -162,7 +153,6 @@ class App extends Component {
 
   // map through the canadian canada summary and kick out province and case number. then filter through through that, if case = 0 remove it from the array // 
 
-  
   // add a unique key, for each set in the array // 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
@@ -181,7 +171,6 @@ class App extends Component {
     });
   };
 
-
   coordinateValues() {
     let lineGraphArray = this.state.fullProvinceTimeline.map((e) => {
       let data = { Date: e.Date, Cases: e.Cases };
@@ -191,7 +180,6 @@ class App extends Component {
       handOffToLineGraph: lineGraphArray,
     });
   }
-
 
   render() {
     // console.log(this.state.newApi)

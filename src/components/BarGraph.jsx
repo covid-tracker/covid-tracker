@@ -30,7 +30,8 @@ class BarGraph extends Component {
     // console.log(this.barChartInfo)
     return (
       <motion.div whileTap={{ scale: 1.1, x: "-5px", y: "5px" }}>
-        <div className="customBox" style={{ width: "100%", height: 740 }}>
+        <div className="customBox" style={{ textAlign: "center", width: "100%", height: 740 }}>
+          <h1 className="title">Total Confirmed Cases</h1>
           <ResponsiveContainer>
             <BarChart
               data={barChartInfo.map((e) => {
