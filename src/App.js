@@ -1,25 +1,28 @@
 import React, { Component } from "react";
 import axios from "axios";
 import GetProvincialStats from "./components/GetProvincialStats";
-import Widget from "./components/Widget";
-import LogoMain from "./components/LogoMain";
-import LineGraph from "./components/LineGraph"; // Rechart Graphs
-import BarGraph from "./components/BarGraph"; // Rechart Graphs
-import Map from "./components/Map"; // MapBox
+import Widget from "./components/Widget"; // Widget made for the total stats in top right corner // 
+import LogoMain from "./components/LogoMain"; 
+import LineGraph from "./components/LineGraph"; // Rechart Graphs // 
+import BarGraph from "./components/BarGraph"; // Rechart Graphs // 
+import Map from "./components/Map"; // MapBox //
 import Loader from "react-loader-spinner";
-import { motion } from "framer-motion"; //Framer motion for animations
+import { motion } from "framer-motion"; //Framer motion for animations //
 
-// URLs
+// URLs, Currently taking care of the total National Figures // 
 const provinceDataURL ="https://api.covid19api.com/country/canada/status/confirmed/live";
 const summaryDataURL = "https://api.covid19api.com/summary";
 
+// New URLs, currently taking care of the provincial stats // 
 const newApiResponse = "https://covid-19-statistics.p.rapidapi.com/reports"
+const newApiResponseDate = "https://covid-19-statistics.p.rapidapi.com/provinces/"
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       newApi: [],
+      newApiDate: [],
       allProvinceData: [],
       allProvinceDataTwo: [],
       allProvinceDataThree: [],
@@ -39,15 +42,15 @@ class App extends Component {
     this.coordinateValues = this.coordinateValues.bind(this);
   }
 
-  async componentDidMount() {
 
-    // To generate today's date
+  async componentDidMount() {
+    // To generate today's date // 
     let fromDate = new Date();
     let toDate = new Date();
-    // Adjusting time to get yesterday's date
+    // Adjusting time to get yesterday's date // 
     fromDate.setHours(-30, 0, 0, 0);
     toDate.setHours(-27, 0, 0, 0);
-    // fromDate and toDate Range
+    // fromDate and toDate Range // 
     fromDate = fromDate.toISOString().split(".")[0] + "Z";
     toDate = toDate.toISOString().split(".")[0] + "Z";
 
@@ -56,13 +59,28 @@ class App extends Component {
       method: `GET`,
       params: {
         iso: `CAN`,
-        // date: '2021-02-14',
+        // date: '2021-02-14', 
       },
       headers :{
         'x-rapidapi-key': '63fefd3bbbmsh7e07abc4e3d579bp14f7e0jsnc007e001acd6',
         'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com'
       }
     });
+
+            const { data: newApiDate } = await axios ({
+      url: newApiResponseDate,
+      method: `GET`,
+      params: {
+        from: fromDate,
+        to: toDate,
+        iso: `CAN`,
+        date: '2021-02-14',
+      },
+      headers :{
+        'x-rapidapi-key': '63fefd3bbbmsh7e07abc4e3d579bp14f7e0jsnc007e001acd6',
+        'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com'
+      }
+          });
 
     const { data: canadianSummaryAll } = await axios({
       url: provinceDataURL,
@@ -80,13 +98,14 @@ class App extends Component {
 
     this.setState({
       newApi: newApi.data,
+      newApiDate :newApiDate.data,
       canadianSummaryAll,
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
-    // this.allProvinceDataTwo(this.state.newApi)
     this.firstDataGather()
-    console.log(this.state.allProvinceData)
+    console.log(this.state.newApiDate)
+    console.log(this.state.allProvinceData.data)
     console.log(this.state.newApi[0].region)
     console.log(this.state.newApi[0].region.province)
   }
@@ -100,6 +119,7 @@ class App extends Component {
         Fatality: provinceDataSets.fatality_rate,
         Recovered: provinceDataSets.recovered,
         Region: provinceDataSets.region,
+        Date
       };
     });
     this.setState({
@@ -153,7 +173,7 @@ class App extends Component {
 
   // map through the canadian canada summary and kick out province and case number. then filter through through that, if case = 0 remove it from the array // 
 
-  // add a unique key, for each set in the array // 
+  // Add a unique key, for each set in the array // 
   functionForLineGraph = (provinceInfoForLineGraph) => {
     let filteredSpecificProvince = this.state.canadianSummaryLineGraph.filter(
       (e) => {
@@ -182,13 +202,13 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.state.newApi)
+    console.log(this.state.newApi)
     // console.log(this.state.newApi[0])
     // console.log(this.state.allProvinceData)
     // console.log(this.state.allProvinceDataThree)
     // console.log(this.state.allProvinceDataTwo)
     // console.log(this.state.newApi[0].region.province)
-    // console.log(newApi.data[0].date)
+    // console.log(this.state.newApi.data[0].date)
     // console.log(newApi.data[0].confirmed)
     const {
       allProvinceData,
@@ -224,7 +244,7 @@ class App extends Component {
           <section className="columns">
             <div className="column is-3">
               <BarGraph
-                // barChartInfo={canadianSummaryBarGraph}
+                // barChartInfo={canadianSummaryBarGraph} 
                 barChartInfo={allProvinceData}
                 lineGraphHandler={this.functionForLineGraph}
               />
