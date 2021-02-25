@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+
+import { motion } from "framer-motion";
+
 import {
   BarChart,
   Bar,
@@ -8,7 +11,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { motion } from "framer-motion";
 
 class BarGraph extends Component {
   constructor() {
@@ -27,16 +29,15 @@ class BarGraph extends Component {
     // console.log(this.state.dataForLineGraph)
   };
 
-    onBarClickTwo = (obj) => {
-    let province = obj.activePayload[0].payload.State;
-    this.setState({ dataForProvincialStats: province}, () => {
-      this.props.provincialStatsHandler(this.state.dataForProvincialStats);
-    });
-    // console.log(this.province)
-  };
+  //   onBarClickTwo = (obj) => {
+  //   let province = obj.activePayload[0].payload.State;
+  //   this.setState({ dataForProvincialStats: province}, () => {
+  //     this.props.provincialStatsHandler(this.state.dataForProvincialStats);
+  //   });
+  //   // console.log(this.province)
+  // };
 
   render() {
-    // console.log(this.barChartInfo)
     const { barChartInfo } = this.props;
     return (
       <motion.div whileTap={{ scale: 1.1, x: "-5px", y: "5px" }}>
@@ -52,8 +53,8 @@ class BarGraph extends Component {
               maxBarSize={20}
               layout={"vertical"}
               style={{ paddingBottom: 20 }}
-              // onClick={this.onBarClick}
-              onClick={this.onBarClickTwo}
+              onClick={this.onBarClick}
+              // onClick={this.onBarClickTwo}
             >
               <CartesianGrid strokeDasharray="1 1" />
               <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />
