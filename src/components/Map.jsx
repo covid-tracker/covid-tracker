@@ -47,6 +47,16 @@ class Map extends Component {
               </Marker>
             );
           })}
+            {/* {this.props.markerData.Region.map((province) => {
+            return (
+              <Marker
+                latitude={parseFloat(province.lat)}
+                longitude={parseFloat(province.long)}
+              >
+                <div style={style}>{province.province}</div>
+              </Marker>
+            );
+          })} */}
         </ReactMapGL>
       </div>
     );

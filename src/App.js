@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import GetProvincialStats from "./components/GetProvincialStats";
 import Widget from "./components/Widget"; // Widget made for the total stats in top right corner // 
+import WidgetTwo from "./components/WidgetTwo"; // Widget made for the total stats in top right corner // 
 import LogoMain from "./components/LogoMain"; 
 import LineGraph from "./components/LineGraph"; // Rechart Graphs // 
 import BarGraph from "./components/BarGraph"; // Rechart Graphs // 
@@ -15,13 +15,14 @@ const summaryDataURL = "https://api.covid19api.com/summary";
 
 // New URLs, currently taking care of the provincial stats // 
 const newApiResponse = "https://covid-19-statistics.p.rapidapi.com/reports"
-const newApiResponseDate = "https://covid-19-statistics.p.rapidapi.com/provinces/"
+const newApiResponseDate = "https://covid-19-statistics.p.rapidapi.com/provinces"
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       newApi: [],
+      widgetDataData: [],
       newApiDate: [],
       allProvinceData: [],
       allProvinceDataTwo: [],
@@ -32,6 +33,8 @@ class App extends Component {
       canadianSummaryBarGraph: [],
       canadianSummaryCanada: [],
       handOffToLineGraph: [],
+      totalsForProvincialStats: [],
+      totalsForProvincialStatsArray: [],
       loading: true,
       graphComponentData: {
         interpolation: "natural",
@@ -40,6 +43,7 @@ class App extends Component {
       fullProvinceTimeline: "",
     };
     this.coordinateValues = this.coordinateValues.bind(this);
+    this.coordinateValuesTwo = this.coordinateValuesTwo.bind(this)
   }
 
 
@@ -59,7 +63,7 @@ class App extends Component {
       method: `GET`,
       params: {
         iso: `CAN`,
-        // date: '2021-02-14', 
+        date: '2021-02-23', 
       },
       headers :{
         'x-rapidapi-key': '63fefd3bbbmsh7e07abc4e3d579bp14f7e0jsnc007e001acd6',
@@ -67,7 +71,20 @@ class App extends Component {
       }
     });
 
-            const { data: newApiDate } = await axios ({
+        const { data: newApiWidget } = await axios ({
+      url: newApiResponse,
+      method: `GET`,
+      params: {
+        iso: `CAN`,
+        date: '2021-02-14', 
+      },
+      headers :{
+        'x-rapidapi-key': '63fefd3bbbmsh7e07abc4e3d579bp14f7e0jsnc007e001acd6',
+        'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com'
+      }
+    });
+
+        const { data: newApiDate } = await axios ({
       url: newApiResponseDate,
       method: `GET`,
       params: {
@@ -98,16 +115,16 @@ class App extends Component {
 
     this.setState({
       newApi: newApi.data,
+      widgetDataData: newApiWidget.data[10],
       newApiDate :newApiDate.data,
       canadianSummaryAll,
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
     this.firstDataGather()
-    console.log(this.state.newApiDate)
-    console.log(this.state.allProvinceData.data)
-    console.log(this.state.newApi[0].region)
-    console.log(this.state.newApi[0].region.province)
+    // console.log(this.state.newApi)
+    // console.log(this.state.allProvinceData.data)
+    // console.log(this.state.newApi[0].region.province)
   }
 
   firstDataGather() {  
@@ -139,22 +156,6 @@ class App extends Component {
       allProvinceDataThree: allProvincialStatsThree,
     });
   };
-
-  // allProvinceDataTwo() {
-  //   let allProvincialStatsTwo = this.state.newApi.map((provinceDataSetsTwo) => {
-  //     let data = { Active: provinceDataSetsTwo.active,
-  //       Confirmed: provinceDataSetsTwo.confirmed,
-  //       Deaths: provinceDataSetsTwo.deaths,
-  //       Fatality: provinceDataSetsTwo.fatality_rate,
-  //       Recovered: provinceDataSetsTwo.recovered,
-  //       Region: provinceDataSetsTwo.region,
-  //     };
-  //     return data;
-  //   });
-  //   this.setState({
-  //     allProvinceDataTwo: allProvincialStatsTwo,
-  //   });
-  // }
 
   // provinceGraph = (singleProvince) => {
   //   let provinceHistoricalData = this.state.canadianSummaryAll.filter(
@@ -201,19 +202,39 @@ class App extends Component {
     });
   }
 
+  functionForProvincialTotals = (provinceInfoForProvincialTotals) => {
+    let filteredSpecificProvinceTwo = this.state.allProvinceData.filter(
+      (e) => {
+        return e.Confirmed === provinceInfoForProvincialTotals
+          ? {
+            Cases: e.Confirmed,
+            Date: e.Deaths,
+            Province: e.Active,
+          }
+          : null;
+      }
+    );
+    this.setState({ fullProvinceTimeline: filteredSpecificProvinceTwo }, () => {
+      this.coordinateValuesTwo();
+    });
+  };
+
+  coordinateValuesTwo() {
+    let provincialStatsArray = this.state.fullProvinceTimeline.map((e) => {
+      let data = { Date: e.Deaths, Cases: e.Confirmed };
+      return data;
+    });
+    this.setState({
+      totalsForProvincialStats: provincialStatsArray,
+    });
+  }
+
   render() {
-    console.log(this.state.newApi)
-    // console.log(this.state.newApi[0])
-    // console.log(this.state.allProvinceData)
-    // console.log(this.state.allProvinceDataThree)
-    // console.log(this.state.allProvinceDataTwo)
-    // console.log(this.state.newApi[0].region.province)
-    // console.log(this.state.newApi.data[0].date)
-    // console.log(newApi.data[0].confirmed)
     const {
       allProvinceData,
       // canadianSummaryBarGraph,
       canadianSummaryAll,
+      widgetDataData,
       canadianSummaryCanada,
       graphComponentData,
       handOffToLineGraph,
@@ -247,16 +268,22 @@ class App extends Component {
                 // barChartInfo={canadianSummaryBarGraph} 
                 barChartInfo={allProvinceData}
                 lineGraphHandler={this.functionForLineGraph}
+                provincialStatsHandler={this.functionForProvincialTotals}
               />
-              <GetProvincialStats/>
             </div>
             <div className="column is-5">
               <motion.div whileHover={{ scale: 1.2, y: "-20px" }}>
+                {/* <Map markerData={allProvinceData} /> */}
                 <Map markerData={canadianSummaryAll} />
               </motion.div>
             </div>
             <div className="column is-4">
-              <Widget widgetData={canadianSummaryCanada} />
+              <Widget 
+                widgetData={canadianSummaryCanada} 
+                />
+              <WidgetTwo 
+                widgetDataTwo={widgetDataData} 
+                />
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}

@@ -18,10 +18,6 @@ h2 {
   font-size: $size-1;
 }
 
-p {
-  // font-size: 10rem;
-}
-
 .section {
   background: linear-gradient(
     to right,
@@ -104,6 +100,13 @@ $table-cell-border: 1px solid $blueAccent;
 // Table End //
 
 // BarGraph Start
+.barGraphTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.125;
+  margin: .5rem 0 -1rem 0;
+}
+
 .recharts-surface {
   overflow: visible;
   padding-left: 25px;
@@ -116,7 +119,6 @@ $table-cell-border: 1px solid $blueAccent;
 svg > g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
   transform: translate(0.001rem, 0);
 }
-
 // BarGraph End
 
 // Widget Start //
@@ -144,11 +146,6 @@ li {
   margin: 1rem;
 }
 // Widget End //
-
-// Charts Start //
-BarChart {
-  margin: 0 auto;
-}
 
 .recharts-surface {
   overflow: visible;

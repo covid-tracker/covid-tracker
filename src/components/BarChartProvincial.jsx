@@ -10,34 +10,17 @@ import {
 } from "recharts";
 import { motion } from "framer-motion";
 
-class BarGraph extends Component {
+class BarGraphProvincial extends Component {
   constructor() {
     super();
     this.state = {
       dataForLineGraph: null,
-      dataForProvincialStats: null,
     };
   }
 
-  onBarClick = (obj) => {
-    let province = obj.activePayload[0].payload.State;
-    this.setState({ dataForLineGraph: province}, () => {
-      this.props.lineGraphHandler(this.state.dataForLineGraph);
-    });
-    // console.log(this.state.dataForLineGraph)
-  };
-
-    onBarClickTwo = (obj) => {
-    let province = obj.activePayload[0].payload.State;
-    this.setState({ dataForProvincialStats: province}, () => {
-      this.props.provincialStatsHandler(this.state.dataForProvincialStats);
-    });
-    // console.log(this.province)
-  };
-
   render() {
-    // console.log(this.barChartInfo)
     const { barChartInfo } = this.props;
+    // console.log(this.barChartInfo)
     return (
       <motion.div whileTap={{ scale: 1.1, x: "-5px", y: "5px" }}>
         <div className="customBox" style={{ textAlign: "center", width: "100%", height: 740 }}>
@@ -52,8 +35,7 @@ class BarGraph extends Component {
               maxBarSize={20}
               layout={"vertical"}
               style={{ paddingBottom: 20 }}
-              // onClick={this.onBarClick}
-              onClick={this.onBarClickTwo}
+              onClick={this.onBarClick}
             >
               <CartesianGrid strokeDasharray="1 1" />
               <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />
@@ -73,4 +55,4 @@ class BarGraph extends Component {
   }
 }
 
-export default BarGraph;
+export default BarGraphProvincial;
