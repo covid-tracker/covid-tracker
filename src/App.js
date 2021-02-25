@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
-import GetProvincialStats from "./components/GetProvincialStats";
+
+import { motion } from "framer-motion"; //Framer motion for animations //
+import Loader from "react-loader-spinner"; // Loading screen //
+
 import Widget from "./components/Widget"; // Widget made for the total stats in top right corner // 
+import WidgetTwo from "./components/WidgetTwo"; // Widget made for the total stats in top right corner // 
 import LogoMain from "./components/LogoMain"; 
 import LineGraph from "./components/LineGraph"; // Rechart Graphs // 
 import BarGraph from "./components/BarGraph"; // Rechart Graphs // 
 import Map from "./components/Map"; // MapBox //
-import Loader from "react-loader-spinner";
-import { motion } from "framer-motion"; //Framer motion for animations //
 
 // URLs, Currently taking care of the total National Figures // 
 const provinceDataURL ="https://api.covid19api.com/country/canada/status/confirmed/live";
@@ -15,21 +17,23 @@ const summaryDataURL = "https://api.covid19api.com/summary";
 
 // New URLs, currently taking care of the provincial stats // 
 const newApiResponse = "https://covid-19-statistics.p.rapidapi.com/reports"
-const newApiResponseDate = "https://covid-19-statistics.p.rapidapi.com/provinces/"
+// const newApiResponseDate = "https://covid-19-statistics.p.rapidapi.com/provinces"
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       newApi: [],
-      newApiDate: [],
+      widgetDataData: [],
+      // newApiDate: [],
       allProvinceData: [],
-      allProvinceDataTwo: [],
-      allProvinceDataThree: [],
 
+      handOffToLineGraphTwo: [],
+
+
+      allRegionProvinceData: [],
       canadianSummaryLineGraph: [],
       canadianSummaryAll: [],
-      canadianSummaryBarGraph: [],
       canadianSummaryCanada: [],
       handOffToLineGraph: [],
       loading: true,
@@ -41,7 +45,6 @@ class App extends Component {
     };
     this.coordinateValues = this.coordinateValues.bind(this);
   }
-
 
   async componentDidMount() {
     // To generate today's date // 
@@ -59,7 +62,7 @@ class App extends Component {
       method: `GET`,
       params: {
         iso: `CAN`,
-        // date: '2021-02-14', 
+        date: '2021-02-23', 
       },
       headers :{
         'x-rapidapi-key': '63fefd3bbbmsh7e07abc4e3d579bp14f7e0jsnc007e001acd6',
@@ -67,20 +70,33 @@ class App extends Component {
       }
     });
 
-            const { data: newApiDate } = await axios ({
-      url: newApiResponseDate,
+        const { data: newApiWidget } = await axios ({
+      url: newApiResponse,
       method: `GET`,
       params: {
-        from: fromDate,
-        to: toDate,
         iso: `CAN`,
-        date: '2021-02-14',
+        date: '2021-02-14', 
       },
       headers :{
         'x-rapidapi-key': '63fefd3bbbmsh7e07abc4e3d579bp14f7e0jsnc007e001acd6',
         'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com'
       }
-          });
+    });
+
+      //   const { data: newApiDate } = await axios ({
+      // url: newApiResponseDate,
+      // method: `GET`,
+      // params: {
+      //   from: fromDate,
+      //   to: toDate,
+      //   iso: `CAN`,
+      //   date: '2021-02-14',
+      // },
+      // headers :{
+      //   'x-rapidapi-key': '63fefd3bbbmsh7e07abc4e3d579bp14f7e0jsnc007e001acd6',
+      //   'x-rapidapi-host': 'covid-19-statistics.p.rapidapi.com'
+      // }
+      //     });
 
     const { data: canadianSummaryAll } = await axios({
       url: provinceDataURL,
@@ -98,16 +114,18 @@ class App extends Component {
 
     this.setState({
       newApi: newApi.data,
-      newApiDate :newApiDate.data,
+      widgetDataData: newApiWidget.data[10],
       canadianSummaryAll,
       canadianSummaryCanada: canadianSummaryCanada.Countries[30],
       loading: false,
     });
     this.firstDataGather()
-    console.log(this.state.newApiDate)
-    console.log(this.state.allProvinceData.data)
-    console.log(this.state.newApi[0].region)
-    console.log(this.state.newApi[0].region.province)
+    console.log(this.state.canadianSummaryAll)
+    console.log(this.state.canadianSummaryCanada)
+    // console.log(this.state.newApi)
+    // console.log(this.state.allProvinceData.data)
+    // console.log(this.state.newApi[0].region.province)
+    // console.log(this.state.allProvinceData[0].Region)
   }
 
   firstDataGather() {  
@@ -119,42 +137,28 @@ class App extends Component {
         Fatality: provinceDataSets.fatality_rate,
         Recovered: provinceDataSets.recovered,
         Region: provinceDataSets.region,
-        Date
       };
     });
     this.setState({
       allProvinceData: allProvincialStats,
     });
-    this.threeDataGather()
-    console.log(this.state.allProvinceData)
+    this.secondDataGather()
   };
 
-    threeDataGather() {  
-    let allProvincialStatsThree = this.state.allProvinceData.map((provinceDataSetsThree) => {
-      return {
-        Province: provinceDataSetsThree.province,
+    secondDataGather() {  
+    let allProvincialStatsRegions = this.state.allProvinceData.map((provinceDataSetsTwo) => {
+      const returnedCoordinates = {
+        Latitude: provinceDataSetsTwo.Region.lat,
+        Longitude: provinceDataSetsTwo.Region.long,
+        Province: provinceDataSetsTwo.Region.province,
       };
+      return returnedCoordinates;
     });
     this.setState({
-      allProvinceDataThree: allProvincialStatsThree,
+      allRegionProvinceData: allProvincialStatsRegions,
     });
+    this.coordinateValuesTwo() 
   };
-
-  // allProvinceDataTwo() {
-  //   let allProvincialStatsTwo = this.state.newApi.map((provinceDataSetsTwo) => {
-  //     let data = { Active: provinceDataSetsTwo.active,
-  //       Confirmed: provinceDataSetsTwo.confirmed,
-  //       Deaths: provinceDataSetsTwo.deaths,
-  //       Fatality: provinceDataSetsTwo.fatality_rate,
-  //       Recovered: provinceDataSetsTwo.recovered,
-  //       Region: provinceDataSetsTwo.region,
-  //     };
-  //     return data;
-  //   });
-  //   this.setState({
-  //     allProvinceDataTwo: allProvincialStatsTwo,
-  //   });
-  // }
 
   // provinceGraph = (singleProvince) => {
   //   let provinceHistoricalData = this.state.canadianSummaryAll.filter(
@@ -201,22 +205,29 @@ class App extends Component {
     });
   }
 
+    coordinateValuesTwo() {
+    let lineGraphArray = this.state.allProvinceData.map((e) => {
+      let data = { Date: e.Region.province, Cases: e.Confirmed };
+      return data;
+    });
+    this.setState({
+      handOffToLineGraphTwo: lineGraphArray,
+    });
+  }
+
+
   render() {
-    console.log(this.state.newApi)
-    // console.log(this.state.newApi[0])
-    // console.log(this.state.allProvinceData)
-    // console.log(this.state.allProvinceDataThree)
-    // console.log(this.state.allProvinceDataTwo)
-    // console.log(this.state.newApi[0].region.province)
-    // console.log(this.state.newApi.data[0].date)
-    // console.log(newApi.data[0].confirmed)
+    console.log(this.state.allRegionProvinceData)
+    console.log(this.state.allProvinceData)
     const {
       allProvinceData,
-      // canadianSummaryBarGraph,
       canadianSummaryAll,
+      handOffToLineGraphTwo,
+      // allRegionProvinceData,
+      widgetDataData,
       canadianSummaryCanada,
       graphComponentData,
-      handOffToLineGraph,
+      // handOffToLineGraph,
     } = this.state;
     if (this.state.loading) {
       return (
@@ -244,26 +255,29 @@ class App extends Component {
           <section className="columns">
             <div className="column is-3">
               <BarGraph
-                // barChartInfo={canadianSummaryBarGraph} 
                 barChartInfo={allProvinceData}
                 lineGraphHandler={this.functionForLineGraph}
               />
-              <GetProvincialStats/>
             </div>
             <div className="column is-5">
-              <motion.div whileHover={{ scale: 1.2, y: "-20px" }}>
+              <motion.div whileHover={{ scale: 1.01, y: "-20px" }}>
                 <Map markerData={canadianSummaryAll} />
               </motion.div>
             </div>
             <div className="column is-4">
-              <Widget widgetData={canadianSummaryCanada} />
+              <Widget 
+                widgetData={canadianSummaryCanada} 
+                />
+              <WidgetTwo 
+                widgetDataTwo={widgetDataData} 
+                />
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
               >
                 <LineGraph
                   graphStyle={graphComponentData}
-                  lineGraphFinalFunction={handOffToLineGraph}
+                  lineGraphFinalFunction={handOffToLineGraphTwo}
                 />
               </motion.div>
             </div>

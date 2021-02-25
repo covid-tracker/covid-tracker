@@ -15,9 +15,9 @@ class Map extends Component {
     viewport: {
       width: "auto",
       height: 716,
-      latitude: 62,
-      longitude: -96.81,
-      zoom: 2.3,
+      latitude: 56,
+      longitude: -97.81,
+      zoom: 3,
       isDrabble: "false",
       cluster: "true",
       clusterRadius: 80,
@@ -26,6 +26,7 @@ class Map extends Component {
   };
 
   render() {
+    // console.log(this.props.markerData)
     return (
       <div className="customBox shadowTwo" style={{ textAlign: "center" }}>
         <ReactMapGL
@@ -43,6 +44,7 @@ class Map extends Component {
                 latitude={parseFloat(province.Lat)}
                 longitude={parseFloat(province.Lon)}
               >
+                <div style={style}>{province.Cases}</div>
                 <div style={style}>{province.Cases}</div>
               </Marker>
             );
