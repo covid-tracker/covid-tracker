@@ -67,7 +67,7 @@ $content-heading-color: #575a86;
   background-color: #2e335a;
   border-radius: 25px;
   padding: 1.25rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   box-shadow: 8px 10px 14px #1f2442;
 }
 
@@ -101,15 +101,10 @@ $table-cell-border: 1px solid $blueAccent;
 
 // BarGraph Start
 .barGraphTitle {
-  font-size: 1.75rem;
+  font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.125;
   margin: .5rem 0 -1rem 0;
-}
-
-.recharts-surface {
-  overflow: visible;
-  padding-left: 25px;
 }
 
 .recharts-cartesian-axis {
@@ -149,7 +144,7 @@ li {
 
 .recharts-surface {
   overflow: visible;
-  padding-left: 25px;
+  padding-left: 17px;
 }
 svg > g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
   transform: translate(0.001rem, 0);
@@ -170,7 +165,7 @@ svg > g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
 
 // Styling here to override bulma settings
 h2 {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   letter-spacing: 3px;
 }
 
@@ -189,6 +184,11 @@ body {
   border-radius: 25px;
   border-color: red;
   padding: .8rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  // margin-bottom: 1.2rem;
 }
 
 // Bulma override end //

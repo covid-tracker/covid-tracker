@@ -16,6 +16,7 @@ class WidgetTwo extends Component {
         <div className="is-multiline columns">
 
           <motion.div
+            key={confirmed}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             className="column widBox widgetOne shadowThree"
@@ -25,15 +26,17 @@ class WidgetTwo extends Component {
           </motion.div>
 
           <motion.div
+            key={recovered}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             className="column widBox widgetThree shadowThree"
           >
-            <h3>ACTIVE CASES</h3>
-            <h2>{active}</h2>
+            <h3>RECOVERED</h3>
+            <h2>{recovered}</h2>
           </motion.div>
 
           <motion.div
+            key={deaths}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             className="column widBox widgetTwo shadowThree"
@@ -45,15 +48,17 @@ class WidgetTwo extends Component {
 
         <div className="is-multiline columns">
           <motion.div
+            key={active}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             className="column widBox widgetOne shadowThree"
           >
-            <h3>RECOVERED</h3>
-            <h2>{recovered}</h2>
+            <h3>ACTIVE CASES</h3>
+            <h2>{active}</h2>
           </motion.div>
 
           <motion.div
+            key={fatality_rate}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             className="column widBox widgetThree shadowThree"
