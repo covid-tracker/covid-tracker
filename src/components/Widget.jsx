@@ -1,7 +1,29 @@
 import React, { Component } from "react";
+import axios from "axios";
+
 import { motion } from "framer-motion";
 
+const summaryDataURL = "https://api.covid19api.com/summary";
+
 class Widget extends Component {
+    constructor() {
+    super();
+    this.state = {
+      canadianSummaryCanada: [],
+    };
+  }
+
+  async componentDidMount() {
+    const { data: canadianSummaryCanada } = await axios({
+      url: summaryDataURL,
+      method: `GET`,
+    });
+
+    this.setState({
+      canadianSummaryCanada: canadianSummaryCanada.Countries[30],
+    });
+  }
+
   render() {
     const {
       TotalConfirmed,
@@ -9,9 +31,9 @@ class Widget extends Component {
       TotalDeaths,
       NewConfirmed,
       NewRecovered,
-      NewDeaths
+      // NewDeaths
+    } = this.state.canadianSummaryCanada;
 
-    } = this.props.widgetData;
     return (
       <div className="customBox shadowTwo" style={{ textAlign: "center" }}>
         <h1 className="title">National Live Count</h1>
@@ -43,32 +65,32 @@ class Widget extends Component {
             <h2>{TotalDeaths}</h2>
           </motion.div>
         </div>
-        
+
         <div className="is-multiline columns">
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             className="column widBox widgetOne shadowThree"
           >
-            <h3>RECENT</h3>
+            <h3>RECENT CASES</h3>
             <h2>{NewConfirmed}</h2>
           </motion.div>
 
-          <motion.div
+          {/* <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             className="column widBox widgetThree shadowThree"
           >
             <h3>RECENT DEATHS</h3>
             <h2>{NewDeaths}</h2>
-          </motion.div>
+          </motion.div> */}
 
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             className="column widBox widgetTwo shadowThree"
           >
-            <h3>RECENT RECOVERIES</h3>
+            <h3>RECENT RECOVERY</h3>
             <h2>{NewRecovered}</h2>
           </motion.div>
         </div>

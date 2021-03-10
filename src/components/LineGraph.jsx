@@ -36,15 +36,16 @@ class LineGraph extends Component {
     } else {
       return (
         <div className="customBox shadowTwo">
-          <h3 style={{ textAlign: "center", color: "white", fontSize: 15 }}>
-            Province Cases
-          </h3>
-          <ResponsiveContainer width="100%" aspect={3.5 / 3.75}>
+          <h1 className="title" style={{ textAlign: "center", color: "white", fontSize: 15 }}>
+            Provincial Recovered Cases
+          </h1>
+          <ResponsiveContainer width="100%" aspect={3.6 / 6
+          }>
             <LineChart
               // width={510}
               // height={430}
               data={this.props.lineGraphFinalFunction}
-              margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
+              margin={{ top: 0, right: 5, left: 0, bottom: 0 }}
               style={{ margin: "0 auto" }}
             >
               <CartesianGrid strokeDasharray="1 1" />

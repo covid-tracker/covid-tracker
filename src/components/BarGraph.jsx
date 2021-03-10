@@ -21,28 +21,21 @@ class BarGraph extends Component {
     };
   }
 
-  onBarClick = (obj) => {
-    let province = obj.activePayload[0].payload.State;
-    this.setState({ dataForLineGraph: province}, () => {
-      this.props.lineGraphHandler(this.state.dataForLineGraph);
-    });
-    // console.log(this.state.dataForLineGraph)
-  };
+  // This was a function sending the results of what the user clicked as props back to app.js then again down to lineGraph.jsx, unfortunatly the api is not returning the calls for provincial data at the moment so this is not bing used for the time being. // 
 
-  //   onBarClickTwo = (obj) => {
+  // onBarClick = (obj) => {
   //   let province = obj.activePayload[0].payload.State;
-  //   this.setState({ dataForProvincialStats: province}, () => {
-  //     this.props.provincialStatsHandler(this.state.dataForProvincialStats);
+  //   this.setState({ dataForLineGraph: province}, () => {
+  //     this.props.lineGraphHandler(this.state.dataForLineGraph);
   //   });
-  //   // console.log(this.province)
   // };
 
   render() {
     const { barChartInfo } = this.props;
     return (
       <motion.div whileTap={{ scale: 1.1, x: "-5px", y: "5px" }}>
-        <div className="customBox" style={{ textAlign: "center", width: "100%", height: 740 }}>
-          <h1 className="barGraphTitle">Total Confirmed Cases</h1>
+        <div className="customBox" style={{ textAlign: "center", width: "100%", height: 670 }}>
+          <h1 className="barGraphTitle">Provincial Confirmed Cases</h1>
           <ResponsiveContainer>
             <BarChart
               data={barChartInfo.map((e) => {
@@ -54,7 +47,6 @@ class BarGraph extends Component {
               layout={"vertical"}
               style={{ paddingBottom: 20 }}
               onClick={this.onBarClick}
-              // onClick={this.onBarClickTwo}
             >
               <CartesianGrid strokeDasharray="1 1" />
               <XAxis type={"number"} orientation={"bottom"} stroke="#f35163" />
