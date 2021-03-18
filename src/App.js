@@ -130,9 +130,10 @@ class App extends Component {
       else return false;
     })
     this.setState({
-      allRegionProvinceData: allProvincialStatsRegions.slice(0,13),
+      allRegionProvinceData: allProvincialStatsRegions.filter(Boolean),
     });
     this.coordinateValuesTwo() 
+    console.log(this.state.allProvinceData)
   };
 
   coordinateValuesTwo() {
