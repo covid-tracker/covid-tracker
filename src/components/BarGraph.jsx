@@ -24,8 +24,13 @@ class BarGraph extends Component {
   // This was a function sending the results of what the user clicked as props back to app.js then again down to lineGraph.jsx, unfortunatly the api is not returning the calls for provincial data at the moment so this is not bing used for the time being. // 
 
   // onBarClick = (obj) => {
-  //   let province = obj.activePayload[0].payload.State;
-  //   this.setState({ dataForLineGraph: province}, () => {
+  //   console.log(obj)
+  //   let province = obj.activePayload[0].payload;
+  //   console.log(province)
+  //   const provinceCount = province.Cases
+  //   console.log(provinceCount)
+    
+  //   this.setState({ dataForLineGraph: provinceCount}, () => {
   //     this.props.lineGraphHandler(this.state.dataForLineGraph);
   //   });
   // };

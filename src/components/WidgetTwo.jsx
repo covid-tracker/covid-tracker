@@ -7,9 +7,9 @@ class WidgetTwo extends Component {
       confirmed,
       active,
       deaths,
-      recovered,
       fatality_rate,
     } = this.props.widgetDataTwo;
+
     return (
       <div className="customBox shadowTwo" style={{ textAlign: "center" }}>
         <h1 className="title">Ontario Live Count</h1>
@@ -19,27 +19,17 @@ class WidgetTwo extends Component {
             key={confirmed}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            className="column widBox widgetOne shadowThree"
+            className="column widBox widgetTwo shadowThree"
           >
             <h3>CASES</h3>
             <h2>{confirmed}</h2>
           </motion.div>
 
           <motion.div
-            key={recovered}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            className="column widBox widgetThree shadowThree"
-          >
-            <h3>RECOVERED</h3>
-            <h2>{recovered}</h2>
-          </motion.div>
-
-          <motion.div
             key={deaths}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            className="column widBox widgetTwo shadowThree"
+            className="column widBox widgetOne shadowThree"
           >
             <h3>DEATHS</h3>
             <h2>{deaths}</h2>

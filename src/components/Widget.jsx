@@ -27,11 +27,9 @@ class Widget extends Component {
   render() {
     const {
       TotalConfirmed,
-      TotalRecovered,
+      NewDeaths,
       TotalDeaths,
       NewConfirmed,
-      NewRecovered,
-      // NewDeaths
     } = this.state.canadianSummaryCanada;
 
     return (
@@ -52,17 +50,8 @@ class Widget extends Component {
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
             className="column widBox widgetThree shadowThree"
           >
-            <h3>RECOVERED</h3>
-            <h2>{TotalRecovered}</h2>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            className="column widBox widgetTwo shadowThree"
-          >
-            <h3>DEATHS</h3>
-            <h2>{TotalDeaths}</h2>
+            <h3>NEW DEATHS</h3>
+            <h2>{NewDeaths}</h2>
           </motion.div>
         </div>
 
@@ -70,28 +59,19 @@ class Widget extends Component {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            className="column widBox widgetOne shadowThree"
+            className="column widBox widgetTwo shadowThree"
           >
             <h3>RECENT CASES</h3>
             <h2>{NewConfirmed}</h2>
           </motion.div>
 
-          {/* <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            className="column widBox widgetThree shadowThree"
-          >
-            <h3>RECENT DEATHS</h3>
-            <h2>{NewDeaths}</h2>
-          </motion.div> */}
-
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9, x: "-5px", y: "5px" }}
-            className="column widBox widgetTwo shadowThree"
+            className="column widBox widgetOne shadowThree"
           >
-            <h3>RECENT RECOVERY</h3>
-            <h2>{NewRecovered}</h2>
+            <h3>DEATHS</h3>
+            <h2>{TotalDeaths}</h2>
           </motion.div>
         </div>
       </div>

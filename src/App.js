@@ -54,8 +54,6 @@ class App extends Component {
   }
 
   async componentDidMount() {
-
-    // setting time for the second newApi Call //
     let dailyDate = new Date()
     // setting hours for the second newApi Call //
     dailyDate.setHours(-30, 0, 0, 0)
@@ -94,7 +92,7 @@ class App extends Component {
       loading: false,
       });
       this.firstDataGather()
-      // console.log(this.state.allProvinceData)
+      console.log(this.state.widgetDataData)
   }
 
   firstDataGather() {  
@@ -133,12 +131,12 @@ class App extends Component {
       allRegionProvinceData: allProvincialStatsRegions.filter(Boolean),
     });
     this.coordinateValuesTwo() 
-    console.log(this.state.allProvinceData)
+    // console.log(this.state.allProvinceData)
   };
 
   coordinateValuesTwo() {
     let lineGraphArray = this.state.allProvinceData.map((e) => {
-      let data = { Date: e.Region.province, Cases: e.Recovered };
+      let data = { Date: e.Region.province, Cases: e.Active };
       return data;
     });
     this.setState({
@@ -177,7 +175,7 @@ class App extends Component {
   // }
 
   render() {
-    console.log(this.state.allRegionProvinceData)
+    // console.log(this.state.allRegionProvinceData)
     const {
       allProvinceData,
       handOffToLineGraphTwo,
